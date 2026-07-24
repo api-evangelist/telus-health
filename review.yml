@@ -1,0 +1,155 @@
+aid: telus-health
+name: TELUS Health
+review:
+  question: Does TELUS Health expose a documented public developer API, and what is its real machine-readable contract (OpenAPI or FHIR CapabilityStatement)?
+  answer: true
+  date: '2026-07-24'
+  reviewer: API Evangelist
+  homeMarket: Canada
+findings:
+  summary: |
+    TELUS Health is the digital-health division of TELUS (telus.com) and Canada's
+    leading health-IT provider, operating the PS Suite, Med Access, and cloud-native
+    Collaborative Health Record (CHR) EMRs plus pharmacy, virtual care, and
+    employer/benefits health services. Its documented public integration surface is
+    the CHR Enterprise API, a GraphQL API. The GraphQL endpoint URL is provisioned
+    per CHR domain (Settings > Enterprise API > API Endpoint), so there is no single
+    published base host; the schema is explorable via a public GraphQL Voyager page
+    and via GraphQL introspection. In addition, TELUS publishes the TELUS Patient
+    Chart FHIR R4 implementation guide on Simplifier.net: 89 StructureDefinition
+    profiles and extensions under the http://telus.com/fhir/patientChart canonical,
+    which were harvested verbatim. No downloadable OpenAPI/Swagger was found (the
+    documented REST-equivalent surface is GraphQL, not OpenAPI). No TELUS-authored
+    FHIR CapabilityStatement / metadata or SMART-on-FHIR .well-known/smart-configuration
+    is published (the Simplifier project /metadata returns a generic Firely Server
+    CapabilityStatement, not TELUS conformance). Both API surfaces are documented but
+    gated behind a partner or CHR-domain agreement.
+  developerPortal:
+    url: https://help.inputhealth.com/en/articles/6483215-chr-enterprise-api
+    httpStatus: 200
+    confirmed: true
+    note: >-
+      CHR Enterprise API documentation on the InputHealth (TELUS CHR) help centre.
+      InputHealth is the platform behind the TELUS Collaborative Health Record.
+  fhirCapabilityStatement:
+    captured: false
+    note: >-
+      No TELUS-authored CapabilityStatement, /metadata, or SMART-on-FHIR
+      smart-configuration is published. https://fhir.simplifier.net/TELUSPatientChart/metadata
+      returns 200 but is a generic Firely Server 4.6.1 CapabilityStatement
+      (publisher Firely, name Simplifier, zero resources) describing the hosting
+      registry, not the TELUS FHIR API.
+  fhirImplementationGuide:
+    captured: true
+    fhirVersion: 4.0.1 (R4)
+    publisher: TELUS
+    canonical: http://telus.com/fhir/patientChart
+    structureDefinitionCount: 89
+    savedArtifact: fhir/telus-patient-chart-structuredefinitions.json
+    provenance: >-
+      Retrieved 2026-07-24 from the TELUS Patient Chart public project on
+      Simplifier.net via GET https://fhir.simplifier.net/TELUSPatientChart/StructureDefinition?_count=100
+      (Accept: application/fhir+json). Saved verbatim as the returned FHIR searchset
+      Bundle of 89 StructureDefinition resources (profiles + extensions). No
+      ValueSet, CodeSystem, OperationDefinition, SearchParameter, CapabilityStatement,
+      or ImplementationGuide resources are present in the project.
+    resourcesProfiled:
+    - AllergyIntolerance
+    - CarePlan
+    - ClinicalImpression
+    - Composition
+    - Condition
+    - DiagnosticReport
+    - DocumentReference
+    - Encounter
+    - MedicationRequest
+    - Provenance
+    - Bundle (Patient Chart / Document)
+  downloadableSpecs:
+    openapiHarvested: false
+    count: 1
+    note: >-
+      No OpenAPI/Swagger document is published. The documented programmatic surface
+      is GraphQL (CHR Enterprise API). One verbatim FHIR artifact was harvested: the
+      89-profile TELUS Patient Chart StructureDefinition Bundle.
+  authModel:
+    chrEnterpriseApi:
+      scheme: JWT (JSON Web Token) Bearer
+      details: >-
+        RS512-signed JWT with a public key configured on the API Consumer, an Issuer
+        (iss) matching the API Consumer configuration, and expiry within 15 minutes
+        (900 seconds). Presented as "Authorization: Bearer {json_web_token}".
+      smartOnFhir: false
+      oauth2: false
+      apiKey: false
+    telusPatientChartFhir:
+      scheme: none (conformance package)
+      note: FHIR R4 profile package / implementation guide; no live authenticated TELUS FHIR endpoint is published.
+  standardsConformance:
+    hl7Fhir: R4 (4.0.1) via the TELUS Patient Chart implementation guide
+    usCore: false
+    ukCore: false
+    auCore: false
+    caCore: false (national CA scope, but not stated as pan-Canadian CA Core / CA Baseline conformant)
+    daVinci: false
+    carin: false
+    note: >-
+      Canada's FHIR interoperability is stewarded federally by Canada Health Infoway
+      (CA Core / CA Baseline). The TELUS Patient Chart IG declares national Canada
+      scope but does not declare CA Core conformance in the harvested profiles.
+  accessPosture:
+    gated: true
+    selfServe: false
+    note: >-
+      Both surfaces are publicly documented but gated. The CHR Enterprise API requires
+      a CHR domain and an API Consumer / partner configuration; the Omara Health
+      Exchange is an enterprise/marketplace FHIR platform with no public developer docs.
+  transports:
+  - protocol: GraphQL
+    scheme: https
+    documented: true
+    note: CHR Enterprise API. POST GraphQL queries/mutations to a per-domain endpoint with a Bearer JWT.
+  - protocol: FHIR REST
+    scheme: https
+    documented: true
+    note: TELUS Patient Chart FHIR R4 profiles; the live registry endpoint is Simplifier-hosted, not a TELUS production API host.
+  - protocol: WebSocket
+    scheme: wss
+    documented: false
+    note: No WebSocket surface is documented for TELUS Health.
+sources:
+- url: https://help.inputhealth.com/en/articles/6483215-chr-enterprise-api
+  type: Documentation
+  httpStatus: 200
+  note: CHR Enterprise API overview - GraphQL, JWT RS512 Bearer auth.
+- url: https://help.inputhealth.com/en/articles/5941595-api-reference-documentation
+  type: APIReference
+  httpStatus: 200
+  note: References GraphQL Voyager schema explorer, introspection, cursor pagination (default 50, max 100).
+- url: https://help.inputhealth.com/en/articles/6368814-enterprise-api-onboarding-overview
+  type: GettingStarted
+  httpStatus: 200
+  note: Enterprise API onboarding overview.
+- url: https://help.inputhealth.com/en/articles/6483223-making-requests-to-the-api
+  type: Documentation
+  httpStatus: 200
+  note: Request format - POST GraphQL body with Authorization Bearer JWT; endpoint copied from per-domain Settings.
+- url: http://apidocs.inputhealth.com/voyager.html
+  type: APIReference
+  httpStatus: 200
+  note: Public GraphQL Voyager schema explorer for the CHR Enterprise API.
+- url: https://simplifier.net/teluspatientchart
+  type: Documentation
+  httpStatus: 200
+  note: TELUS Patient Chart FHIR R4 public project (national Canada scope), published by TELUS.
+- url: https://fhir.simplifier.net/TELUSPatientChart/StructureDefinition?_count=100
+  type: FHIR
+  httpStatus: 200
+  note: Source of the harvested 89-profile StructureDefinition Bundle.
+- url: https://www.telus.com/en/health
+  type: Website
+  httpStatus: 403
+  note: TELUS Health website; returns 403 to non-browser clients (bot protection) but is a genuine live page.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

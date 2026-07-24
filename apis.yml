@@ -1,0 +1,105 @@
+aid: telus-health
+url: https://raw.githubusercontent.com/api-evangelist/telus-health/refs/heads/main/apis.yml
+name: TELUS Health
+kind: company
+description: >-
+  TELUS Health is the digital-health division of TELUS, one of Canada's largest
+  telecommunications and technology companies, and the country's leading health-IT
+  provider. It operates the PS Suite, Med Access, and cloud-native Collaborative
+  Health Record (CHR) electronic medical records used across Canadian primary care,
+  along with pharmacy management, virtual care, and employer/benefits health services.
+  Its documented public integration surface is the CHR Enterprise API, a GraphQL
+  endpoint secured with RS512-signed JWT bearer tokens that exposes clinic data
+  (patients, appointments, encounters, clinical documents and more) for partner-built
+  add-ons, complemented by the TELUS Patient Chart FHIR R4 implementation guide, a
+  package of 89 published StructureDefinition profiles under the
+  http://telus.com/fhir/patientChart canonical for standards-based patient-record
+  exchange out of TELUS EMRs, and the Omara Health Exchange FHIR interoperability
+  platform. Home market is Canada, where healthcare is province-fragmented and FHIR
+  interoperability is stewarded federally by Canada Health Infoway. Both API surfaces
+  are documented but gated behind a partner or CHR-domain agreement.
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+tags:
+- Healthcare
+- Canada
+- EMR
+- EHR
+- FHIR
+- HL7
+- Interoperability
+- GraphQL
+- e-Prescribing
+- Pharmacy
+- Digital Health
+- Clinical Data
+created: '2026-07-24'
+modified: '2026-07-24'
+specificationVersion: '0.19'
+apis:
+- aid: telus-health:telus-chr-enterprise-api
+  name: TELUS CHR Enterprise API
+  description: >-
+    GraphQL API for the TELUS Collaborative Health Record (CHR) that lets partners
+    build integrations against clinic data. Queries retrieve and mutations create or
+    update CHR records (patients, appointments, encounters, clinical documents and
+    more), exposed as a data graph following the GraphQL Cursor Connections spec
+    (page size defaults to 50, max 100). Authenticated with RS512-signed JSON Web
+    Tokens presented as Bearer tokens, with tokens expiring within 15 minutes. The
+    GraphQL endpoint URL is provisioned per CHR domain in Settings, so no single
+    fixed base host is published.
+  humanURL: https://help.inputhealth.com/en/articles/6483215-chr-enterprise-api
+  tags:
+  - GraphQL
+  - EMR
+  - Healthcare
+  - Interoperability
+  properties:
+  - type: Documentation
+    url: https://help.inputhealth.com/en/articles/6483215-chr-enterprise-api
+  - type: APIReference
+    url: http://apidocs.inputhealth.com/voyager.html
+  - type: GraphQL
+    url: http://apidocs.inputhealth.com/voyager.html
+  - type: GettingStarted
+    url: https://help.inputhealth.com/en/articles/6368814-enterprise-api-onboarding-overview
+  - type: Authentication
+    url: https://help.inputhealth.com/en/articles/6483223-making-requests-to-the-api
+- aid: telus-health:telus-patient-chart-fhir-api
+  name: TELUS Patient Chart FHIR API
+  description: >-
+    TELUS Patient Chart FHIR R4 implementation guide, published by TELUS, containing
+    89 StructureDefinition profiles and extensions under the
+    http://telus.com/fhir/patientChart canonical. Profiles cover patient-chart
+    resources including AllergyIntolerance, CarePlan, ClinicalImpression, Composition,
+    Condition, DiagnosticReport, DocumentReference, Encounter, MedicationRequest and
+    a large set of medication/prescribing extensions, used to exchange patient-record
+    data exported from TELUS EMRs. This is a conformance package (profiles/extensions);
+    no TELUS CapabilityStatement or SMART-on-FHIR configuration is published.
+  humanURL: https://simplifier.net/teluspatientchart
+  baseURL: https://fhir.simplifier.net/TELUSPatientChart
+  tags:
+  - FHIR
+  - HL7
+  - Interoperability
+  - Healthcare
+  properties:
+  - type: Documentation
+    url: https://simplifier.net/teluspatientchart
+  - type: FHIR
+    url: fhir/telus-patient-chart-structuredefinitions.json
+common:
+- type: Website
+  url: https://www.telus.com/en/health
+- type: DeveloperPortal
+  url: https://help.inputhealth.com/en/articles/6483215-chr-enterprise-api
+- type: Documentation
+  url: https://help.inputhealth.com/en/articles/6483215-chr-enterprise-api
+- type: APIReference
+  url: http://apidocs.inputhealth.com/voyager.html
+- type: GettingStarted
+  url: https://help.inputhealth.com/en/articles/6368814-enterprise-api-onboarding-overview
+- type: LinkedIn
+  url: https://www.linkedin.com/company/telus-health
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com
