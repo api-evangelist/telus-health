@@ -1,0 +1,52 @@
+generated: '2026-07-24'
+method: searched
+source: https://help.inputhealth.com/en/articles/5941595-api-reference-documentation
+api: telus-health:telus-chr-enterprise-api
+protocol: GraphQL
+authentication:
+  style: bearer-jwt
+  ref: authentication/telus-health-authentication.yml
+transport:
+  method: POST
+  content_type: application/json
+  body: GraphQL query/mutation as POST payload
+  endpoint: per-CHR-domain (Settings > Enterprise API > API Endpoint); no fixed base host
+pagination:
+  style: cursor
+  spec: GraphQL Cursor Connections Specification (Relay)
+  params:
+  - first
+  - after
+  - last
+  - before
+  default_page_size: 50
+  max_page_size: 100
+  response_fields:
+  - edges
+  - node
+  - cursor
+  - pageInfo.hasNextPage
+  - pageInfo.hasPreviousPage
+  - pageInfo.startCursor
+  - pageInfo.endCursor
+  applies_to: connection-returning fields (e.g. appointments, patients, referralRecords, tasks)
+introspection:
+  supported: true
+  note: GraphQL self-discovery via introspection query; anonymous schema also published at apidocs.ca.inputhealth.com/enterprise-api/introspection.json
+    and visualized via GraphQL Voyager.
+idempotency:
+  supported: false
+  note: No idempotency-key header/param is documented; GraphQL mutations are not declared idempotent.
+error_envelope:
+  style: graphql
+  note: 'Standard GraphQL response envelope: top-level "errors" array (message, locations, path) alongside
+    partial "data"; no RFC 9457 problem+json.'
+rate_limiting:
+  documented: false
+versioning:
+  documented: false
+  note: No version path/header; schema evolves in place with @deprecated field markers (see lifecycle).
+cross_links:
+  authentication: authentication/telus-health-authentication.yml
+  lifecycle: lifecycle/telus-health-lifecycle.yml
+  graphql_sdl: graphql/telus-health-chr-enterprise.graphql

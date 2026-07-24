@@ -1,0 +1,16 @@
+generated: '2026-07-24'
+method: searched
+source: https://help.inputhealth.com/en/articles/6368814-enterprise-api-onboarding-overview
+api: telus-health:telus-chr-enterprise-api
+has_sandbox: true
+model:
+  separation: dedicated sandbox CHR domain
+  how_obtained: sandbox domain credentials issued during the Development onboarding phase
+  flow: Develop and end-to-end test the integration against a sandbox CHR domain, complete the privacy
+    & security questionnaire, then request production access.
+  gated: true
+test_values:
+  published: false
+  note: No public magic/test identifiers or fixtures are published; sandbox data lives in a provisioned
+    per-partner sandbox CHR domain behind onboarding credentials.
+endpoint: per-sandbox-domain (Settings > Enterprise API > API Endpoint)

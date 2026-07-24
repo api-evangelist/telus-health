@@ -1,0 +1,20 @@
+generated: '2026-07-24'
+method: generated
+source: graphql/telus-health-chr-enterprise.graphql
+note: >-
+  Agent Skills for the TELUS CHR Enterprise API (GraphQL). Every operation is a real
+  root field verified against the published GraphQL schema; steps ground in those
+  operationIds plus the captured conventions/authentication/lifecycle rules.
+skills:
+- file: telus-health-register-patient-and-book-appointment.md
+  name: Register a patient and book an appointment
+  api: graphql/telus-health-chr-enterprise.graphql
+  operations: [createPatient, patient, createAppointment, appointment]
+- file: telus-health-manage-outgoing-referral.md
+  name: Create and track an outgoing referral
+  api: graphql/telus-health-chr-enterprise.graphql
+  operations: [createOutgoingReferralRecord, referralRecord, assignReferralRecordToWaitingList, addReferralRecordComment]
+- file: telus-health-record-clinical-data.md
+  name: Record medications and allergies on a patient chart
+  api: graphql/telus-health-chr-enterprise.graphql
+  operations: [addMedicationRecord, addDrugAllergyRecord, addNonDrugAllergyRecord, upsertPatientDataItem, patient]

@@ -1,0 +1,28 @@
+# TELUS Health
+
+> TELUS Health is the digital-health division of TELUS, one of Canada's largest telecommunications and technology companies, and the country's leading health-IT provider (PS Suite, Med Access, and the cloud-native Collaborative Health Record / CHR EMRs, plus pharmacy, virtual care, and employer/benefits health services). Its documented public integration surface is the CHR Enterprise API — a GraphQL API secured with RS512-signed JWT bearer tokens — complemented by the TELUS Patient Chart FHIR R4 implementation guide (89 StructureDefinition profiles). Both surfaces are documented but gated behind a partner or CHR-domain agreement.
+
+## APIs
+- [TELUS CHR Enterprise API](https://help.inputhealth.com/en/articles/6483215-chr-enterprise-api): GraphQL API over the Collaborative Health Record (patients, appointments, encounters, referrals, tasks, clinical documents). Query = 64 fields, Mutation = 49 fields. Cursor Connections pagination (default 50, max 100). Auth: RS512 JWT bearer, tokens expire within 15 minutes; endpoint provisioned per CHR domain.
+- [TELUS Patient Chart FHIR API](https://simplifier.net/teluspatientchart): FHIR R4 (4.0.1) implementation guide — 89 StructureDefinition profiles/extensions under the http://telus.com/fhir/patientChart canonical.
+
+## Specs
+- [CHR Enterprise GraphQL SDL](https://raw.githubusercontent.com/api-evangelist/telus-health/refs/heads/main/graphql/telus-health-chr-enterprise.graphql): full schema, derived from the published anonymous introspection.
+- [CHR Enterprise GraphQL introspection JSON](https://raw.githubusercontent.com/api-evangelist/telus-health/refs/heads/main/graphql/telus-health-chr-enterprise-introspection.json): verbatim from apidocs.ca.inputhealth.com/enterprise-api/introspection.json (GraphQL Voyager).
+- [TELUS Patient Chart StructureDefinitions](https://raw.githubusercontent.com/api-evangelist/telus-health/refs/heads/main/fhir/telus-patient-chart-structuredefinitions.json): 89-profile FHIR R4 searchset Bundle.
+
+## Docs
+- [CHR Enterprise API overview](https://help.inputhealth.com/en/articles/6483215-chr-enterprise-api)
+- [Enterprise API onboarding](https://help.inputhealth.com/en/articles/6368814-enterprise-api-onboarding-overview)
+- [Making requests to the API (auth)](https://help.inputhealth.com/en/articles/6483223-making-requests-to-the-api)
+- [API reference documentation](https://help.inputhealth.com/en/articles/5941595-api-reference-documentation)
+- [GraphQL Voyager schema explorer](http://apidocs.inputhealth.com/voyager.html)
+
+## Artifacts
+- [Authentication](https://raw.githubusercontent.com/api-evangelist/telus-health/refs/heads/main/authentication/telus-health-authentication.yml)
+- [Conventions](https://raw.githubusercontent.com/api-evangelist/telus-health/refs/heads/main/conventions/telus-health-conventions.yml)
+- [Conformance](https://raw.githubusercontent.com/api-evangelist/telus-health/refs/heads/main/conformance/telus-health-conformance.yml)
+- [Data model](https://raw.githubusercontent.com/api-evangelist/telus-health/refs/heads/main/data-model/telus-health-data-model.yml)
+- [Lifecycle](https://raw.githubusercontent.com/api-evangelist/telus-health/refs/heads/main/lifecycle/telus-health-lifecycle.yml)
+- [MCP candidate tools](https://raw.githubusercontent.com/api-evangelist/telus-health/refs/heads/main/mcp/telus-health-mcp.yml)
+- [Agent Skills](https://raw.githubusercontent.com/api-evangelist/telus-health/refs/heads/main/skills/_index.yml)

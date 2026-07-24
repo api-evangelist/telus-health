@@ -1,0 +1,36 @@
+generated: '2026-07-24'
+method: searched
+source: live probes of /.well-known/* across TELUS Health / InputHealth hosts
+hosts_probed:
+- help.inputhealth.com
+- apidocs.inputhealth.com
+- fhir.simplifier.net
+- www.telus.com
+documents:
+- host: help.inputhealth.com
+  path: /.well-known/security.txt
+  status: 200
+  file: telus-health-security.txt
+  note: Served by Intercom (the CHR help centre is Intercom-hosted); it is Intercom's security.txt (canonical
+    app.intercom.com), NOT a TELUS-authored disclosure policy.
+- host: help.inputhealth.com
+  path: /.well-known/openid-configuration
+  status: 404
+- host: help.inputhealth.com
+  path: /.well-known/oauth-authorization-server
+  status: 404
+- host: help.inputhealth.com
+  path: /.well-known/smart-configuration
+  status: 404
+- host: help.inputhealth.com
+  path: /.well-known/api-catalog
+  status: 404
+- host: fhir.simplifier.net
+  path: /.well-known/smart-configuration
+  status: 401
+  note: Simplifier registry host requires auth; no SMART-on-FHIR configuration is published for the TELUS
+    Patient Chart project.
+- host: www.telus.com
+  path: /.well-known/security.txt
+  status: 403
+  note: Bot-protected (403 to non-browser clients).

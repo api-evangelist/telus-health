@@ -1,0 +1,1374 @@
+generated: '2026-07-24'
+method: derived
+status: candidate
+source: graphql/telus-health-chr-enterprise.graphql (Query + Mutation root fields)
+note: 'No official hosted MCP server is published by TELUS Health. This is a DERIVED candidate tool surface:
+  one tool per CHR Enterprise API GraphQL root field. Input schemas are the corresponding GraphQL field
+  arguments; a real server would require the per-domain endpoint and an RS512 JWT bearer token.'
+server:
+  name: telus-chr-enterprise
+  transport: http
+  url: null
+  auth: RS512 JWT bearer (per-CHR-domain endpoint)
+coverage:
+  query_tools: 64
+  mutation_tools: 49
+  total: 113
+tools:
+- name: query_appointment
+  category: query
+  graphql_field: Query.appointment
+  returns: Appointment
+  args:
+  - name: id
+    type: ID!
+  description: Returns a single appointment.
+- name: query_appointmentTags
+  category: query
+  graphql_field: Query.appointmentTags
+  returns: AppointmentTag
+  args: null
+  description: List of available tags for appointments. Default sort order is by creation date, with oldest
+    records first.
+- name: query_appointments
+  category: query
+  graphql_field: Query.appointments
+  returns: AppointmentConnection
+  args:
+  - name: from
+    type: DateTimeWithTimezone
+  - name: locationId
+    type: ID
+  - name: patientId
+    type: ID
+  - name: providerId
+    type: ID
+  - name: serviceId
+    type: ID
+  - name: to
+    type: DateTimeWithTimezone
+  - name: visitType
+    type: VisitTypeEnum
+  - name: includeDeactivated
+    type: Boolean
+  - name: orderBy
+    type: '[AppointmentOrderByInput!]'
+  - name: after
+    type: String
+  - name: before
+    type: String
+  - name: first
+    type: Int
+  - name: last
+    type: Int
+  description: Returns a list of appointments, with cursor-based pagination. Default sort order is by
+    creation date, with oldest record
+- name: query_availabilities
+  category: query
+  graphql_field: Query.availabilities
+  returns: Availability
+  args:
+  - name: exclusiveAvailability
+    type: Boolean
+  - name: from
+    type: DateTimeWithTimezone
+  - name: locations
+    type: '[ID!]'
+  - name: providers
+    type: '[ID!]'
+  - name: serviceId
+    type: ID!
+  - name: to
+    type: DateTimeWithTimezone
+  - name: userGroupId
+    type: ID
+  - name: visitType
+    type: VisitTypeEnum
+  description: Returns a list of available appointment times.
+- name: query_careTeamRole
+  category: query
+  graphql_field: Query.careTeamRole
+  returns: CareTeamRole
+  args:
+  - name: uuid
+    type: String!
+  description: Returns a single care team role.
+- name: query_careTeamRoles
+  category: query
+  graphql_field: Query.careTeamRoles
+  returns: CareTeamRoleConnection
+  args:
+  - name: name
+    type: String
+  - name: after
+    type: String
+  - name: before
+    type: String
+  - name: first
+    type: Int
+  - name: last
+    type: Int
+  description: Returns a list of all the patient care team roles configured for the account ordered by
+    position.
+- name: query_caseStatus
+  category: query
+  graphql_field: Query.caseStatus
+  returns: CaseStatus
+  args:
+  - name: id
+    type: ID!
+  description: Returns a single case status.
+- name: query_caseStatuses
+  category: query
+  graphql_field: Query.caseStatuses
+  returns: CaseStatusConnection
+  args:
+  - name: includeArchived
+    type: Boolean
+  - name: name
+    type: SearchString
+  - name: after
+    type: String
+  - name: before
+    type: String
+  - name: first
+    type: Int
+  - name: last
+    type: Int
+  description: Returns a list of case statuses, with cursor-based pagination. Default sort order is by
+    creation date, with oldest recor
+- name: query_caseTemplate
+  category: query
+  graphql_field: Query.caseTemplate
+  returns: CaseTemplate
+  args:
+  - name: id
+    type: ID!
+  description: Returns a single case template.
+- name: query_caseTemplates
+  category: query
+  graphql_field: Query.caseTemplates
+  returns: CaseTemplateConnection
+  args:
+  - name: includeArchived
+    type: Boolean
+  - name: name
+    type: SearchString
+  - name: after
+    type: String
+  - name: before
+    type: String
+  - name: first
+    type: Int
+  - name: last
+    type: Int
+  description: Returns a list of case templates, with cursor-based pagination. Default sort order is in
+    ascending order by position.
+- name: query_contact
+  category: query
+  graphql_field: Query.contact
+  returns: Contact
+  args:
+  - name: id
+    type: ID!
+  description: Returns a single contact.
+- name: query_contacts
+  category: query
+  graphql_field: Query.contacts
+  returns: ContactConnection
+  args:
+  - name: billingCode
+    type: String
+  - name: excludeReadOnly
+    type: Boolean
+  - name: facilityName
+    type: String
+  - name: fax
+    type: String
+  - name: name
+    type: String
+  - name: occupation
+    type: ContactOccupationEnum
+  - name: occupationRawValue
+    type: String
+  - name: after
+    type: String
+  - name: before
+    type: String
+  - name: first
+    type: Int
+  - name: last
+    type: Int
+  description: Returns a list of contacts, with cursor-based pagination.  Default sort order is alphabetical
+    by first name, last name.
+- name: query_draftAppointment
+  category: query
+  graphql_field: Query.draftAppointment
+  returns: DraftAppointment
+  args:
+  - name: id
+    type: ID!
+  description: Returns a single draft appointment.
+- name: query_draftAppointments
+  category: query
+  graphql_field: Query.draftAppointments
+  returns: DraftAppointmentConnection
+  args:
+  - name: from
+    type: DateTimeWithTimezone
+  - name: locationId
+    type: ID
+  - name: providerId
+    type: ID
+  - name: serviceId
+    type: ID
+  - name: to
+    type: DateTimeWithTimezone
+  - name: orderBy
+    type: '[DraftAppointmentOrderByInput!]'
+  - name: after
+    type: String
+  - name: before
+    type: String
+  - name: first
+    type: Int
+  - name: last
+    type: Int
+  description: 'Returns a list of draft appointments, with cursor-based pagination. Default sort order
+    is by creation date, with oldest '
+- name: query_facilities
+  category: query
+  graphql_field: Query.facilities
+  returns: FacilityConnection
+  args:
+  - name: category
+    type: FacilityCategoryEnum
+  - name: categoryRawValue
+    type: SearchString
+  - name: city
+    type: SearchString
+  - name: email
+    type: SearchString
+  - name: excludeReadOnly
+    type: Boolean
+  - name: fax
+    type: SearchString
+  - name: name
+    type: SearchString
+  - name: phone
+    type: SearchString
+  - name: postalCode
+    type: SearchString
+  - name: after
+    type: String
+  - name: before
+    type: String
+  - name: first
+    type: Int
+  - name: last
+    type: Int
+  description: Returns a list of facilities, with cursor-based pagination. Default sort order is by createdAt,
+    with oldest records firs
+- name: query_facility
+  category: query
+  graphql_field: Query.facility
+  returns: Facility
+  args:
+  - name: id
+    type: ID!
+  description: Returns a single facility.
+- name: query_fileTags
+  category: query
+  graphql_field: Query.fileTags
+  returns: FileTagConnection
+  args:
+  - name: includeArchived
+    type: Boolean
+  - name: after
+    type: String
+  - name: before
+    type: String
+  - name: first
+    type: Int
+  - name: last
+    type: Int
+  description: List of available tags for files. Default sort order is by name.
+- name: query_groupVisit
+  category: query
+  graphql_field: Query.groupVisit
+  returns: GroupVisit
+  args:
+  - name: id
+    type: ID!
+  description: Returns a single group visit.
+- name: query_groupVisits
+  category: query
+  graphql_field: Query.groupVisits
+  returns: GroupVisitConnection
+  args:
+  - name: allowEbooking
+    type: Boolean
+  - name: description
+    type: SearchString
+  - name: from
+    type: DateTimeWithTimezone
+  - name: fullyBooked
+    type: Boolean
+  - name: includeDeactivated
+    type: Boolean
+  - name: locationId
+    type: ID
+  - name: name
+    type: SearchString
+  - name: orderBy
+    type: '[GroupVisitOrderByInput!]'
+  - name: to
+    type: DateTimeWithTimezone
+  - name: after
+    type: String
+  - name: before
+    type: String
+  - name: first
+    type: Int
+  - name: last
+    type: Int
+  description: Returns a list of group visits, with cursor-based pagination. Default sort order is by
+    start time, with earliest records
+- name: query_identificationTemplate
+  category: query
+  graphql_field: Query.identificationTemplate
+  returns: IdentificationTemplate
+  args:
+  - name: id
+    type: ID!
+  description: Returns a single identification template.
+- name: query_identificationTemplates
+  category: query
+  graphql_field: Query.identificationTemplates
+  returns: IdentificationTemplate
+  args: null
+  description: Returns a list of identification templates configured for the account.
+- name: query_labObservations
+  category: query
+  graphql_field: Query.labObservations
+  returns: LabObservationConnection
+  args:
+  - name: after
+    type: String
+  - name: before
+    type: String
+  - name: first
+    type: Int
+  - name: last
+    type: Int
+  - name: collectedDate
+    type: ISO8601Date!
+  - name: identificationType
+    type: String!
+  - name: identificationValue
+    type: String!
+  - name: recordId
+    type: String
+  - name: recordIds
+    type: '[String!]'
+  description: Reserved to CHR internal use.
+- name: query_labTestNames
+  category: query
+  graphql_field: Query.labTestNames
+  returns: LabTestNameConnection
+  args:
+  - name: name
+    type: SearchString
+  - name: after
+    type: String
+  - name: before
+    type: String
+  - name: first
+    type: Int
+  - name: last
+    type: Int
+  description: Returns a list of lab test names.
+- name: query_letterTemplate
+  category: query
+  graphql_field: Query.letterTemplate
+  returns: LetterTemplate
+  args:
+  - name: id
+    type: ID!
+  description: Returns a single letter template.
+- name: query_letterTemplates
+  category: query
+  graphql_field: Query.letterTemplates
+  returns: LetterTemplateConnection
+  args:
+  - name: includeArchived
+    type: Boolean
+  - name: title
+    type: SearchString
+  - name: after
+    type: String
+  - name: before
+    type: String
+  - name: first
+    type: Int
+  - name: last
+    type: Int
+  description: Returns a list of letter templates, with cursor-based pagination. Default sort order is
+    by createdAt, with most recent r
+- name: query_location
+  category: query
+  graphql_field: Query.location
+  returns: Location
+  args:
+  - name: id
+    type: ID!
+  description: Returns a single location.
+- name: query_locations
+  category: query
+  graphql_field: Query.locations
+  returns: Location
+  args: null
+  description: Returns a list of all the locations configured within the account. Default sort order is
+    by creation date, with oldest r
+- name: query_patient
+  category: query
+  graphql_field: Query.patient
+  returns: Patient
+  args:
+  - name: id
+    type: ID!
+  description: Returns a single patient (respondent).
+- name: query_patientDataCategories
+  category: query
+  graphql_field: Query.patientDataCategories
+  returns: PatientDataCategoryConnection
+  args:
+  - name: includeArchived
+    type: Boolean
+  - name: name
+    type: SearchString
+  - name: after
+    type: String
+  - name: before
+    type: String
+  - name: first
+    type: Int
+  - name: last
+    type: Int
+  description: Returns a list of all the patient data categories configured for the account ordered by
+    position.
+- name: query_patientDataCategory
+  category: query
+  graphql_field: Query.patientDataCategory
+  returns: PatientDataCategory
+  args:
+  - name: uuid
+    type: String!
+  description: Returns a single patient data category.
+- name: query_patientDataTemplate
+  category: query
+  graphql_field: Query.patientDataTemplate
+  returns: PatientDataTemplate
+  args:
+  - name: categoryUuid
+    type: String!
+  - name: uuid
+    type: String!
+  description: Returns a single patient data template.
+- name: query_patientDataTemplates
+  category: query
+  graphql_field: Query.patientDataTemplates
+  returns: PatientDataTemplateConnection
+  args:
+  - name: categoryName
+    type: SearchString
+  - name: categoryUuid
+    type: String
+  - name: name
+    type: SearchString
+  - name: after
+    type: String
+  - name: before
+    type: String
+  - name: first
+    type: Int
+  - name: last
+    type: Int
+  description: Returns a list of patient data templates, with cursor-based pagination. Default sort order
+    is by creation date, with old
+- name: query_patientIdentificationVerification
+  category: query
+  graphql_field: Query.patientIdentificationVerification
+  returns: IdentificationVerification
+  args:
+  - name: id
+    type: ID!
+  description: Returns a verification status of the patient's identification.
+- name: query_patients
+  category: query
+  graphql_field: Query.patients
+  returns: PatientConnection
+  args:
+  - name: dateOfBirth
+    type: ISO8601Date
+  - name: email
+    type: SearchString
+  - name: firstName
+    type: SearchString
+  - name: gender
+    type: GenderEnum
+  - name: identificationValue
+    type: String
+  - name: identificationTemplateId
+    type: ID
+  - name: lastName
+    type: SearchString
+  - name: locationId
+    type: ID
+  - name: phone
+    type: PhoneSearchString
+  - name: primaryPractitionerId
+    type: ID
+  - name: statusTagId
+    type: ID
+  - name: includeArchived
+    type: Boolean
+  - name: orderBy
+    type: '[PatientOrderByInput!]'
+  - name: after
+    type: String
+  - name: before
+    type: String
+  - name: first
+    type: Int
+  - name: last
+    type: Int
+  description: Returns a list of patients (respondents), with cursor-based pagination. Default sort order
+    is by creation date, with new
+- name: query_presentingIssue
+  category: query
+  graphql_field: Query.presentingIssue
+  returns: PresentingIssue
+  args:
+  - name: id
+    type: ID!
+  description: Returns a single presenting issue.
+- name: query_presentingIssues
+  category: query
+  graphql_field: Query.presentingIssues
+  returns: PresentingIssueConnection
+  args:
+  - name: after
+    type: String
+  - name: before
+    type: String
+  - name: first
+    type: Int
+  - name: last
+    type: Int
+  - name: name
+    type: SearchString
+  - name: nameOrSearchablePhrase
+    type: SearchString
+  description: Returns a list of presenting issues defined for the account, with cursor-based pagination.
+    Default sort order is by id.
+- name: query_provider
+  category: query
+  graphql_field: Query.provider
+  returns: ProviderUser
+  args:
+  - name: id
+    type: ID!
+  description: Returns a single provider (CHR user).
+- name: query_providers
+  category: query
+  graphql_field: Query.providers
+  returns: ProviderUserConnection
+  args:
+  - name: languages
+    type: '[SearchString!]'
+  - name: lastName
+    type: SearchString
+  - name: firstName
+    type: SearchString
+  - name: licenseNumber
+    type: SearchString
+  - name: billingNumber
+    type: SearchString
+  - name: email
+    type: SearchString
+  - name: hasInbox
+    type: Boolean
+  - name: hasSchedule
+    type: Boolean
+  - name: after
+    type: String
+  - name: before
+    type: String
+  - name: first
+    type: Int
+  - name: last
+    type: Int
+  description: Returns a list of providers (CHR users), with cursor-based pagination. Default sort order
+    is by creation date, with olde
+- name: query_referralDataSettings
+  category: query
+  graphql_field: Query.referralDataSettings
+  returns: ReferralDataSetting
+  args:
+  - name: direction
+    type: ReferralDirectionEnum
+  description: Returns a list of referral data settings.
+- name: query_referralPriorities
+  category: query
+  graphql_field: Query.referralPriorities
+  returns: ReferralPriorityConnection
+  args:
+  - name: includeArchived
+    type: Boolean
+  - name: name
+    type: SearchString
+  - name: after
+    type: String
+  - name: before
+    type: String
+  - name: first
+    type: Int
+  - name: last
+    type: Int
+  description: Returns a list of referral priorities, with cursor-based pagination. Default sort order
+    is by creation date, with oldest
+- name: query_referralPriority
+  category: query
+  graphql_field: Query.referralPriority
+  returns: ReferralPriority
+  args:
+  - name: id
+    type: ID!
+  description: Returns a single referral priority.
+- name: query_referralRecord
+  category: query
+  graphql_field: Query.referralRecord
+  returns: ReferralRecord
+  args:
+  - name: id
+    type: ID!
+  description: Returns a single referral record.
+- name: query_referralRecords
+  category: query
+  graphql_field: Query.referralRecords
+  returns: ReferralRecordConnection
+  args:
+  - name: anyPriorityIds
+    type: '[ID!]'
+  - name: anyStatusIds
+    type: '[ID!]'
+  - name: direction
+    type: ReferralDirectionEnum
+  - name: includeArchived
+    type: Boolean
+  - name: orderBy
+    type: '[ReferralRecordOrderByInput!]'
+  - name: waitingListId
+    type: ID
+  - name: after
+    type: String
+  - name: before
+    type: String
+  - name: first
+    type: Int
+  - name: last
+    type: Int
+  description: Returns a list of referral records, with cursor-based pagination. Default sort order is
+    by creation date, with oldest re
+- name: query_referralStatus
+  category: query
+  graphql_field: Query.referralStatus
+  returns: ReferralStatus
+  args:
+  - name: id
+    type: ID!
+  description: Returns a single referral status.
+- name: query_referralStatuses
+  category: query
+  graphql_field: Query.referralStatuses
+  returns: ReferralStatusConnection
+  args:
+  - name: direction
+    type: ReferralStatusDirectionEnum
+  - name: excludeWaitingListStatus
+    type: Boolean
+  - name: includeArchived
+    type: Boolean
+  - name: name
+    type: SearchString
+  - name: waitingListId
+    type: ID
+  - name: after
+    type: String
+  - name: before
+    type: String
+  - name: first
+    type: Int
+  - name: last
+    type: Int
+  description: Returns a list of referral statuses, with cursor-based pagination. Default sort order is
+    by creation date, with oldest r
+- name: query_referralWaitingList
+  category: query
+  graphql_field: Query.referralWaitingList
+  returns: ReferralWaitingList
+  args:
+  - name: id
+    type: ID!
+  description: Returns a single referral waiting list.
+- name: query_referralWaitingLists
+  category: query
+  graphql_field: Query.referralWaitingLists
+  returns: ReferralWaitingListConnection
+  args:
+  - name: includeArchived
+    type: Boolean
+  - name: name
+    type: SearchString
+  - name: after
+    type: String
+  - name: before
+    type: String
+  - name: first
+    type: Int
+  - name: last
+    type: Int
+  description: Returns a list of referral waiting lists, with cursor-based pagination. Default sort order
+    is by creation date, with old
+- name: query_respondent
+  category: query
+  graphql_field: Query.respondent
+  returns: Respondent
+  args:
+  - name: id
+    type: ID!
+  description: Returns a single patient (respondent).
+- name: query_respondents
+  category: query
+  graphql_field: Query.respondents
+  returns: RespondentConnection
+  args:
+  - name: dateOfBirth
+    type: ISO8601Date
+  - name: email
+    type: SearchString
+  - name: firstName
+    type: SearchString
+  - name: gender
+    type: GenderEnum
+  - name: identificationValue
+    type: String
+  - name: identificationTemplateId
+    type: ID
+  - name: lastName
+    type: SearchString
+  - name: locationId
+    type: ID
+  - name: phone
+    type: PhoneSearchString
+  - name: primaryPractitionerId
+    type: ID
+  - name: statusTagId
+    type: ID
+  - name: includeArchived
+    type: Boolean
+  - name: orderBy
+    type: '[PatientOrderByInput!]'
+  - name: after
+    type: String
+  - name: before
+    type: String
+  - name: first
+    type: Int
+  - name: last
+    type: Int
+  description: Returns a list of patients (respondents), with cursor-based pagination. Default sort order
+    is by creation date, with new
+- name: query_schedule
+  category: query
+  graphql_field: Query.schedule
+  returns: LegacySchedule
+  args:
+  - name: to
+    type: DateTimeWithTimezone
+  - name: from
+    type: DateTimeWithTimezone!
+  - name: providers
+    type: '[ID!]!'
+  - name: locations
+    type: '[ID!]'
+  - name: visitType
+    type: VisitTypeEnum
+  description: Returns the schedule for a provider.
+- name: query_service
+  category: query
+  graphql_field: Query.service
+  returns: Service
+  args:
+  - name: id
+    type: ID!
+  description: Returns a single appointment type (service).
+- name: query_services
+  category: query
+  graphql_field: Query.services
+  returns: Service
+  args:
+  - name: name
+    type: SearchString
+  - name: presentingIssueId
+    type: ID
+  description: 'Returns a list of all the appointment types (services) configured within the account.
+    Default sort order is by creation '
+- name: query_statusTag
+  category: query
+  graphql_field: Query.statusTag
+  returns: StatusTag
+  args:
+  - name: id
+    type: ID!
+  description: Returns a single patient status tag.
+- name: query_statusTags
+  category: query
+  graphql_field: Query.statusTags
+  returns: StatusTagConnection
+  args:
+  - name: after
+    type: String
+  - name: before
+    type: String
+  - name: first
+    type: Int
+  - name: last
+    type: Int
+  description: Returns a list of all the patient status tags configured for the account, with cursor-based
+    pagination. Default sort ord
+- name: query_task
+  category: query
+  graphql_field: Query.task
+  returns: Task
+  args:
+  - name: id
+    type: ID!
+  description: Returns a single task.
+- name: query_taskCategories
+  category: query
+  graphql_field: Query.taskCategories
+  returns: TaskCategoryConnection
+  args:
+  - name: includeArchived
+    type: Boolean
+  - name: name
+    type: SearchString
+  - name: orderBy
+    type: '[TaskCategoryOrderByInput!]'
+  - name: after
+    type: String
+  - name: before
+    type: String
+  - name: first
+    type: Int
+  - name: last
+    type: Int
+  description: Returns a list of task categories, with cursor-based pagination. Default sort order is
+    by creation date, with newest rec
+- name: query_taskCategory
+  category: query
+  graphql_field: Query.taskCategory
+  returns: TaskCategory
+  args:
+  - name: id
+    type: ID!
+  description: Returns a single task category.
+- name: query_taskTemplate
+  category: query
+  graphql_field: Query.taskTemplate
+  returns: TaskTemplate
+  args:
+  - name: id
+    type: ID!
+  description: Returns a single task template.
+- name: query_taskTemplates
+  category: query
+  graphql_field: Query.taskTemplates
+  returns: TaskTemplateConnection
+  args:
+  - name: name
+    type: SearchString
+  - name: orderBy
+    type: '[TaskTemplateOrderByInput!]'
+  - name: after
+    type: String
+  - name: before
+    type: String
+  - name: first
+    type: Int
+  - name: last
+    type: Int
+  description: Returns a list of task templates.
+- name: query_tasks
+  category: query
+  graphql_field: Query.tasks
+  returns: TaskConnection
+  args:
+  - name: categoryId
+    type: ID
+  - name: includeCompleted
+    type: Boolean
+  - name: name
+    type: SearchString
+  - name: orderBy
+    type: '[TaskOrderByInput!]'
+  - name: priority
+    type: TaskPriorityEnum
+  - name: status
+    type: TaskStatusEnum
+  - name: after
+    type: String
+  - name: before
+    type: String
+  - name: first
+    type: Int
+  - name: last
+    type: Int
+  description: Returns a list of tasks, with cursor-based pagination. Default sort order is by creation
+    date and id ascending.
+- name: query_upcomingAppointments
+  category: query
+  graphql_field: Query.upcomingAppointments
+  returns: AppointmentConnection
+  args:
+  - name: after
+    type: String
+  - name: before
+    type: String
+  - name: first
+    type: Int
+  - name: last
+    type: Int
+  description: Returns a list of appointments where startAt is greater than the request time, with cursor-based
+    pagination. Default sor
+- name: query_userGroup
+  category: query
+  graphql_field: Query.userGroup
+  returns: UserGroup
+  args:
+  - name: id
+    type: ID!
+  description: Returns a single user group.
+- name: query_userGroups
+  category: query
+  graphql_field: Query.userGroups
+  returns: UserGroup
+  args: null
+  description: Returns a list of all the user groups configured within the account. Default sort order
+    is by creation date, with oldest
+- name: query_virtualVisitLink
+  category: query
+  graphql_field: Query.virtualVisitLink
+  returns: VirtualVisitLink
+  args:
+  - name: appointmentId
+    type: ID
+  - name: id
+    type: ID
+  description: Returns a virtual visit link for an appointment or link id.
+- name: mutation_addCareTeamMember
+  category: mutation
+  graphql_field: Mutation.addCareTeamMember
+  returns: AddCareTeamMemberPayload
+  args:
+  - name: input
+    type: AddCareTeamMemberInput!
+  description: Adds a care team member to patient chart.
+- name: mutation_addCaseComment
+  category: mutation
+  graphql_field: Mutation.addCaseComment
+  returns: AddCaseCommentPayload
+  args:
+  - name: input
+    type: AddCaseCommentInput!
+  description: Adds a comment to an existing case record.
+- name: mutation_addDrugAllergyRecord
+  category: mutation
+  graphql_field: Mutation.addDrugAllergyRecord
+  returns: AddDrugAllergyRecordPayload
+  args:
+  - name: input
+    type: AddDrugAllergyRecordInput!
+  description: Creates a patient's drug allergy record with the supplied attributes.
+- name: mutation_addGroupVisitAttendee
+  category: mutation
+  graphql_field: Mutation.addGroupVisitAttendee
+  returns: AddGroupVisitAttendeePayload
+  args:
+  - name: input
+    type: AddGroupVisitAttendeeInput!
+  description: Adds a patient to a group visit by creating an appointment within it.
+- name: mutation_addMedicationRecord
+  category: mutation
+  graphql_field: Mutation.addMedicationRecord
+  returns: AddMedicationRecordPayload
+  args:
+  - name: input
+    type: AddMedicationRecordInput!
+  description: Creates a patient's medication record with the supplied attributes.
+- name: mutation_addNonDrugAllergyRecord
+  category: mutation
+  graphql_field: Mutation.addNonDrugAllergyRecord
+  returns: AddNonDrugAllergyRecordPayload
+  args:
+  - name: input
+    type: AddNonDrugAllergyRecordInput!
+  description: Creates a patient's non drug allergy record with the supplied attributes.
+- name: mutation_addReferralRecordComment
+  category: mutation
+  graphql_field: Mutation.addReferralRecordComment
+  returns: AddReferralRecordCommentPayload
+  args:
+  - name: input
+    type: AddReferralRecordCommentInput!
+  description: Adds a comment to the referral record.
+- name: mutation_addTaskComment
+  category: mutation
+  graphql_field: Mutation.addTaskComment
+  returns: AddTaskCommentPayload
+  args:
+  - name: input
+    type: AddTaskCommentInput!
+  description: Adds a comment to a task.
+- name: mutation_archiveCase
+  category: mutation
+  graphql_field: Mutation.archiveCase
+  returns: ArchiveCasePayload
+  args:
+  - name: input
+    type: ArchiveCaseInput!
+  description: Archives an existing case record.
+- name: mutation_archivePatient
+  category: mutation
+  graphql_field: Mutation.archivePatient
+  returns: ArchivePatientPayload
+  args:
+  - name: input
+    type: ArchivePatientInput!
+  description: Archives a patient.
+- name: mutation_assignReferralRecordToWaitingList
+  category: mutation
+  graphql_field: Mutation.assignReferralRecordToWaitingList
+  returns: AssignReferralRecordToWaitingListPayload
+  args:
+  - name: input
+    type: AssignReferralRecordToWaitingListInput!
+  description: Adds the existing referral record to the waiting list.
+- name: mutation_closeCase
+  category: mutation
+  graphql_field: Mutation.closeCase
+  returns: CloseCasePayload
+  args:
+  - name: input
+    type: CloseCaseInput!
+  description: Marks the case as closed.
+- name: mutation_createAppointment
+  category: mutation
+  graphql_field: Mutation.createAppointment
+  returns: Appointment
+  args:
+  - name: input
+    type: CreateAppointmentInput!
+  - name: options
+    type: CreateAppointmentOptions
+  description: Creates an appointment with the supplied attributes (only supports future appointments).
+- name: mutation_createAttachment
+  category: mutation
+  graphql_field: Mutation.createAttachment
+  returns: CreateAttachmentPayload
+  args:
+  - name: input
+    type: CreateAttachmentInput!
+  description: Creates an attachment with the supplied attributes
+- name: mutation_createCase
+  category: mutation
+  graphql_field: Mutation.createCase
+  returns: CreateCasePayload
+  args:
+  - name: input
+    type: CreateCaseInput!
+  description: Creates a new case for a patient using the specified details.
+- name: mutation_createContact
+  category: mutation
+  graphql_field: Mutation.createContact
+  returns: CreateContactPayload
+  args:
+  - name: input
+    type: CreateContactInput!
+  description: Creates a new contact record and associates it with a facility.
+- name: mutation_createDraftAppointment
+  category: mutation
+  graphql_field: Mutation.createDraftAppointment
+  returns: CreateDraftAppointmentPayload
+  args:
+  - name: input
+    type: CreateDraftAppointmentInput!
+  description: Creates a draft/temporary appointment with the supplied attributes to reserve a given availability
+    during the booking pr
+- name: mutation_createFacility
+  category: mutation
+  graphql_field: Mutation.createFacility
+  returns: CreateFacilityPayload
+  args:
+  - name: input
+    type: CreateFacilityInput!
+  description: Creates a new facility.
+- name: mutation_createFlexibleWorkHour
+  category: mutation
+  graphql_field: Mutation.createFlexibleWorkHour
+  returns: CreateFlexibleWorkHourPayload
+  args:
+  - name: input
+    type: CreateFlexibleWorkHourInput!
+  description: Creates a new flexible work hour.
+- name: mutation_createIncomingReferralRecord
+  category: mutation
+  graphql_field: Mutation.createIncomingReferralRecord
+  returns: CreateIncomingReferralRecordPayload
+  args:
+  - name: input
+    type: CreateIncomingReferralRecordInput!
+  description: Creates an incoming referral record with the supplied attributes.
+- name: mutation_createInternalReferralRecord
+  category: mutation
+  graphql_field: Mutation.createInternalReferralRecord
+  returns: CreateInternalReferralRecordPayload
+  args:
+  - name: input
+    type: CreateInternalReferralRecordInput!
+  description: Creates an internal referral record with the supplied attributes.
+- name: mutation_createOutgoingReferralRecord
+  category: mutation
+  graphql_field: Mutation.createOutgoingReferralRecord
+  returns: CreateOutgoingReferralRecordPayload
+  args:
+  - name: input
+    type: CreateOutgoingReferralRecordInput!
+  description: Creates an outgoing referral record with the supplied attributes.
+- name: mutation_createPatient
+  category: mutation
+  graphql_field: Mutation.createPatient
+  returns: CreatePatientPayload
+  args:
+  - name: input
+    type: CreatePatientInput!
+  description: Creates a new patient.
+- name: mutation_createProviderOffTime
+  category: mutation
+  graphql_field: Mutation.createProviderOffTime
+  returns: CreateProviderOffTimePayload
+  args:
+  - name: input
+    type: CreateProviderOffTimeInput!
+  description: Creates a new off time record for a provider using the specified details.
+- name: mutation_createRespondent
+  category: mutation
+  graphql_field: Mutation.createRespondent
+  returns: CreateRespondentPayload
+  args:
+  - name: input
+    type: CreateRespondentInput!
+  description: Creates a new patient.
+- name: mutation_createStandardWorkHour
+  category: mutation
+  graphql_field: Mutation.createStandardWorkHour
+  returns: CreateStandardWorkHourPayload
+  args:
+  - name: input
+    type: CreateStandardWorkHourInput!
+  description: Creates a new standard work hour.
+- name: mutation_createTask
+  category: mutation
+  graphql_field: Mutation.createTask
+  returns: CreateTaskPayload
+  args:
+  - name: input
+    type: CreateTaskInput!
+  description: Creates a new task with the specified details.
+- name: mutation_createTaskByTemplate
+  category: mutation
+  graphql_field: Mutation.createTaskByTemplate
+  returns: CreateTaskByTemplatePayload
+  args:
+  - name: input
+    type: CreateTaskByTemplateInput!
+  description: Creates a new task with the specified details based on task template.
+- name: mutation_deleteDraftAppointment
+  category: mutation
+  graphql_field: Mutation.deleteDraftAppointment
+  returns: DeleteDraftAppointmentPayload
+  args:
+  - name: input
+    type: DeleteDraftAppointmentInput!
+  description: Deletes a draft/temporary appointment.
+- name: mutation_healthProfile
+  category: mutation
+  graphql_field: Mutation.healthProfile
+  returns: HealthProfileMutations
+  args: null
+  description: Health profile mutations.
+- name: mutation_manageCaseObservation
+  category: mutation
+  graphql_field: Mutation.manageCaseObservation
+  returns: ManageCaseObservationPayload
+  args:
+  - name: input
+    type: ManageCaseObservationInput!
+  description: Adds, updates, and removes observations associated with the case record.
+- name: mutation_reassignCase
+  category: mutation
+  graphql_field: Mutation.reassignCase
+  returns: ReassignCasePayload
+  args:
+  - name: input
+    type: ReassignCaseInput!
+  description: Updates the assignee of an existing case record.
+- name: mutation_removeGroupVisitAttendee
+  category: mutation
+  graphql_field: Mutation.removeGroupVisitAttendee
+  returns: RemoveGroupVisitAttendeePayload
+  args:
+  - name: input
+    type: RemoveGroupVisitAttendeeInput!
+  description: Removes a patient from a group visit by cancelling every appointment they hold within it.
+- name: mutation_saveOlisLabMessage
+  category: mutation
+  graphql_field: Mutation.saveOlisLabMessage
+  returns: SaveOlisLabMessagePayload
+  args:
+  - name: input
+    type: SaveOlisLabMessageInput!
+  description: '*Reserved to CHR internal use.*'
+- name: mutation_updateAppointment
+  category: mutation
+  graphql_field: Mutation.updateAppointment
+  returns: UpdateAppointmentPayload
+  args:
+  - name: input
+    type: UpdateAppointmentInput!
+  description: Updates an appointment with the supplied attributes.
+- name: mutation_updateCareTeamMember
+  category: mutation
+  graphql_field: Mutation.updateCareTeamMember
+  returns: UpdateCareTeamMemberPayload
+  args:
+  - name: input
+    type: UpdateCareTeamMemberInput!
+  description: Updates a care team member in patient chart.
+- name: mutation_updateCase
+  category: mutation
+  graphql_field: Mutation.updateCase
+  returns: UpdateCasePayload
+  args:
+  - name: input
+    type: UpdateCaseInput!
+  description: Updates an existing case for a patient.
+- name: mutation_updateCaseStatus
+  category: mutation
+  graphql_field: Mutation.updateCaseStatus
+  returns: UpdateCaseStatusPayload
+  args:
+  - name: input
+    type: UpdateCaseStatusInput!
+  description: Updates the status of an existing case for a patient.
+- name: mutation_updateContact
+  category: mutation
+  graphql_field: Mutation.updateContact
+  returns: UpdateContactPayload
+  args:
+  - name: input
+    type: UpdateContactInput!
+  description: Updates an existing contact.
+- name: mutation_updateDraftAppointment
+  category: mutation
+  graphql_field: Mutation.updateDraftAppointment
+  returns: UpdateDraftAppointmentPayload
+  args:
+  - name: input
+    type: UpdateDraftAppointmentInput!
+  description: Updates a draft/temporary appointment with the supplied attributes to reserve a given availability
+    during the booking pr
+- name: mutation_updateFacility
+  category: mutation
+  graphql_field: Mutation.updateFacility
+  returns: UpdateFacilityPayload
+  args:
+  - name: input
+    type: UpdateFacilityInput!
+  description: Updates the existing facility.
+- name: mutation_updateIncomingReferralRecord
+  category: mutation
+  graphql_field: Mutation.updateIncomingReferralRecord
+  returns: UpdateIncomingReferralRecordPayload
+  args:
+  - name: input
+    type: UpdateIncomingReferralRecordInput!
+  description: Updates existing incoming referral record with the supplies attributes.
+- name: mutation_updateInternalReferralRecord
+  category: mutation
+  graphql_field: Mutation.updateInternalReferralRecord
+  returns: UpdateInternalReferralRecordPayload
+  args:
+  - name: input
+    type: UpdateInternalReferralRecordInput!
+  description: Updates existing internal referral record with the supplies attributes.
+- name: mutation_updateOutgoingReferralRecord
+  category: mutation
+  graphql_field: Mutation.updateOutgoingReferralRecord
+  returns: UpdateOutgoingReferralRecordPayload
+  args:
+  - name: input
+    type: UpdateOutgoingReferralRecordInput!
+  description: Updates existing outgoing referral record with the supplies attributes.
+- name: mutation_updatePatient
+  category: mutation
+  graphql_field: Mutation.updatePatient
+  returns: UpdatePatientPayload
+  args:
+  - name: input
+    type: UpdatePatientInput!
+  description: Updates a patient.
+- name: mutation_updateTask
+  category: mutation
+  graphql_field: Mutation.updateTask
+  returns: UpdateTaskPayload
+  args:
+  - name: input
+    type: UpdateTaskInput!
+  description: Updates an existing task with the specified details.
+- name: mutation_upsertCaseDataItem
+  category: mutation
+  graphql_field: Mutation.upsertCaseDataItem
+  returns: UpsertCaseDataItemPayload
+  args:
+  - name: input
+    type: UpsertCaseDataItemInput!
+  description: Creates or updates a case data item.
+- name: mutation_upsertPatientDataItem
+  category: mutation
+  graphql_field: Mutation.upsertPatientDataItem
+  returns: UpsertPatientDataItemPayload
+  args:
+  - name: input
+    type: UpsertPatientDataItemInput!
+  description: Inserts a patient data entry with the supplied attributes on the patient chart.
+- name: mutation_upsertReferralDataItem
+  category: mutation
+  graphql_field: Mutation.upsertReferralDataItem
+  returns: UpsertReferralDataItemPayload
+  args:
+  - name: input
+    type: UpsertReferralDataItemInput!
+  description: Creates or updates a referral data item.

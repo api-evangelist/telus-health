@@ -1,0 +1,32 @@
+generated: '2026-07-24'
+method: probed
+source: live DNS/TLS/HTTP probes of apis.yml + OpenAPI hosts
+hosts:
+- host: www.telus.com
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Sep 24 10:42:38 2026 GMT
+  hsts: null
+- host: help.inputhealth.com
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Sep 26 00:34:14 2026 GMT
+  hsts: false
+- host: simplifier.net
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Dec 13 23:59:59 2026 GMT
+  hsts: false
+domains:
+- domain: telus.com
+  dnssec: false
+  caa: []
+  spf: true
+  dmarc: true
+  dmarc_policy: reject
+- domain: inputhealth.com
+  dnssec: false
+  caa: []
+  spf: true
+  dmarc: true
+  dmarc_policy: none

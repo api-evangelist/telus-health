@@ -1,0 +1,30 @@
+generated: '2026-07-24'
+method: derived
+source: graphql/telus-health-chr-enterprise-introspection.json + fhir/telus-patient-chart-structuredefinitions.json
+  + docs
+standards:
+- id: graphql
+  conforms: true
+  evidence: CHR Enterprise API is a GraphQL API (Query 64 fields, Mutation 49 fields); introspection published.
+- id: graphql-cursor-connections
+  conforms: true
+  evidence: Docs state adherence to the GraphQL Cursor Connections Specification (default 50 / max 100).
+- id: jwt-rfc7519
+  conforms: true
+  evidence: RS512-signed JWT bearer tokens with iss/exp claims.
+- id: hl7-fhir-r4
+  conforms: true
+  evidence: 'TELUS Patient Chart implementation guide: 89 StructureDefinition profiles, fhirVersion 4.0.1.'
+- id: oauth2
+  conforms: false
+  evidence: No oauth2 security scheme; auth is partner-minted RS512 JWT.
+- id: smart-on-fhir
+  conforms: false
+  evidence: No .well-known/smart-configuration published.
+- id: ca-core-fhir
+  conforms: false
+  evidence: National Canada scope declared but CA Core / CA Baseline conformance not declared in the harvested
+    profiles.
+- id: rfc9457-problem-details
+  conforms: false
+  evidence: GraphQL error envelope, not application/problem+json.

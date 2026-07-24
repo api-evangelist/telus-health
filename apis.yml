@@ -60,6 +60,16 @@ apis:
     url: http://apidocs.inputhealth.com/voyager.html
   - type: GraphQL
     url: http://apidocs.inputhealth.com/voyager.html
+  - type: GraphQL
+    url: graphql/telus-health-chr-enterprise.graphql
+  - type: GraphQL
+    url: graphql/telus-health-chr-enterprise-introspection.json
+  - type: MCPServer
+    url: mcp/telus-health-mcp.yml
+  - type: DataModel
+    url: data-model/telus-health-data-model.yml
+  - type: Sandbox
+    url: sandbox/telus-health-sandbox.yml
   - type: GettingStarted
     url: https://help.inputhealth.com/en/articles/6368814-enterprise-api-onboarding-overview
   - type: Authentication
@@ -88,6 +98,8 @@ apis:
   - type: FHIR
     url: fhir/telus-patient-chart-structuredefinitions.json
 common:
+- type: DomainSecurity
+  url: security/telus-health-domain-security.yml
 - type: Website
   url: https://www.telus.com/en/health
 - type: DeveloperPortal
@@ -100,6 +112,24 @@ common:
   url: https://help.inputhealth.com/en/articles/6368814-enterprise-api-onboarding-overview
 - type: LinkedIn
   url: https://www.linkedin.com/company/telus-health
+- type: GitHubOrganization
+  url: https://github.com/telus-health-chr
+- type: Authentication
+  url: authentication/telus-health-authentication.yml
+- type: Conventions
+  url: conventions/telus-health-conventions.yml
+- type: Conformance
+  url: conformance/telus-health-conformance.yml
+- type: Lifecycle
+  url: lifecycle/telus-health-lifecycle.yml
+- type: Packages
+  url: packages/telus-health-packages.yml
+- type: WellKnown
+  url: well-known/telus-health-well-known.yml
+- type: AgentSkill
+  url: skills/_index.yml
+- type: LLMsTxt
+  url: llms/telus-health-llms.txt
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com

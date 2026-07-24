@@ -1,0 +1,32 @@
+generated: '2026-07-24'
+method: searched
+source: https://help.inputhealth.com/en/articles/6483223-making-requests-to-the-api
+docs: https://help.inputhealth.com/en/articles/6483223-making-requests-to-the-api
+summary:
+  types:
+  - http
+  scheme: bearer
+  bearer_format: JWT
+  oauth2_flows: []
+  api_key_in: []
+schemes:
+- name: chrEnterpriseJWT
+  type: http
+  scheme: bearer
+  bearer_format: JWT
+  api: telus-health:telus-chr-enterprise-api
+  signing_algorithm: RS512
+  header: 'Authorization: Bearer {json_web_token}'
+  token_details:
+    issuer: iss claim must match the configured API Consumer
+    signature: RS512 (RSA-SHA512); public key configured on the API Consumer in CHR Settings
+    expiry: token must expire within 15 minutes (exp <= iat + 900s)
+    audience: per-CHR-domain Enterprise API endpoint
+  notes: No OAuth 2.0, no API keys, no SMART-on-FHIR. Partner mints a short-lived RS512 JWT signed by
+    a private key whose public key is registered on the CHR API Consumer; access is gated behind a CHR-domain
+    / partner agreement.
+fhir_api:
+  api: telus-health:telus-patient-chart-fhir-api
+  scheme: none
+  note: TELUS Patient Chart is a published FHIR R4 conformance package (89 StructureDefinition profiles)
+    on Simplifier; no live authenticated TELUS FHIR endpoint is published.

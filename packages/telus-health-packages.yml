@@ -1,0 +1,18 @@
+generated: '2026-07-24'
+method: searched
+source: https://www.npmjs.com/org/telus-health-chr + https://github.com/telus-health-chr
+note: TELUS Health CHR publishes first-party tooling under the @telus-health-chr npm scope and the github.com/telus-health-chr
+  org. No client SDK for the CHR Enterprise (GraphQL) API is published; integrators call the GraphQL endpoint
+  directly with a standard GraphQL client. The package below is a first-party documentation-generation
+  tool, not a client library.
+packages:
+- language: javascript
+  registry: npm
+  name: '@telus-health-chr/dociql'
+  version: 1.1.8
+  url: https://www.npmjs.com/package/@telus-health-chr/dociql
+  install: npm install @telus-health-chr/dociql
+  repository: https://github.com/telus-health-chr/dociql
+  official: true
+  kind: documentation-generator
+  description: Generate static API documentation from a GraphQL schema (TELUS Health CHR fork of dociql).

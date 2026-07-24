@@ -1,0 +1,30 @@
+generated: '2026-07-24'
+method: derived
+source: graphql introspection @deprecated markers + docs
+api: telus-health:telus-chr-enterprise-api
+versioning:
+  scheme: schema-evolution
+  current: null
+  docs: https://help.inputhealth.com/en/articles/5941595-api-reference-documentation
+  note: No version path or header; the GraphQL schema evolves in place, signaling removals via @deprecated
+    field markers.
+deprecation:
+  mechanism: graphql @deprecated directive
+  policy_url: null
+  sunset_header: false
+  note: Deprecations are surfaced in the schema (deprecationReason) rather than via a published RFC 8594
+    deprecation policy or Sunset headers.
+token_lifetime:
+  access_token: <=15 minutes (RS512 JWT exp)
+sla:
+  url: null
+  uptime_target: null
+status_page: null
+deprecated_operations:
+- Query.respondent (deprecated -> use patient)
+- Query.respondents (deprecated -> use patients)
+- Mutation.createRespondent (deprecated -> use createPatient)
+- Appointment.respondent (deprecated -> use patient)
+- LabObservation.respondent (deprecated -> use patient)
+- Offtime.startAt (deprecated -> use start_at_date/start_at_time)
+- Offtime.untilAt (deprecated -> use end_at_date/end_at_time)

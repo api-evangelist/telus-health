@@ -1,0 +1,4733 @@
+# TELUS CHR Enterprise API — GraphQL SDL
+# Source: https://apidocs.ca.inputhealth.com/enterprise-api/introspection.json (GraphQL Voyager)
+# Retrieved 2026-07-24 via anonymous introspection.json (no auth). Query=64 fields, Mutation=49 fields.
+
+input AddCareTeamMemberInput {
+  clientMutationId: String
+  memberId: ID!
+  memberType: CareTeamMemberMemberTypeEnum!
+  patientId: ID!
+  roleUuid: String
+}
+
+type AddCareTeamMemberPayload {
+  careTeamMember: CareTeamMember!
+  clientMutationId: String
+}
+
+input AddCaseCommentInput {
+  clientMutationId: String
+  body: String!
+  caseId: ID!
+}
+
+type AddCaseCommentPayload {
+  caseComment: CaseComment!
+  clientMutationId: String
+}
+
+input AddDrugAllergyRecordInput {
+  clientMutationId: String
+  din: Din!
+  lifeStage: LifeStageEnum
+  otherReactions: String
+  patientId: ID!
+  reaction: ReactionEnum
+  reactionType: ReactionTypeEnum
+  reportedBy: ReportedByEnum
+  severity: SeverityEnum
+  status: AllergyStatusEnum
+}
+
+type AddDrugAllergyRecordPayload {
+  clientMutationId: String
+  patientAllergy: PatientAllergyRecord
+}
+
+input AddFamilyHistoryRecordInput {
+  clientMutationId: String
+  patientId: ID!
+  ageAtOnset: Int
+  customDiagnoses: [String!]
+  diagnosisIds: [ID!]
+  isRiskFactor: Boolean
+  lifeStage: LifeStageEnum
+  notes: String
+  relationship: RelationshipEnum
+  startDate: ISO8601Date
+  treatment: String
+}
+
+type AddFamilyHistoryRecordPayload {
+  clientMutationId: String
+  familyHistoryRecord: FamilyHistoryRecord
+}
+
+input AddGroupVisitAttendeeInput {
+  clientMutationId: String
+  allowPatientNotification: Boolean
+  allowPractitionerNotification: Boolean
+  groupVisitId: ID!
+  patientId: ID!
+  patientNotificationMethod: EntityNotificationMethodEnum
+  reason: String
+  status: AppointmentStatusEnum
+}
+
+type AddGroupVisitAttendeePayload {
+  appointment: Appointment!
+  clientMutationId: String
+}
+
+input AddMedicationRecordInput {
+  clientMutationId: String
+  patientId: ID!
+  startAt: PartialDate!
+  additionalInstruction: String
+  continuous: Boolean
+  din: Din
+  dosages: [MedicationDosageInput!]
+  endAt: PartialDate
+  externallyPrescribed: Boolean
+  form: MedicationFormEnum
+  name: String
+  noRenewals: Boolean
+  pastMedication: Boolean
+  quantity: MedicationQuantityInput
+  refill: Int
+  route: MedicationRouteEnum
+}
+
+type AddMedicationRecordPayload {
+  clientMutationId: String
+  medicationRecord: MedicationRecord!
+}
+
+input AddNonDrugAllergyRecordInput {
+  clientMutationId: String
+  patientId: ID!
+  lifeStage: LifeStageEnum
+  name: String
+  otherReactions: String
+  reaction: ReactionEnum
+  reactionType: ReactionTypeEnum
+  reportedBy: ReportedByEnum
+  severity: SeverityEnum
+  status: AllergyStatusEnum
+}
+
+type AddNonDrugAllergyRecordPayload {
+  clientMutationId: String
+  patientAllergy: PatientAllergyRecord
+}
+
+input AddReferralRecordAttachmentInput {
+  resourceId: ID!
+  resourceType: AddReferralRecordAttachmentInputResourceTypeEnum!
+}
+
+enum AddReferralRecordAttachmentInputResourceTypeEnum {
+  ADMINISTRATIVE_NOTE
+  ANSWER_SHEET
+  APPOINTMENT
+  ATTACHMENT
+  ENCOUNTER
+  INJECTION_RECORD
+  MEDICATION_RECORD
+  PATIENT_ALLERGY_RECORD
+}
+
+input AddReferralRecordCommentInput {
+  clientMutationId: String
+  author: ReferralRecordCommentAuthorInput
+  body: String!
+  referralRecordId: ID!
+}
+
+type AddReferralRecordCommentPayload {
+  clientMutationId: String
+  referralRecordComment: ReferralRecordComment!
+}
+
+input AddStatusTagIdsInput {
+  id: ID!
+}
+
+input AddTaskCommentInput {
+  clientMutationId: String
+  actor: TaskCommentActorInput
+  comment: String!
+  taskId: ID!
+}
+
+type AddTaskCommentPayload {
+  clientMutationId: String
+  taskComment: TaskComment!
+}
+
+type Addendum implements Node & Timestampable {
+  content: String!
+  createdAt: ISO8601DateTime!
+  createdBy: ProviderUser!
+  id: ID!
+  updatedAt: ISO8601DateTime!
+}
+
+type AdministrativeNote implements Node & Timestampable {
+  author: ProviderUser
+  createdAt: ISO8601DateTime!
+  endDate: PartialDate
+  id: ID!
+  important: Boolean
+  private: Boolean
+  startDate: PartialDate
+  text: String
+  title: String
+  updatedAt: ISO8601DateTime!
+}
+
+type AdministrativeNoteConnection {
+  edges: [AdministrativeNoteEdge]
+  nodes: [AdministrativeNote]
+  pageInfo: PageInfo!
+}
+
+type AdministrativeNoteEdge {
+  cursor: String!
+  node: AdministrativeNote
+}
+
+enum AdvancedDirectivesEnum {
+  PERFORM_ALL_LIFE_SAVING_MEASURES_POSSIBLE
+  NO_CPR
+  NO_MECHANICAL_VENTILATION
+  NO_CARDIAC_DEFIBRILLATION
+  NO_ENDOTRACHEAL_INTUBATION
+  NO_TRANSCUTANEOUS_PACING
+  OTHER
+}
+
+enum AllergyStatusEnum {
+  ACTIVE
+  UNCONFIRMED
+  CONFIRMED
+  INACTIVE
+  RESOLVED
+  REFUTED
+}
+
+type AmountsData {
+  discount: Float
+  paid: Float
+  processed: Float
+  refunded: Float
+  total: Float
+  wroteOff: Float
+}
+
+type Answer implements Node & NullableTimestampable {
+  createdAt: ISO8601DateTime
+  id: ID!
+  position: Int
+  questionExportableName: String
+  questionId: ID
+  questionText: String
+  questionVariableName: String
+  responseSelections: [ResponseSelection!]
+  responseText: String
+  score: Float
+  updatedAt: ISO8601DateTime
+}
+
+type AnswerSheet implements Node & Timestampable {
+  answersData: [Answer!]
+  createdAt: ISO8601DateTime!
+  createdBy: ProviderUser
+  finishedAt: ISO8601DateTime
+  id: ID!
+  locked: Boolean
+  lockedAt: ISO8601DateTime
+  lockedBy: ProviderUser
+  note: String
+  questionnaire: Questionnaire
+  reportDescription: String
+  reportTitle: String
+  score: Float
+  scores: [Score!]
+  signed: Boolean
+  signedBy: ProviderUser
+  startedAt: ISO8601DateTime
+  updatedAt: ISO8601DateTime!
+}
+
+type AnswerSheetConnection {
+  edges: [AnswerSheetEdge]
+  nodes: [AnswerSheet]
+  pageInfo: PageInfo!
+}
+
+type AnswerSheetEdge {
+  cursor: String!
+  node: AnswerSheet
+}
+
+type Appointment implements Node & Timestampable {
+  checkedInAt: ISO8601DateTime
+  createdAt: ISO8601DateTime!
+  date: ISO8601Date!
+  deactivated: Boolean
+  id: ID!
+  location: Location
+  note: String
+  patient: Patient!
+  presentingIssue: PresentingIssue
+  provider: ProviderUser
+  reason: String
+  respondent: Respondent! @deprecated
+  service: Service
+  startAt: ISO8601DateTime!
+  status: AppointmentStatusEnum!
+  tags: [AppointmentTag!]!
+  untilAt: ISO8601DateTime!
+  updatedAt: ISO8601DateTime!
+  visitType: VisitTypeEnum!
+}
+
+type AppointmentConnection {
+  edges: [AppointmentEdge]
+  nodes: [Appointment]
+  pageInfo: PageInfo!
+}
+
+type AppointmentEdge {
+  cursor: String!
+  node: Appointment
+}
+
+enum AppointmentOrderByEnum {
+  ID
+  START_AT
+  CREATED_AT
+  UPDATED_AT
+  LOCATION
+  PROVIDER
+  SERVICE
+  VISIT_TYPE
+}
+
+input AppointmentOrderByInput {
+  direction: OrderByDirectionEnum!
+  field: AppointmentOrderByEnum!
+}
+
+enum AppointmentStatusEnum {
+  REQUESTED
+  PROVIDER_REQUESTED
+  CONFIRMED
+  ACTION_REQUIRED
+  NO_SHOW
+  ARRIVED
+  IN_ROOM
+  BEING_SEEN
+  VISIT_COMPLETED
+  NOTE_SIGNED
+  CANCELLED
+  REJECTED
+  BOOKED
+  RESCHEDULED
+  NONE
+  SYSTEM_DELAY
+}
+
+type AppointmentTag implements Colorable & Node & Timestampable {
+  color: String
+  createdAt: ISO8601DateTime!
+  id: ID!
+  name: String!
+  shortName: String!
+  updatedAt: ISO8601DateTime!
+}
+
+input ArchiveCaseInput {
+  clientMutationId: String
+  id: ID!
+}
+
+type ArchiveCasePayload {
+  case: Case!
+  clientMutationId: String
+}
+
+input ArchivePatientInput {
+  clientMutationId: String
+  id: ID!
+  notify: Boolean
+}
+
+type ArchivePatientPayload {
+  clientMutationId: String
+  patient: Patient!
+}
+
+union ArchivedBy = EnterpriseApiConsumer | ProviderUser
+
+input AssignReferralRecordToWaitingListInput {
+  clientMutationId: String
+  referralRecordId: ID!
+  referralStatusId: ID
+  waitingListId: ID
+}
+
+type AssignReferralRecordToWaitingListPayload {
+  clientMutationId: String
+  referralRecord: ReferralRecord!
+}
+
+enum AssigneeTypeEnum {
+  PROVIDER_USER
+}
+
+type Attachment implements AttachmentInterface {
+  allowEdit: Boolean!
+  archived: Boolean
+  attachmentUrl: String
+  contentType: String
+  createdAt: ISO8601DateTime!
+  currentVersion: Boolean
+  description: String
+  fileDate: ISO8601DateTime!
+  fileName: String
+  fileSize: Int
+  fileTags: [FileTag!]
+  id: ID!
+  lastReviewedAt: ISO8601DateTime
+  name: String
+  owner: ProviderUser
+  receivedAt: ISO8601DateTime
+  reviewers: [ProviderUser!]
+  updatedAt: ISO8601DateTime!
+  uploadedAt: ISO8601DateTime
+  versioningUuid: String
+}
+
+type AttachmentConnection {
+  edges: [AttachmentEdge]
+  nodes: [Attachment]
+  pageInfo: PageInfo!
+}
+
+type AttachmentEdge {
+  cursor: String!
+  node: Attachment
+}
+
+interface AttachmentInterface {
+  allowEdit: Boolean!
+  archived: Boolean
+  attachmentUrl: String
+  contentType: String
+  createdAt: ISO8601DateTime!
+  currentVersion: Boolean
+  description: String
+  fileDate: ISO8601DateTime!
+  fileName: String
+  fileSize: Int
+  fileTags: [FileTag!]
+  id: ID!
+  lastReviewedAt: ISO8601DateTime
+  name: String
+  owner: ProviderUser
+  receivedAt: ISO8601DateTime
+  reviewers: [ProviderUser!]
+  updatedAt: ISO8601DateTime!
+  uploadedAt: ISO8601DateTime
+  versioningUuid: String
+}
+
+type Availability {
+  location: Location
+  provider: ProviderUser!
+  startAt: ISO8601DateTime!
+  untilAt: ISO8601DateTime!
+  visitType: VisitTypeEnum!
+}
+
+enum BillingStatusEnum {
+  ADJUSTED
+  COMPLETED
+  DELETED
+  DRAFT
+  ERROR
+  HOLD
+  INCOMPLETE
+  NO_CHARGE
+  PAID_PRIVATELY
+  PAST_DUE
+  PAYMENT_DUE
+  PENDING
+  READY
+  REFUSED
+  REJECTED
+  REVERSAL
+  UNDERPAID
+  WRITE_OFF
+}
+
+enum BloodPressureArmEnum {
+  LEFT
+  RIGHT
+}
+
+enum BloodPressurePositionEnum {
+  LAY
+  SIT
+  STAND
+}
+
+type CareTeamMember implements Node & Timestampable {
+  createdAt: ISO8601DateTime!
+  id: ID!
+  member: Member!
+  role: CareTeamRole
+  updatedAt: ISO8601DateTime!
+}
+
+enum CareTeamMemberMemberTypeEnum {
+  PROVIDER_USER
+  CONTACT
+}
+
+enum CareTeamMemberOrderByEnum {
+  CREATED_AT
+  LAST_NAME
+}
+
+input CareTeamMemberOrderByInput {
+  direction: OrderByDirectionEnum!
+  field: CareTeamMemberOrderByEnum!
+}
+
+type CareTeamRole {
+  archived: Boolean
+  archivedBy: ProviderUser
+  description: String
+  name: String
+  position: Int!
+  uuid: String
+}
+
+type CareTeamRoleConnection {
+  edges: [CareTeamRoleEdge]
+  nodes: [CareTeamRole]
+  pageInfo: PageInfo!
+}
+
+type CareTeamRoleEdge {
+  cursor: String!
+  node: CareTeamRole
+}
+
+type Case implements Node & Timestampable {
+  archived: Boolean!
+  archivedAt: ISO8601DateTime
+  archivedBy: ProviderUser
+  assignedProviderUser: ProviderUser!
+  attachments(after: String, before: String, first: Int, last: Int): AttachmentConnection!
+  caseDataItems(after: String, before: String, first: Int, last: Int, templateUuid: String): CaseDataItemConnection!
+  caseNumber: String!
+  closeReason: String
+  closedAt: ISO8601DateTime
+  closedBy: CaseClosedByActor
+  comments(after: String, before: String, first: Int, last: Int): CaseCommentConnection!
+  createdAt: ISO8601DateTime!
+  encounters(after: String, before: String, first: Int, last: Int): EncounterConnection
+  id: ID!
+  issue: String
+  letters(contactId: ID, letterTemplateId: ID, title: String, after: String, before: String, first: Int, last: Int): LetterConnection!
+  observations(type: SearchString, after: String, before: String, first: Int, last: Int): CaseObservationConnection!
+  openedAt: ISO8601DateTime
+  reportedClosedAt: ISO8601DateTime
+  status: CaseStatus!
+  template: CaseTemplate!
+  updatedAt: ISO8601DateTime!
+}
+
+union CaseClosedByActor = EnterpriseApiConsumer | ProviderUser
+
+type CaseComment implements Node & Timestampable {
+  author: CaseCommentAuthor!
+  body: String!
+  createdAt: ISO8601DateTime!
+  id: ID!
+  updatedAt: ISO8601DateTime!
+}
+
+union CaseCommentAuthor = EnterpriseApiConsumer | ProviderUser
+
+type CaseCommentConnection {
+  edges: [CaseCommentEdge]
+  nodes: [CaseComment]
+  pageInfo: PageInfo!
+}
+
+type CaseCommentEdge {
+  cursor: String!
+  node: CaseComment
+}
+
+type CaseConnection {
+  edges: [CaseEdge]
+  nodes: [Case]
+  pageInfo: PageInfo!
+}
+
+union CaseDataEntityAny = CaseDataEntityDate | CaseDataEntityMultiSelection | CaseDataEntityNumber | CaseDataEntitySingleSelection | CaseDataEntityText
+
+type CaseDataEntityDate implements CaseDataEntityInterface {
+  dateFormat: CaseDataEntityDateFormatEnum
+  defaultValue: CaseDataEntityDateDefaultValueEnum
+  defaultValueOffset: Int
+  internalUseOnly: Boolean
+  name: String!
+  range: [CaseDataEntityDateRangeEnum!]
+  required: Boolean
+  setAsDateOfOccurred: Boolean
+  uuid: String!
+}
+
+enum CaseDataEntityDateDefaultValueEnum {
+  TODAY
+}
+
+enum CaseDataEntityDateFormatEnum {
+  YEAR_MONTH_DAY
+  YEAR_MONTH
+  YEAR
+}
+
+enum CaseDataEntityDateRangeEnum {
+  FUTURE
+  PAST
+}
+
+interface CaseDataEntityInterface {
+  internalUseOnly: Boolean
+  name: String!
+  required: Boolean
+  uuid: String!
+}
+
+type CaseDataEntityMultiSelection implements CaseDataEntityInterface {
+  internalUseOnly: Boolean
+  name: String!
+  required: Boolean
+  uuid: String!
+  values: [String!]
+}
+
+type CaseDataEntityNumber implements CaseDataEntityInterface {
+  internalUseOnly: Boolean
+  maxValue: Float
+  minValue: Float
+  name: String!
+  pluralFormat: String
+  required: Boolean
+  singularFormat: String
+  uuid: String!
+}
+
+type CaseDataEntitySingleSelection implements CaseDataEntityInterface {
+  internalUseOnly: Boolean
+  name: String!
+  required: Boolean
+  uuid: String!
+  values: [String!]
+}
+
+type CaseDataEntityText implements CaseDataEntityInterface {
+  allowMultiLines: Boolean
+  internalUseOnly: Boolean
+  name: String!
+  required: Boolean
+  uuid: String!
+}
+
+type CaseDataItem implements Node & Timestampable {
+  createdAt: ISO8601DateTime!
+  id: ID!
+  template: CaseDataTemplate!
+  updatedAt: ISO8601DateTime!
+  values: [CaseDataValueAny!]!
+}
+
+type CaseDataItemConnection {
+  edges: [CaseDataItemEdge]
+  nodes: [CaseDataItem]
+  pageInfo: PageInfo!
+}
+
+type CaseDataItemEdge {
+  cursor: String!
+  node: CaseDataItem
+}
+
+type CaseDataTemplate {
+  entities: [CaseDataEntityAny!]!
+  module: CaseDataTemplateModuleEnum!
+  name: String!
+  uuid: String!
+}
+
+type CaseDataTemplateConnection {
+  edges: [CaseDataTemplateEdge]
+  nodes: [CaseDataTemplate]
+  pageInfo: PageInfo!
+}
+
+type CaseDataTemplateEdge {
+  cursor: String!
+  node: CaseDataTemplate
+}
+
+enum CaseDataTemplateModuleEnum {
+  ADDRESS
+  CONTACT
+  FORM
+}
+
+union CaseDataValueAny = CaseDataValueDate | CaseDataValueMultiSelection | CaseDataValueNumber | CaseDataValueSingleSelection | CaseDataValueText
+
+type CaseDataValueDate implements CaseDataValueInterface {
+  name: String!
+  uuid: String!
+  value: PartialDate
+}
+
+input CaseDataValueInput {
+  valueUuid: String!
+  textValue: String
+  dateValue: PartialDate
+  numberValue: Float
+  singleSelectValue: String
+  multiSelectValue: [String!]
+}
+
+interface CaseDataValueInterface {
+  name: String!
+  uuid: String!
+}
+
+type CaseDataValueMultiSelection implements CaseDataValueInterface {
+  name: String!
+  uuid: String!
+  values: [String!]
+}
+
+type CaseDataValueNumber implements CaseDataValueInterface {
+  displayValue: String
+  name: String!
+  uuid: String!
+  value: Float
+}
+
+type CaseDataValueSingleSelection implements CaseDataValueInterface {
+  name: String!
+  uuid: String!
+  value: String
+}
+
+type CaseDataValueText implements CaseDataValueInterface {
+  name: String!
+  uuid: String!
+  value: String
+}
+
+type CaseEdge {
+  cursor: String!
+  node: Case
+}
+
+type CaseObservation implements Node & Timestampable {
+  createdAt: ISO8601DateTime!
+  details: String
+  endAt: ISO8601Date
+  id: ID!
+  startAt: ISO8601Date
+  type: String
+  updatedAt: ISO8601DateTime!
+}
+
+type CaseObservationConnection {
+  edges: [CaseObservationEdge]
+  nodes: [CaseObservation]
+  pageInfo: PageInfo!
+}
+
+type CaseObservationEdge {
+  cursor: String!
+  node: CaseObservation
+}
+
+type CaseStatus implements Node & Timestampable {
+  archived: Boolean!
+  archivedAt: ISO8601DateTime
+  archivedBy: ProviderUser
+  closed: Boolean!
+  color: String!
+  createdAt: ISO8601DateTime!
+  default: Boolean!
+  id: ID!
+  name: String!
+  updatedAt: ISO8601DateTime!
+}
+
+type CaseStatusConnection {
+  edges: [CaseStatusEdge]
+  nodes: [CaseStatus]
+  pageInfo: PageInfo!
+}
+
+type CaseStatusEdge {
+  cursor: String!
+  node: CaseStatus
+}
+
+type CaseTemplate implements Node & Timestampable {
+  archived: Boolean!
+  caseDataTemplates(name: SearchString, after: String, before: String, first: Int, last: Int): CaseDataTemplateConnection!
+  createdAt: ISO8601DateTime!
+  id: ID!
+  name: String!
+  observationTypes: [String!]!
+  position: Int!
+  supportedIssues: [String!]!
+  updatedAt: ISO8601DateTime!
+}
+
+type CaseTemplateConnection {
+  edges: [CaseTemplateEdge]
+  nodes: [CaseTemplate]
+  pageInfo: PageInfo!
+}
+
+type CaseTemplateEdge {
+  cursor: String!
+  node: CaseTemplate
+}
+
+enum CategoryEnum {
+  DRUG_ALLERGY
+  NON_DRUG_ALLERGY
+}
+
+input CloseCaseInput {
+  clientMutationId: String
+  closeReason: String
+  id: ID!
+  reportedClosedAt: DateTimeWithTimezone
+}
+
+type CloseCasePayload {
+  case: Case!
+  clientMutationId: String
+}
+
+enum ColorNameEnum {
+  RED
+  ORANGE
+  LIGHT_ORANGE
+  YELLOW
+  LIGHT_GREEN
+  GREEN
+  DARK_GREEN
+  TEAL
+  LIGHT_BLUE
+  BLUE
+  NEW_BLUE
+  DARK_BLUE
+  ROYAL_BLUE
+  PURPLE
+  MAGENTA
+  GREY
+}
+
+interface Colorable {
+  color: String
+}
+
+input CombinedIdentificationInput {
+  create: [CreateIdentificationInput!]
+  remove: [RemoveIdentificationInput!]
+  update: [UpdateIdentificationInput!]
+}
+
+input CombinedLinkedEncounterInput {
+  add: [ID!]
+  remove: [ID!]
+}
+
+input CombinedObservationInput {
+  create: [CreateObservationInput!]
+  delete: [ID!]
+  update: [UpdateObservationInput!]
+}
+
+input CombinedReferralRecordAttachmentInput {
+  add: [AddReferralRecordAttachmentInput!]
+  remove: [RemoveReferralRecordAttachmentInput!]
+}
+
+input CombinedStatusTagIdsInput {
+  add: [AddStatusTagIdsInput!]
+  remove: [RemoveStatusTagIdsInput!]
+}
+
+type Contact implements Node & Timestampable {
+  billingCode: String
+  comments: String
+  createdAt: ISO8601DateTime!
+  email: Email
+  facility: Facility!
+  fax: Phone
+  firstName: String!
+  id: ID!
+  jurisdiction: ContactJurisdictionEnum
+  jurisdictionRawValue: String
+  lastName: String!
+  licenseNumber: String
+  medicalSpecialty: ContactMedicalSpecialtyEnum
+  medicalSpecialtyRawValue: String
+  occupation: ContactOccupationEnum
+  occupationRawValue: String
+  phone: Phone
+  phoneExtension: String
+  readOnly: Boolean!
+  title: ContactTitleEnum
+  titleRawValue: String
+  updatedAt: ISO8601DateTime!
+}
+
+type ContactConnection {
+  edges: [ContactEdge]
+  nodes: [Contact]
+  pageInfo: PageInfo!
+}
+
+type ContactEdge {
+  cursor: String!
+  node: Contact
+}
+
+enum ContactJurisdictionEnum {
+  ALBERTA
+  BRITISH_COLUMBIA
+  MANITOBA
+  NEW_BRUNSWICK
+  NEWFOUNDLAND_AND_LABRADOR
+  NOVA_SCOTIA
+  NORTHWEST_TERRITORIES
+  NUNAVUT
+  ONTARIO
+  PRINCE_EDWARD_ISLAND
+  QUEBEC
+  SASKATCHEWAN
+  YUKON
+}
+
+enum ContactMedicalSpecialtyEnum {
+  ADOLESCENT_MEDICINE
+  ANATOMICAL_PATHOLOGY
+  ANESTHESIOLOGY
+  CARDIAC_SURGERY
+  CARDIOLOGY
+  CHILD_AND_ADOLESCENT_PSYCHIATRY
+  CLINICAL_IMMUNOLOGY_AND_ALLERGY
+  CLINICAL_PHARMACOLOGY_AND_TOXICOLOGY
+  COLORECTAL_SURGERY
+  CRITICAL_CARE_MEDICINE
+  DERMATOLOGY
+  DEVELOPMENTAL_PEDIATRICS
+  DIAGNOSTIC_RADIOLOGY
+  EMERGENCY_MEDICINE
+  ENDOCRINOLOGY_AND_METABOLISM
+  FAMILY_MEDICINE
+  FAMILY_MEDICINE_ADDICTION_MEDICINE
+  FAMILY_MEDICINE_CARE_OF_THE_ELDERLY
+  FAMILY_MEDICINE_EMERGENCY_MEDICINE
+  FAMILY_MEDICINE_ENHANCED_SURGICAL_SKILLS
+  FAMILY_MEDICINE_FAMILY_PRACTICE_ANESTHESIA
+  FAMILY_MEDICINE_OBSTETRICAL_SURGICAL_SKILLS
+  FAMILY_MEDICINE_PALLIATIVE_CARE
+  FAMILY_MEDICINE_SPORT_AND_EXERCISE_MEDICINE
+  FORENSIC_PATHOLOGY
+  FORENSIC_PSYCHIATRY
+  GASTROENTEROLOGY
+  GENERAL_INTERNAL_MEDICINE
+  GENERAL_PATHOLOGY
+  GENERAL_PRACTICE
+  GENERAL_SURGERY
+  GENERAL_SURGICAL_ONCOLOGY
+  GERIATRIC_MEDICINE
+  GERIATRIC_PSYCHIATRY
+  GYNECOLOGIC_ONCOLOGY
+  GYNECOLOGIC_REPRODUCTIVE_ENDOCRINOLOGY_AND_INFERTILITY
+  HEMATOLOGICAL_PATHOLOGY
+  HEMATOLOGY
+  INFECTIOUS_DISEASES
+  INTERNAL_MEDICINE
+  INTERVENTIONAL_RADIOLOGY
+  MATERNAL_FETAL_MEDICINE
+  MEDICAL_BIOCHEMISTRY
+  MEDICAL_GENETICS_AND_GENOMICS
+  MEDICAL_MICROBIOLOGY
+  MEDICAL_ONCOLOGY
+  NEONATAL_PERINATAL_MEDICINE
+  NEPHROLOGY
+  NEUROLOGY
+  NEUROPATHOLOGY
+  NEURORADIOLOGY
+  NEUROSURGERY
+  NUCLEAR_MEDICINE
+  OBSTETRICS_AND_GYNECOLOGY
+  OCCUPATIONAL_MEDICINE
+  OPHTHALMOLOGY
+  ORTHOPEDIC_SURGERY
+  OTOLARYNGOLOGY_HEAD_AND_NECK_SURGERY
+  PAIN_MEDICINE
+  PALLIATIVE_MEDICINE
+  PEDIATRIC_EMERGENCY_MEDICINE
+  PEDIATRIC_HEMATOLOGY_ONCOLOGY
+  PEDIATRIC_RADIOLOGY
+  PEDIATRIC_SURGERY
+  PEDIATRICS
+  PHYSICAL_MEDICINE_AND_REHABILITATION
+  PLASTIC_SURGERY
+  PSYCHIATRY
+  PUBLIC_HEALTH_AND_PREVENTIVE_MEDICINE
+  RADIATION_ONCOLOGY
+  RESPIROLOGY
+  RHEUMATOLOGY
+  THORACIC_SURGERY
+  UROLOGY
+  VASCULAR_SURGERY
+  BREAST
+  SPECIALIST_PHYSICIAN
+  SPORTS_MEDICINE
+  OTHER
+}
+
+enum ContactOccupationEnum {
+  ATHLETIC_THERAPIST
+  AUDIOLOGIST
+  AUXILIARY_NURSE
+  CHIROPODIST
+  CHIROPRACTOR
+  CLINICAL_ASSISTANT
+  COUNSELOR
+  DENTAL_ASSISTANT
+  DENTAL_HYGIENIST
+  DENTIST
+  DIETITIAN
+  ENVIRONMENTAL_PUBLIC_HEALTH_PROFESSIONAL
+  GENETIC_COUNSELLOR
+  HEALTH_INFORMATION_MANAGEMENT_PROFESSIONAL
+  KINESIOLOGIST
+  LAWYER
+  LICENSED_PRACTICAL_NURSE
+  MASSAGE_THERAPIST
+  MEDICAL_LABORATORY_TECHNOLOGIST
+  MEDICAL_OFFICE_ADMIN
+  MEDICAL_PHYSICIST
+  MEDICAL_RADIATION_TECHNOLOGIST
+  MEDICAL_STUDENT
+  MENTAL_HEALTH_WORKER
+  MID_WIFE
+  NATUROPATHIC_PHYSICIAN
+  NURSE_PRACTITIONER
+  NURSE
+  OCCUPATIONAL_THERAPIST
+  OPTICIAN
+  OPTOMETRIST
+  OTHER
+  PARAMEDIC
+  PHARMACIST
+  PHARMACY_TECHNICIAN
+  PHYSICIAN_ASSISTANT
+  MEDICAL_DOCTOR
+  PHYSIOTHERAPIST
+  PSYCHOLOGIST
+  REGISTERED_DIETITIAN
+  REGISTERED_MIDWIFE
+  REGISTERED_NURSE
+  REGISTERED_PSYCHIATRIC_NURSE
+  RESIDENT
+  RESPIRATORY_THERAPIST
+  SOCIAL_WORKER
+  SPEECH_LANGUAGE_PATHOLOGIST
+}
+
+enum ContactTitleEnum {
+  DR
+  DOCTOR
+  NURSE
+  NP
+  MR
+  MS
+  MRS
+}
+
+input CreateAppointmentInput {
+  locationId: ID!
+  patientId: ID
+  providerId: ID!
+  respondentId: ID
+  serviceId: ID!
+  tagIds: [ID!]
+  status: AppointmentStatusEnum
+  startAt: UpcomingDateTime!
+  untilAt: UpcomingDateTime!
+  note: String
+  presentingIssueId: ID
+  reason: String
+  notifyBy: EntityNotificationMethodEnum
+  visitType: VisitTypeEnum
+  skipValidations: Boolean
+  allowNotification: Boolean
+  allowPractitionerNotification: Boolean
+}
+
+input CreateAppointmentOptions {
+  requireConfirmation: Boolean
+}
+
+input CreateAttachmentInput {
+  clientMutationId: String
+  caseId: ID
+  date: ISO8601DateTime!
+  description: String
+  file: FileScalar!
+  fileTagIds: [ID!]
+  name: String
+  notifyOwner: Boolean
+  patientId: ID!
+  providerId: ID
+  referralId: ID
+}
+
+type CreateAttachmentPayload {
+  attachment: Attachment!
+  clientMutationId: String
+}
+
+input CreateCaseInput {
+  clientMutationId: String
+  assignedProviderUserId: ID!
+  caseTemplateId: ID!
+  issue: String
+  linkedEncounterIds: [ID!]
+  observations: [CreateObservationInput!]
+  patientId: ID!
+  statusId: ID
+}
+
+type CreateCasePayload {
+  case: Case!
+  clientMutationId: String
+}
+
+input CreateContactInput {
+  clientMutationId: String
+  billingCode: String
+  comments: String
+  email: Email
+  facilityId: ID!
+  fax: Phone
+  firstName: String!
+  jurisdiction: ContactJurisdictionEnum
+  lastName: String!
+  licenseNumber: String
+  medicalSpecialty: ContactMedicalSpecialtyEnum
+  occupation: ContactOccupationEnum
+  phone: Phone
+  phoneExtension: NumericString
+  title: ContactTitleEnum
+}
+
+type CreateContactPayload {
+  clientMutationId: String
+  contact: Contact!
+}
+
+input CreateDraftAppointmentInput {
+  clientMutationId: String
+  startAt: UpcomingDateTime!
+  untilAt: UpcomingDateTime!
+  locationId: ID!
+  serviceId: ID
+  providerId: ID!
+}
+
+type CreateDraftAppointmentPayload {
+  clientMutationId: String
+  draftAppointment: DraftAppointment!
+}
+
+input CreateFacilityInput {
+  clientMutationId: String
+  category: FacilityCategoryEnum
+  city: String
+  comments: String
+  country: String
+  email: Email
+  fax: Phone
+  name: String!
+  phone: Phone
+  phoneExtension: NumericString
+  postalCode: String
+  province: String
+  secondaryPhone: Phone
+  secondaryPhoneExtension: NumericString
+  streetAddress1: String
+  streetAddress2: String
+  website: String
+}
+
+type CreateFacilityPayload {
+  clientMutationId: String
+  facility: Facility!
+}
+
+input CreateFlexibleWorkHourInput {
+  clientMutationId: String
+  color: WorkHourColorInput
+  endAtTime: TimeWithoutOffset!
+  interval: Int
+  locationId: ID
+  providerUserId: ID!
+  serviceIds: [ID!]!
+  slot: Int
+  stacking: Boolean
+  startAtTime: TimeWithoutOffset!
+  visitType: VisitTypeEnum!
+  endAtDate: ISO8601Date!
+  startAtDate: ISO8601Date!
+}
+
+type CreateFlexibleWorkHourPayload {
+  clientMutationId: String
+  flexibleWorkHour: FlexibleWorkHour!
+}
+
+input CreateIdentificationInput {
+  code: String
+  name: String
+  paymentIssuerCode: String
+  primary: Boolean
+  templateId: Int
+  value: String!
+  identificationCustomData: [IdentificationCustomDataInput!]
+}
+
+input CreateIncomingReferralRecordInput {
+  clientMutationId: String
+  attachments: [AddReferralRecordAttachmentInput!]
+  dateOfAdded: ISO8601Date!
+  patientId: ID!
+  priorityId: ID
+  reason: String!
+  orderingProviderId: ID!
+  serviceProviderId: ID
+  statusId: ID
+}
+
+type CreateIncomingReferralRecordPayload {
+  clientMutationId: String
+  referralRecord: ReferralRecord!
+}
+
+input CreateInternalReferralRecordInput {
+  clientMutationId: String
+  attachments: [AddReferralRecordAttachmentInput!]
+  dateOfAdded: ISO8601Date!
+  patientId: ID!
+  priorityId: ID
+  reason: String!
+  orderingProviderId: ID!
+  serviceProviderId: ID!
+  statusId: ID
+}
+
+type CreateInternalReferralRecordPayload {
+  clientMutationId: String
+  referralRecord: ReferralRecord!
+}
+
+input CreateObservationInput {
+  details: String
+  endAt: ISO8601Date
+  startAt: ISO8601Date
+  type: String!
+}
+
+input CreateOutgoingReferralRecordInput {
+  clientMutationId: String
+  attachments: [AddReferralRecordAttachmentInput!]
+  dateOfAdded: ISO8601Date!
+  patientId: ID!
+  priorityId: ID
+  reason: String!
+  orderingProviderId: ID!
+  serviceProviderId: ID
+  statusId: ID
+}
+
+type CreateOutgoingReferralRecordPayload {
+  clientMutationId: String
+  referralRecord: ReferralRecord!
+}
+
+input CreatePatientInput {
+  clientMutationId: String
+  dateOfBirth: ISO8601Date!
+  firstName: String!
+  gender: GenderEnum!
+  identifications: [CreateIdentificationInput!]!
+  lastName: String!
+  genderIdentity: GenderIdentityEnum
+  genderIdentityDescription: String
+  middleInitial: String
+  middleName: String
+  preferredName: String
+  email: Email
+  phone: String
+  homePhone: Phone
+  officePhone: Phone
+  officePhoneExt: String
+  familyDoctor: String
+  referringDoctor: String
+  additionalAddress: String
+  city: String
+  country: String
+  region: String
+  streetAddress: String
+  zipcode: String
+  emergencyFirstName: String
+  emergencyLastName: String
+  emergencyMiddleName: String
+  emergencyPhone: Phone
+  emergencyRelationship: String
+  insuranceCompany: String
+  insuranceGroupNumber: String
+  insuranceId: String
+  language: String
+  notifyBy: NotificationMethodEnum
+  publicAccessAllowed: Boolean
+  familyPractitionerId: Int
+  preferredPharmacyId: Int
+  primaryLocationId: Int
+  primaryPractitionerId: Int
+  pronouns: PronounsEnum
+  referringPractitionerId: Int
+  primaryPractitionerEmail: String
+  primaryPractitionerName: String
+  statusTagIds: [ID!]
+}
+
+type CreatePatientPayload {
+  clientMutationId: String
+  patient: Patient!
+}
+
+input CreateProviderOffTimeInput {
+  clientMutationId: String
+  color: OffTimeColorEnum
+  endAtDate: ISO8601Date!
+  endAtTime: TimeWithoutOffset!
+  memo: String
+  providerUserId: ID!
+  startAtDate: ISO8601Date!
+  startAtTime: TimeWithoutOffset!
+}
+
+type CreateProviderOffTimePayload {
+  clientMutationId: String
+  offTime: Offtime!
+}
+
+input CreateRespondentInput {
+  clientMutationId: String
+  dateOfBirth: ISO8601Date!
+  firstName: String!
+  gender: GenderEnum!
+  identifications: [CreateIdentificationInput!]!
+  lastName: String!
+  genderIdentity: GenderIdentityEnum
+  genderIdentityDescription: String
+  middleInitial: String
+  middleName: String
+  preferredName: String
+  email: Email
+  phone: String
+  homePhone: Phone
+  officePhone: Phone
+  officePhoneExt: String
+  familyDoctor: String
+  referringDoctor: String
+  additionalAddress: String
+  city: String
+  country: String
+  region: String
+  streetAddress: String
+  zipcode: String
+  emergencyFirstName: String
+  emergencyLastName: String
+  emergencyMiddleName: String
+  emergencyPhone: Phone
+  emergencyRelationship: String
+  insuranceCompany: String
+  insuranceGroupNumber: String
+  insuranceId: String
+  language: String
+  notifyBy: NotificationMethodEnum
+  publicAccessAllowed: Boolean
+  familyPractitionerId: Int
+  preferredPharmacyId: Int
+  primaryLocationId: Int
+  primaryPractitionerId: Int
+  pronouns: PronounsEnum
+  referringPractitionerId: Int
+  primaryPractitionerEmail: String
+  primaryPractitionerName: String
+  statusTags: [String!]
+}
+
+type CreateRespondentPayload {
+  clientMutationId: String
+  respondent: Respondent!
+}
+
+input CreateStandardWorkHourInput {
+  clientMutationId: String
+  color: WorkHourColorInput
+  endAtTime: TimeWithoutOffset!
+  interval: Int
+  locationId: ID
+  providerUserId: ID!
+  serviceIds: [ID!]!
+  slot: Int
+  stacking: Boolean
+  startAtTime: TimeWithoutOffset!
+  visitType: VisitTypeEnum!
+  showIntervalsOnSchedule: Boolean
+  weekday: WeekDayEnum!
+}
+
+type CreateStandardWorkHourPayload {
+  clientMutationId: String
+  standardWorkHour: StandardWorkHour!
+}
+
+input CreateTaskByTemplateInput {
+  clientMutationId: String
+  taskTemplateId: ID!
+  dueAt: DateTimeWithTimezone
+  patientId: ID
+  priority: TaskPriorityEnum
+  startAt: DateTimeWithTimezone
+  status: TaskStatusEnum
+}
+
+type CreateTaskByTemplatePayload {
+  clientMutationId: String
+  task: Task!
+}
+
+input CreateTaskInput {
+  clientMutationId: String
+  name: String!
+  priority: TaskPriorityEnum!
+  startAt: DateTimeWithTimezone!
+  assignee: TaskAssigneeInput
+  dueAt: DateTimeWithTimezone
+  locationId: ID
+  patientId: ID
+  status: TaskStatusEnum
+  summary: String
+  taskCategoryId: ID
+}
+
+type CreateTaskPayload {
+  clientMutationId: String
+  task: Task!
+}
+
+union CreatedBy = EnterpriseApiConsumer | ProviderUser
+
+enum CurrencyUnitEnum {
+  AUD
+  CAD
+  EUR
+  GBP
+  NZD
+  USD
+}
+
+scalar DateTimeWithTimezone
+
+input DeleteDraftAppointmentInput {
+  clientMutationId: String
+  id: ID!
+}
+
+type DeleteDraftAppointmentPayload {
+  clientMutationId: String
+  deletedDraftAppointmentId: ID
+}
+
+type Diagnosis implements NullableTimestampable {
+  code: String
+  codingSystem: String
+  createdAt: ISO8601DateTime
+  description: String
+  id: ID
+  updatedAt: ISO8601DateTime
+}
+
+scalar Din
+
+type DraftAppointment implements Node & Timestampable {
+  createdAt: ISO8601DateTime!
+  createdBy: CreatedBy
+  id: ID!
+  location: Location
+  provider: ProviderUser
+  service: Service
+  startAt: ISO8601DateTime
+  untilAt: ISO8601DateTime
+  updatedAt: ISO8601DateTime!
+}
+
+type DraftAppointmentConnection {
+  edges: [DraftAppointmentEdge]
+  nodes: [DraftAppointment]
+  pageInfo: PageInfo!
+}
+
+type DraftAppointmentEdge {
+  cursor: String!
+  node: DraftAppointment
+}
+
+enum DraftAppointmentOrderByEnum {
+  ID
+  CREATED_AT
+}
+
+input DraftAppointmentOrderByInput {
+  direction: OrderByDirectionEnum!
+  field: DraftAppointmentOrderByEnum!
+}
+
+scalar Email
+
+type Encounter implements Node & Timestampable {
+  addendums: [Addendum!]
+  answerSheets: [AnswerSheet!]
+  assessmentAndPlan: [String!]
+  assessmentAndPlanHtml: [String!]
+  assessmentAndPlanMarkdown: [String!]
+  attachments: [Attachment!]
+  concernField: String
+  createdAt: ISO8601DateTime!
+  createdBy: ProviderUser
+  diagnoses: [Diagnosis!]
+  history: [String!]
+  historyHtml: [String!]
+  historyMarkdown: [String!]
+  id: ID!
+  injections: [InjectionRecord!]
+  insuredBillingItems: [InsuredBillingItem!]
+  physicalExam: [String!]
+  physicalExamHtml: [String!]
+  physicalExamMarkdown: [String!]
+  presentingIssue: PresentingIssue
+  privateBillingItems: [PrivateBillingItem!]
+  seenAt: ISO8601DateTime
+  signed: Boolean
+  signedAt: ISO8601DateTime
+  signedBy: ProviderUser
+  updatedAt: ISO8601DateTime!
+  vitals: [VitalsRecord!]
+}
+
+type EncounterConnection {
+  edges: [EncounterEdge]
+  nodes: [Encounter]
+  pageInfo: PageInfo!
+}
+
+type EncounterEdge {
+  cursor: String!
+  node: Encounter
+}
+
+enum EncounterOrderByEnum {
+  CREATED_AT
+}
+
+input EncounterOrderByInput {
+  direction: OrderByDirectionEnum!
+  field: EncounterOrderByEnum!
+}
+
+type EnterpriseApiConsumer implements Node & Timestampable {
+  active: Boolean!
+  createdAt: ISO8601DateTime!
+  id: ID!
+  name: String
+  updatedAt: ISO8601DateTime!
+}
+
+enum EntityNotificationMethodEnum {
+  DEFAULT
+  BOTH
+  EMAIL
+  NONE
+  SMS
+}
+
+type Facility implements Node & Timestampable {
+  category: FacilityCategoryEnum
+  categoryRawValue: String
+  city: String
+  comments: String
+  country: String
+  createdAt: ISO8601DateTime!
+  email: String
+  fax: String
+  id: ID!
+  latitude: Float
+  longitude: Float
+  name: String!
+  phone: String
+  phoneExt: String
+  postalCode: String
+  province: String
+  readOnly: Boolean!
+  secondaryPhone: String
+  secondaryPhoneExt: String
+  streetAddress1: String
+  streetAddress2: String
+  updatedAt: ISO8601DateTime!
+  website: String
+}
+
+enum FacilityCategoryEnum {
+  CLINIC
+  CRISIS_SERVICES
+  HOSPITAL
+  INSURANCE_AGENCY
+  LABORATORY
+  OTHER
+  PHARMACY
+  PHARMA_COMPANY
+  PHYSICIAN
+  PRIVATE_CLINIC
+  PUBLIC_HEALTH
+  SUPPLIER
+  UTILITIES
+}
+
+type FacilityConnection {
+  edges: [FacilityEdge]
+  nodes: [Facility]
+  pageInfo: PageInfo!
+}
+
+type FacilityEdge {
+  cursor: String!
+  node: Facility
+}
+
+type FamilyHistoryRecord implements Node & Timestampable {
+  ageAtOnset: Int
+  createdAt: ISO8601DateTime!
+  diagnoses: [Diagnosis!]!
+  id: ID!
+  isRiskFactor: Boolean!
+  lifeStage: LifeStageEnum
+  notes: String
+  relationship: String
+  startDate: PartialDate
+  treatment: String
+  updatedAt: ISO8601DateTime!
+}
+
+type FamilyHistoryRecordConnection {
+  edges: [FamilyHistoryRecordEdge]
+  nodes: [FamilyHistoryRecord]
+  pageInfo: PageInfo!
+}
+
+type FamilyHistoryRecordEdge {
+  cursor: String!
+  node: FamilyHistoryRecord
+}
+
+scalar FileScalar
+
+type FileTag implements Node & Timestampable {
+  archived: Boolean
+  createdAt: ISO8601DateTime!
+  id: ID!
+  locked: Boolean
+  name: String!
+  updatedAt: ISO8601DateTime!
+}
+
+type FileTagConnection {
+  edges: [FileTagEdge]
+  nodes: [FileTag]
+  pageInfo: PageInfo!
+}
+
+type FileTagEdge {
+  cursor: String!
+  node: FileTag
+}
+
+type FlexibleDataCategory implements Node & Timestampable {
+  archived: Boolean!
+  createdAt: ISO8601DateTime!
+  flexibleDataTemplates(after: String, before: String, first: Int, last: Int): FlexibleDataTemplateConnection
+  id: ID!
+  name: String!
+  position: Int
+  resourceType: FlexibleDataCategoryTypeEnum!
+  updatedAt: ISO8601DateTime!
+  uuid: String!
+}
+
+enum FlexibleDataCategoryTypeEnum {
+  FORM
+  REFERRAL
+}
+
+type FlexibleDataEntity implements Node & Timestampable {
+  createdAt: ISO8601DateTime!
+  id: ID!
+  name: String
+  type: FlexibleDataTypeOptionEnum
+  updatedAt: ISO8601DateTime!
+  uuid: String
+}
+
+type FlexibleDataPropertyItem implements Node & Timestampable {
+  archived: Boolean
+  category: FlexibleDataCategory!
+  createdAt: ISO8601DateTime!
+  id: ID!
+  template: FlexibleDataTemplate!
+  updatedAt: ISO8601DateTime!
+  values: [FlexibleDataValueAny!]!
+}
+
+type FlexibleDataPropertyItemConnection {
+  edges: [FlexibleDataPropertyItemEdge]
+  nodes: [FlexibleDataPropertyItem]
+  pageInfo: PageInfo!
+}
+
+type FlexibleDataPropertyItemEdge {
+  cursor: String!
+  node: FlexibleDataPropertyItem
+}
+
+type FlexibleDataTemplate implements Node & Timestampable {
+  archived: Boolean!
+  createdAt: ISO8601DateTime!
+  entities: [FlexibleDataEntity!]!
+  id: ID!
+  module: FlexibleDataTemplateTypeEnum!
+  name: String
+  position: Int
+  updatedAt: ISO8601DateTime!
+  uuid: String!
+}
+
+type FlexibleDataTemplateConnection {
+  edges: [FlexibleDataTemplateEdge]
+  nodes: [FlexibleDataTemplate]
+  pageInfo: PageInfo!
+}
+
+type FlexibleDataTemplateEdge {
+  cursor: String!
+  node: FlexibleDataTemplate
+}
+
+enum FlexibleDataTemplateTypeEnum {
+  ADDRESS
+  APPOINTMENT
+  CONTACT
+  FORM
+}
+
+enum FlexibleDataTypeOptionEnum {
+  DATE
+  MULTIPLE
+  NUMERICAL
+  SINGLE
+  TEXT
+}
+
+union FlexibleDataValueAny = FlexibleDataValueDate | FlexibleDataValueMultiSelection | FlexibleDataValueNumber | FlexibleDataValueSingleSelection | FlexibleDataValueText
+
+type FlexibleDataValueDate {
+  name: String!
+  uuid: String!
+  value: String
+}
+
+input FlexibleDataValueInput {
+  valueUuid: String!
+  textValue: String
+  dateValue: PartialDate
+  numberValue: Float
+  singleSelectValue: String
+  multiSelectValue: [String!]
+}
+
+type FlexibleDataValueMultiSelection {
+  name: String!
+  uuid: String!
+  values: [String!]
+}
+
+type FlexibleDataValueNumber {
+  name: String!
+  uuid: String!
+  value: Float
+}
+
+type FlexibleDataValueSingleSelection {
+  name: String!
+  uuid: String!
+  value: String
+}
+
+type FlexibleDataValueText {
+  name: String!
+  uuid: String!
+  value: String
+}
+
+type FlexibleWorkHour implements Colorable & Node & Timestampable {
+  color: String
+  createdAt: ISO8601DateTime!
+  endAtDate: ISO8601Date!
+  endAtTime: TimeWithoutOffset!
+  id: ID!
+  interval: Int!
+  location: Location!
+  services: [Service!]!
+  slot: Int!
+  stacking: Boolean!
+  startAtDate: ISO8601Date!
+  startAtTime: TimeWithoutOffset!
+  updatedAt: ISO8601DateTime!
+  visitType: VisitTypeEnum!
+}
+
+type FlexibleWorkHourConnection {
+  edges: [FlexibleWorkHourEdge]
+  nodes: [FlexibleWorkHour]
+  pageInfo: PageInfo!
+}
+
+type FlexibleWorkHourEdge {
+  cursor: String!
+  node: FlexibleWorkHour
+}
+
+enum FormularyFrequency {
+  QD_ONCE_DAILY
+  BID_TWICE_DAILY
+  TID_THREE_TIMES_DAILY
+  QID_FOUR_TIMES_DAILY
+  QAM_EVERY_MORNING
+  QHS_DAILY_AT_BEDTIME
+  QNOON_DAILY_AT_NOON
+  QPM_DAILY_IN_THE_EVENING
+  FIVE_TIMES_DAILY
+  SIX_TIMES_DAILY
+  SEVEN_TIMES_DAILY
+  EIGHT_TIMES_DAILY
+  NINE_TIMES_DAILY
+  TEN_TIMES_DAILY
+  STAT_NOW
+  ONCE_ONE_TIME_ONLY
+  PER_DAY
+  OTH_OTHER
+  Q1H_EVERY_HOUR
+  Q1_2H_EVERY_ONE_TO_TWO_HOURS
+  Q2H_EVERY_TWO_HOURS
+  Q2_3H_EVERY_TWO_TO_THREE_HOURS
+  Q3H_EVERY_THREE_HOURS
+  Q3_4H_EVERY_THREE_TO_FOUR_HOURS
+  Q4H_EVERY_FOUR_HOURS
+  Q4_6H_EVERY_FOUR_TO_SIX_HOURS
+  Q6H_EVERY_SIX_HOURS
+  Q6_8H_EVERY_SIX_TO_EIGHT_HOURS
+  Q8H_EVERY_EIGHT_HOURS
+  Q8H_10H_EVERY_EIGHT_TO_TEN_HOURS
+  Q10H_EVERY_10_HOURS
+  Q12H_EVERY_12_HOURS
+  Q8_12H_EVERY_EIGHT_TO_12_HOURS
+  Q36H_EVERY_36_HOURS
+  Q72H_EVERY_72_HOURS
+  Q2D_EVERY_OTHER_DAY
+  Q3D_EVERY_THREE_DAYS
+  Q4D_EVERY_FOUR_DAYS
+  ONCE_EVERY_FIVE_DAYS
+  ONCE_EVERY_SIX_DAYS
+  ONCE_EVERY_SEVEN_DAYS
+  TWENTY_ONE_OUT_OF_28_DAYS
+  Q30D_EVERY_30_DAYS
+  Q60D_EVERY_60_DAYS
+  Q90D_EVERY_90_DAYS
+  EVERY_2_WEEKS
+  EVERY_3_WEEKS
+  EVERY_4_WEEKS
+  EVERY_6_WEEKS
+  EVERY_8_WEEKS
+  EVERY_10_WEEKS
+  EVERY_12_WEEKS
+  ONCE_A_WEEK
+  TWICE_PER_WEEK
+  THREE_TIMES_PER_WEEK
+  FOUR_TIMES_PER_WEEK
+  FIVE_TIMES_PER_WEEK
+  SIX_TIMES_PER_WEEK
+  ONCE_A_MONTH
+  EVERY_3_MONTHS
+  EVERY_4_MONTHS
+  EVERY_6_MONTHS
+  ONCE_A_YEAR
+}
+
+enum GenderEnum {
+  MALE
+  FEMALE
+  OTHER
+}
+
+enum GenderIdentityEnum {
+  FEMALE
+  MALE
+  TRANSGENDER_MALE
+  TRANSGENDER_FEMALE
+  NON_BINARY
+  PREFER_TO_DESCRIBE
+}
+
+type GoalRecord implements Node & Timestampable {
+  createdAt: ISO8601DateTime!
+  description: String!
+  id: ID!
+  position: Int
+  status: GoalStatusEnum
+  updatedAt: ISO8601DateTime!
+}
+
+type GoalRecordConnection {
+  edges: [GoalRecordEdge]
+  nodes: [GoalRecord]
+  pageInfo: PageInfo!
+}
+
+type GoalRecordEdge {
+  cursor: String!
+  node: GoalRecord
+}
+
+enum GoalStatusEnum {
+  ACHIEVED
+  ACTIVE
+  DISMISSED
+  NOT_ACHIEVED
+}
+
+type GroupVisit implements Node & Timestampable {
+  allowEbooking: Boolean!
+  allowExistingPatient: Boolean!
+  allowNewPatient: Boolean!
+  appointments: [Appointment!]!
+  availableSlots: Int
+  createdAt: ISO8601DateTime!
+  createdProviderUser: ProviderUser
+  deactivated: Boolean
+  description: String
+  fullyBooked: Boolean
+  id: ID!
+  location: Location
+  name: String
+  occupiedSlotsCount: Int!
+  providerUsers: [ProviderUser!]!
+  startAt: ISO8601DateTime!
+  status: AppointmentStatusEnum
+  untilAt: ISO8601DateTime!
+  updatedAt: ISO8601DateTime!
+}
+
+type GroupVisitConnection {
+  edges: [GroupVisitEdge]
+  nodes: [GroupVisit]
+  pageInfo: PageInfo!
+}
+
+type GroupVisitEdge {
+  cursor: String!
+  node: GroupVisit
+}
+
+enum GroupVisitOrderByEnum {
+  CREATED_AT
+  ID
+  LOCATION_NAME
+  NAME
+  START_AT
+  UPDATED_AT
+}
+
+input GroupVisitOrderByInput {
+  direction: OrderByDirectionEnum!
+  field: GroupVisitOrderByEnum!
+}
+
+type HealthProfile implements Timestampable {
+  advancedDirectives: [AdvancedDirectivesEnum!]
+  advancedDirectivesFreeText: String
+  createdAt: ISO8601DateTime!
+  familyHistoryRecords(isRiskFactor: Boolean, after: String, before: String, first: Int, last: Int): FamilyHistoryRecordConnection
+  goalRecords(status: GoalStatusEnum, after: String, before: String, first: Int, last: Int): GoalRecordConnection
+  medicalHistoryRecords(status: PatientHistoryRecordStatusEnum, isRiskFactor: Boolean, after: String, before: String, first: Int, last: Int): MedicalHistoryRecordConnection
+  notes: String
+  organOrTissueDonation: String
+  socialHistoryRecords(type: SocialHistoryTypeEnum, subtype: SocialHistorySubtypeEnum, isRiskFactor: Boolean, after: String, before: String, first: Int, last: Int): SocialHistoryRecordConnection
+  surgicalHistoryRecords(status: PatientHistoryRecordStatusEnum, isRiskFactor: Boolean, after: String, before: String, first: Int, last: Int): SurgicalHistoryRecordConnection
+  updatedAt: ISO8601DateTime!
+}
+
+type HealthProfileMutations implements HealthProfileMutationsInterface {
+  addFamilyHistoryRecord(input: AddFamilyHistoryRecordInput!): AddFamilyHistoryRecordPayload!
+}
+
+interface HealthProfileMutationsInterface {
+  addFamilyHistoryRecord(input: AddFamilyHistoryRecordInput!): AddFamilyHistoryRecordPayload!
+}
+
+enum HeartBeatEnum {
+  IRREGULAR
+  REGULAR
+  UNKNOWN
+}
+
+scalar HtmlFragment
+
+scalar ISO8601Date
+
+scalar ISO8601DateTime
+
+interface Iconable {
+  icon: String
+}
+
+type Identification implements Node & Timestampable {
+  code: String
+  createdAt: ISO8601DateTime!
+  endAt: ISO8601Date
+  id: ID!
+  identificationCustomData: [IdentificationCustomData!]
+  isPrimary: Boolean!
+  name: String
+  paymentIssuerCode: String
+  startAt: ISO8601Date
+  template: IdentificationTemplate
+  updatedAt: ISO8601DateTime!
+  value: String
+}
+
+type IdentificationCustomData {
+  name: String
+  uuid: String
+  value: String
+}
+
+input IdentificationCustomDataInput {
+  value: String
+  uuid: String!
+}
+
+type IdentificationTemplate implements Node {
+  autoGenerate: Boolean!
+  id: ID!
+  identificationCustomData: [IdentificationTemplateCustomData!]
+  name: String
+  paymentIssuerCode: String
+  primary: Boolean!
+}
+
+type IdentificationTemplateCustomData {
+  name: String
+  type: String
+  uuid: String
+  valueFormat: String
+}
+
+type IdentificationVerification {
+  status: String
+  statusMessages: [String!]
+}
+
+type InjectionRecord implements Node & Timestampable {
+  comments: String
+  createdAt: ISO8601DateTime!
+  createdBy: ProviderUser
+  dosage: String
+  historical: Boolean
+  id: ID!
+  injectedBy: ProviderUser
+  injectedDate: PartialDate
+  lotNumber: String
+  name: String!
+  refusedDate: PartialDate
+  route: InjectionRouteEnum
+  sequence: String
+  series: InjectionSeriesEnum
+  serum: String
+  siteGiven: InjectionSiteGivenEnum
+  strength: String
+  type: InjectionTypeEnum
+  updatedAt: ISO8601DateTime!
+}
+
+type InjectionRecordConnection {
+  edges: [InjectionRecordEdge]
+  nodes: [InjectionRecord]
+  pageInfo: PageInfo!
+}
+
+type InjectionRecordEdge {
+  cursor: String!
+  node: InjectionRecord
+}
+
+enum InjectionRouteEnum {
+  INTRADERMAL
+  INTRAMUSCULAR
+  INTRAVENOUS
+  NASAL
+  ORAL
+  SUBCUTANEOUS
+  OTHER
+}
+
+enum InjectionSeriesEnum {
+  BOOSTER
+  PRIMARY
+  PRIMARY_1
+  PRIMARY_2
+  PRIMARY_3
+  PRIMARY_4
+  PRIMARY_5
+  PRIMARY_6
+}
+
+enum InjectionSiteGivenEnum {
+  ABDOMEN
+  LEFT_DELTOID
+  LEFT_FOREARM
+  LEFT_GLUTEUS
+  LEFT_THIGH
+  LEFT_UPPER_ARM
+  RIGHT_DELTOID
+  RIGHT_FOREARM
+  RIGHT_GLUTEUS
+  RIGHT_THIGH
+  RIGHT_UPPER_ARM
+  OTHER
+}
+
+enum InjectionTypeEnum {
+  ALLERGY
+  IMMUNIZATION
+  INJECTION
+  OTHER
+}
+
+type InsuredBillingItem implements Node & Timestampable {
+  amountUnit: CurrencyUnitEnum
+  amountsData: AmountsData
+  baseAmount: Float
+  code: String
+  createdAt: ISO8601DateTime!
+  description: String
+  diagnoses: [Diagnosis!]
+  id: ID!
+  paidAmount: Float
+  status: InsuredBillingStatusEnum
+  taxAmount: Float
+  updatedAt: ISO8601DateTime!
+}
+
+enum InsuredBillingStatusEnum {
+  ADJUSTED
+  CANCELLED
+  DRAFT
+  HELD
+  INVALID
+  PAID
+  READY
+  REFUSED
+  SUBMITTED
+}
+
+type InternalApiConsumer implements Node & Timestampable {
+  createdAt: ISO8601DateTime!
+  id: ID!
+  name: String!
+  updatedAt: ISO8601DateTime!
+}
+
+type LabObservation implements Node & Timestampable {
+  collectedAt: String
+  createdAt: ISO8601DateTime!
+  id: ID!
+  olisRecordId: String
+  patient: Patient
+  reportedAt: ISO8601DateTime
+  respondent: Respondent @deprecated
+  status: String
+  statusChangedAt: ISO8601DateTime
+  updatedAt: ISO8601DateTime!
+  uuid: ID!
+}
+
+type LabObservationConnection {
+  edges: [LabObservationEdge]
+  nodes: [LabObservation]
+  pageInfo: PageInfo!
+}
+
+type LabObservationEdge {
+  cursor: String!
+  node: LabObservation
+}
+
+type LabReport implements AttachmentInterface {
+  abnormalCount: Int
+  accessionNumber: String
+  addedAt: ISO8601DateTime
+  allowEdit: Boolean!
+  archived: Boolean
+  attachmentUrl: String
+  contentType: String
+  createdAt: ISO8601DateTime!
+  currentVersion: Boolean
+  description: String
+  fileDate: ISO8601DateTime!
+  fileName: String
+  fileSize: Int
+  fileTags: [FileTag!]
+  id: ID!
+  labDistributor: String
+  lastReviewedAt: ISO8601DateTime
+  mainNote: String
+  name: String
+  owner: ProviderUser
+  receivedAt: ISO8601DateTime
+  receivingFacility: String
+  reviewers: [ProviderUser!]
+  reviewsCount: Int!
+  sendingApp: String
+  sendingFacility: String
+  updatedAt: ISO8601DateTime!
+  uploadedAt: ISO8601DateTime
+  versioningUuid: String
+}
+
+type LabReportConnection {
+  edges: [LabReportEdge]
+  nodes: [LabReport]
+  pageInfo: PageInfo!
+}
+
+type LabReportEdge {
+  cursor: String!
+  node: LabReport
+}
+
+type LabResult implements Node & Timestampable {
+  collectedAt: ISO8601DateTime
+  createdAt: ISO8601DateTime!
+  id: ID!
+  labReport: LabReport
+  labTest: LabTest
+  lastResult: Boolean
+  name: String
+  note: String
+  sectionName: String
+  status: String
+  type: String
+  updatedAt: ISO8601DateTime!
+  uuid: String
+  values: [LabResultValue!]
+}
+
+type LabResultConnection {
+  edges: [LabResultEdge]
+  nodes: [LabResult]
+  pageInfo: PageInfo!
+}
+
+type LabResultEdge {
+  cursor: String!
+  node: LabResult
+}
+
+enum LabResultOrderByEnum {
+  COLLECTED_AT
+  CREATED_AT
+  ID
+  LAB_TEST_NAME
+  SECTION_NAME
+  UPDATED_AT
+}
+
+input LabResultOrderByInput {
+  direction: OrderByDirectionEnum!
+  field: LabResultOrderByEnum!
+}
+
+type LabResultValue {
+  abnormalFlag: String
+  microbiologyIndex: Int
+  note: String
+  observationSubId: String
+  referencesRange: [String!]
+  resultStatus: String
+  units: String
+  value: String
+}
+
+type LabTest {
+  id: ID!
+  loincCode: String
+  name: String!
+  shortName: String!
+}
+
+type LabTestName {
+  name: String
+}
+
+type LabTestNameConnection {
+  edges: [LabTestNameEdge]
+  nodes: [LabTestName]
+  pageInfo: PageInfo!
+}
+
+type LabTestNameEdge {
+  cursor: String!
+  node: LabTestName
+}
+
+type LegacySchedule {
+  offtime: [Offtime!]
+  worktime: [Worktime!]
+}
+
+type Letter implements Node & Timestampable {
+  contact: Contact
+  createdAt: ISO8601DateTime!
+  createdBy: ProviderUser
+  id: ID!
+  letter: String
+  locked: Boolean
+  lockedAt: ISO8601DateTime
+  lockedBy: ProviderUser
+  signed: Boolean
+  signedBy: ProviderUser
+  template: LetterTemplate
+  title: String
+  unlockedAt: ISO8601DateTime
+  updatedAt: ISO8601DateTime!
+}
+
+type LetterConnection {
+  edges: [LetterEdge]
+  nodes: [Letter]
+  pageInfo: PageInfo!
+}
+
+type LetterEdge {
+  cursor: String!
+  node: Letter
+}
+
+input LetterOrderByInput {
+  direction: OrderByDirectionEnum!
+  field: LettterOrderByEnum!
+}
+
+type LetterTemplate implements Node & Timestampable {
+  archived: Boolean
+  archivedBy: ProviderUser
+  createdAt: ISO8601DateTime!
+  id: ID!
+  title: String!
+  updatedAt: ISO8601DateTime!
+}
+
+type LetterTemplateConnection {
+  edges: [LetterTemplateEdge]
+  nodes: [LetterTemplate]
+  pageInfo: PageInfo!
+}
+
+type LetterTemplateEdge {
+  cursor: String!
+  node: LetterTemplate
+}
+
+enum LettterOrderByEnum {
+  CREATED_AT
+  CREATED_BY
+  ID
+  LETTER_TEMPLATE
+  SIGNED_BY
+  UPDATED_AT
+}
+
+enum LifeStageEnum {
+  ADOLESCENT
+  ADULT
+  CHILD
+  INFANT
+  NEW_BORN
+}
+
+enum LocaleEnum {
+  ENGLISH
+  FRENCH
+  SPANISH
+}
+
+type LocalizedField {
+  locale: LocaleEnum!
+  value: String!
+}
+
+type Location implements Colorable & Node & Timestampable {
+  city: String
+  color: String
+  createdAt: ISO8601DateTime!
+  description: String
+  groupLabel: String
+  id: ID!
+  internalName: String
+  latitude: String
+  longitude: String
+  name: String!
+  postalCode: String
+  primary: Boolean!
+  primaryContactNumber: Phone
+  primaryEmail: Email
+  primaryFaxNumber: Phone
+  public: Boolean!
+  region: String
+  streetAddress1: String
+  streetAddress2: String
+  timezoneIanaName: String
+  timezoneName: String
+  updatedAt: ISO8601DateTime!
+}
+
+input ManageCaseObservationInput {
+  clientMutationId: String
+  caseId: ID!
+  manageCaseObservations: CombinedObservationInput!
+}
+
+type ManageCaseObservationPayload {
+  caseObservations: [CaseObservation!]!
+  clientMutationId: String
+}
+
+enum MassMatchEnum {
+  ALL
+  PRACTITIONER
+  STAFF
+}
+
+type MedicalHistoryRecord implements Node & Timestampable {
+  createdAt: ISO8601DateTime!
+  description: String
+  diagnoses: [Diagnosis!]!
+  endDate: PartialDate
+  id: ID!
+  isRiskFactor: Boolean!
+  lifeStage: LifeStageEnum
+  notes: String
+  startDate: PartialDate
+  status: PatientHistoryRecordStatusEnum
+  updatedAt: ISO8601DateTime!
+}
+
+type MedicalHistoryRecordConnection {
+  edges: [MedicalHistoryRecordEdge]
+  nodes: [MedicalHistoryRecord]
+  pageInfo: PageInfo!
+}
+
+type MedicalHistoryRecordEdge {
+  cursor: String!
+  node: MedicalHistoryRecord
+}
+
+type MedicationDosage {
+  condition: String
+  dose: String!
+  doseUnit: String!
+  duration: String
+  frequency: String!
+  prn: Boolean
+}
+
+enum MedicationDosageConditionEnum {
+  AND
+  THEN
+}
+
+input MedicationDosageInput {
+  condition: MedicationDosageConditionEnum
+  doseUnit: MedicationDoseUnitEnum
+  doseValue: Float
+  durationUnit: MedicationDurationUnitEnum
+  durationValue: Int
+  frequency: FormularyFrequency
+  prn: Boolean
+}
+
+enum MedicationDoseUnitEnum {
+  NONE
+  AMPULE
+  APPLICATION
+  APPLICATOR
+  BOTTLE
+  BOX
+  CAPSULE
+  CREAM
+  CUBIC_CENTIMETER
+  DOSE
+  EACH
+  G
+  IMPLANT
+  INHALATION
+  IN_I
+  INSERT
+  MCG
+  MG
+  ML
+  PACKAGE
+  PACKET
+  PATCH
+  PUFFS
+  PUMP
+  RING
+  SPRAY
+  SUPPOSITORIES
+  TABLET
+  TABLESPOON
+  TEASPOON
+  TUBE
+  UNIT
+  VIALS
+  PERCENTAGE
+  APPLICATORFUL
+  STRIP
+  STICK
+  WAFER
+  CANISTER
+  BUCCAL_TABLET
+  NEBULIZER
+  LANCET
+  DROP
+  SCOOP
+  KIT
+  PAD
+  SACHET
+  PELLET
+  CAN
+  LOZENGE
+  SPONGE
+  GUM
+  PEN_NEEDLE
+  DEVICE
+  SYRINGE
+  PASTILLE
+  ENEMA
+  TAMPON
+  DRESSING
+  PEN
+  L
+  CUP_US
+  FOZ_BR
+  GAL_BR
+  LB_AV
+  OZ_AV
+  PT_BR
+  QT_BR
+  SFT_I
+  SIN_I
+  SYD_I
+  TBS_US
+  TSP_US
+  CM
+  CM2
+  IU
+  KG
+  M2
+  MU
+  MEQ
+  MM2
+  MM3
+  MMOL
+  MOL
+  NL
+  NG
+  UL
+  UMOL
+}
+
+enum MedicationDurationUnitEnum {
+  DAY
+  WEEK
+  MONTH
+  YEAR
+}
+
+enum MedicationFormEnum {
+  AEROSOL_METERED_DOSE
+  AEROSOL_WITH_PROPELLANTS
+  BAR_CHEWABLE
+  BEAD
+  BISCUIT
+  BOLUS
+  CAPSULE
+  CARTRIDGE
+  CAPSULE_DELAYED_RELEASE
+  CEMENT
+  CORD
+  CREAM
+  DOUCHE
+  DROPS
+  DRESSING
+  CAPSULE_ENTERIC_COATED
+  TABLET_ENTERIC_COATED
+  ELIXIR
+  EMULSION
+  ENEMA
+  TABLET_EFFERVESCENT
+  FLOSS
+  GAS
+  GRANULE_FOR_SUSPENSION_DELAYED_RELEASE
+  GRANULE_EFFERVESCENT
+  GEL
+  GEL_CONTROLLED_RELEASE
+  GLOBULES
+  GRANULES
+  GRAFT
+  GUM_CHEWABLE
+  IMPLANT
+  INSERT
+  INSERT_EXTENDED_RELEASE
+  JAM
+  KIT
+  LEAF
+  LIPOSOME
+  LIQUID
+  LOTION
+  LOZENGE
+  MOUTHWASH_GARGLE
+  OINTMENT
+  OVULES
+  PAD
+  PATCH
+  POWDER_ENTERIC_COATED
+  POWDER_EFFERVESCENT
+  PENCIL
+  PIECE_CHEWABLE
+  PLASTER
+  METERED_DOSE_PUMP
+  DRUG_PREMIX
+  PELLET_ORAL
+  POWDER
+  POWDER_SUSTAINED_RELEASE
+  POWDER_FOR_SUSPENSION_SUSTAINED_RELEASE
+  PASTE
+  POWDER_FOR_SUSPENSION
+  POWDER_FOR_SOLUTION
+  RING_SLOW_RELEASE
+  SUSPENSION_DELAYED_RELEASE
+  SHAMPOO
+  SPRAY_METERED_DOSE
+  SOLUTION
+  SOAP_BAR
+  SPRINKLE_CAPSULE
+  SPONGE
+  SPRAY
+  SUPPOSITORY_SUSTAINED_RELEASE
+  SUSTAINED_RELEASE_CAPSULE
+  DISC_SUSTAINED_RELEASE
+  SYRUP_SUSTAINED_RELEASE
+  SUSTAINED_RELEASE_TABLET
+  STICK
+  STRIP
+  SUPPOSITORY
+  SUSPENSION
+  SUTURE
+  SWAB
+  SYRUP
+  TABLET
+  TABLET_CHEWABLE
+  TABLET_DISPERSIBLE
+  TABLET_DELAYED_RELEASE
+  TABLET_RAPID_DISSOLVE
+  TABLET_SUBLINGUAL
+  TAPE
+  TEAT_DILATOR
+  TEA_HERBAL
+  TOOTHPASTE
+  UNASSIGNED
+  WAFER
+  WIPE
+}
+
+input MedicationQuantityInput {
+  unit: MedicationQuantityUnitEnum
+  value: Float
+}
+
+enum MedicationQuantityUnitEnum {
+  NONE
+  AMPULE
+  APPLICATION
+  APPLICATOR
+  BOTTLE
+  BOX
+  CAPSULE
+  CARTRIDGE
+  CONTAINER
+  CUBIC_CENTIMETER
+  DEVICE
+  DISKS
+  EACH
+  G
+  IMPLANT
+  INDIVIDUAL_DOSES
+  INHALATION
+  INHALER
+  INSERT
+  MCG
+  METERED_DOSE_INHALER
+  MG
+  ML
+  PACKAGE
+  PACKET
+  PATCH
+  PUFFS
+  PUMP
+  RING
+  SPRAY
+  SUPPOSITORIES
+  TABLET
+  TUBE
+  UNIT
+  VIALS
+  PERCENTAGE
+  STRIP
+  STICK
+  WAFER
+  CANISTER
+  BUCCAL_TABLET
+  NEBULIZER
+  LANCET
+  DROP
+  DOSE
+  SCOOP
+  KIT
+  PAD
+  SACHET
+  BAR
+  PELLET
+  BAG
+  CAN
+  LOZENGE
+  SPONGE
+  GUM
+  PEN_NEEDLE
+  SYRINGE
+  PASTILLE
+  ENEMA
+  TAMPON
+  DRESSING
+  PEN
+  L
+  CUP_US
+  FOZ_BR
+  GAL_BR
+  LB_AV
+  OZ_AV
+  PT_BR
+  QT_BR
+  SFT_I
+  SIN_I
+  SYD_I
+  TBS_US
+  TSP_US
+  CM2
+  IU
+  KG
+  M2
+  MU
+  MEQ
+  MM2
+  MM3
+  MMOL
+  MOL
+  NL
+  NG
+  UL
+  UMOL
+}
+
+type MedicationRecord implements Node & Timestampable {
+  additionalInstruction: String
+  cancelledAt: ISO8601DateTime
+  continuous: Boolean
+  createdAt: ISO8601DateTime!
+  din: String
+  dosages: [MedicationDosage!]
+  endAt: PartialDate
+  externallyPrescribed: Boolean
+  form: String
+  id: ID!
+  name: String!
+  noRenewals: Boolean
+  pastMedication: Boolean
+  quantity: String
+  quantityUnit: String
+  refill: String
+  route: String
+  startAt: PartialDate
+  stoppedByPatient: Boolean
+  stoppedByProviderUser: ProviderUser
+  stoppedDate: ISO8601Date
+  stoppedNote: String
+  stoppedReason: String
+  updatedAt: ISO8601DateTime!
+}
+
+type MedicationRecordConnection {
+  edges: [MedicationRecordEdge]
+  nodes: [MedicationRecord]
+  pageInfo: PageInfo!
+}
+
+type MedicationRecordEdge {
+  cursor: String!
+  node: MedicationRecord
+}
+
+enum MedicationRouteEnum {
+  ORAL
+  TOPICAL
+  INHALATION
+  NASAL
+  OPHTHALMIC
+  INTRAVENOUS_IV
+  SUBCUTANEOUS
+  TRANSDERMAL
+  OTIC
+  VAGINAL
+  SUBLINGUAL
+  RECTAL
+  VAPORIZATION
+  INTRAMUSCULAR_IM
+  INTRA_ARTICULAR
+  INTRAUTERINE
+  BUCCAL
+  DENTAL
+  INTRAVENOUS
+  NASOGASTRIC
+  BATHWATER
+  BLADDER_IRRIGATION
+  ENDOTRACHEAL
+  EPIDURAL
+  INTRAARTERIAL
+  INTRABURSAL
+  INTRACARDIAC
+  INTRACAVERNOSAL
+  INTRACISTERNAL
+  INTRADERMAL
+  INTRADISCAL
+  INTRAGANGLION
+  INTRALESIONAL
+  INTRAOCULAR_IRRIGATION
+  INTRAOCULAR
+  INTRAOSSEOUS
+  INTRAPERITONEAL
+  INTRAPLEURAL
+  INTRASINUSAL
+  INTRATENDON
+  INTRATHECAL
+  INTRAVENTRICULAR
+  INTRAVESICAL
+  INTRAVITREAL
+  IRRIGATION
+  MOUTHWASH
+  OPHTHALMIC_IRRIGATION
+  ORAL_NEBULIZATION
+  OOTIC_IRRIGATION
+  RETROBULBAR
+  URETHRAL
+  VAGINAL_IRRIGATION
+  WOUND_IRRIGATION
+  OTHER
+}
+
+union Member = Contact | ProviderUser
+
+type Mutation {
+  addCareTeamMember(input: AddCareTeamMemberInput!): AddCareTeamMemberPayload
+  addCaseComment(input: AddCaseCommentInput!): AddCaseCommentPayload
+  addDrugAllergyRecord(input: AddDrugAllergyRecordInput!): AddDrugAllergyRecordPayload
+  addGroupVisitAttendee(input: AddGroupVisitAttendeeInput!): AddGroupVisitAttendeePayload
+  addMedicationRecord(input: AddMedicationRecordInput!): AddMedicationRecordPayload
+  addNonDrugAllergyRecord(input: AddNonDrugAllergyRecordInput!): AddNonDrugAllergyRecordPayload
+  addReferralRecordComment(input: AddReferralRecordCommentInput!): AddReferralRecordCommentPayload
+  addTaskComment(input: AddTaskCommentInput!): AddTaskCommentPayload
+  archiveCase(input: ArchiveCaseInput!): ArchiveCasePayload
+  archivePatient(input: ArchivePatientInput!): ArchivePatientPayload
+  assignReferralRecordToWaitingList(input: AssignReferralRecordToWaitingListInput!): AssignReferralRecordToWaitingListPayload
+  closeCase(input: CloseCaseInput!): CloseCasePayload
+  createAppointment(input: CreateAppointmentInput!, options: CreateAppointmentOptions): Appointment!
+  createAttachment(input: CreateAttachmentInput!): CreateAttachmentPayload
+  createCase(input: CreateCaseInput!): CreateCasePayload
+  createContact(input: CreateContactInput!): CreateContactPayload
+  createDraftAppointment(input: CreateDraftAppointmentInput!): CreateDraftAppointmentPayload
+  createFacility(input: CreateFacilityInput!): CreateFacilityPayload
+  createFlexibleWorkHour(input: CreateFlexibleWorkHourInput!): CreateFlexibleWorkHourPayload
+  createIncomingReferralRecord(input: CreateIncomingReferralRecordInput!): CreateIncomingReferralRecordPayload
+  createInternalReferralRecord(input: CreateInternalReferralRecordInput!): CreateInternalReferralRecordPayload
+  createOutgoingReferralRecord(input: CreateOutgoingReferralRecordInput!): CreateOutgoingReferralRecordPayload
+  createPatient(input: CreatePatientInput!): CreatePatientPayload
+  createProviderOffTime(input: CreateProviderOffTimeInput!): CreateProviderOffTimePayload
+  createRespondent(input: CreateRespondentInput!): CreateRespondentPayload @deprecated
+  createStandardWorkHour(input: CreateStandardWorkHourInput!): CreateStandardWorkHourPayload
+  createTask(input: CreateTaskInput!): CreateTaskPayload
+  createTaskByTemplate(input: CreateTaskByTemplateInput!): CreateTaskByTemplatePayload
+  deleteDraftAppointment(input: DeleteDraftAppointmentInput!): DeleteDraftAppointmentPayload
+  healthProfile: HealthProfileMutations!
+  manageCaseObservation(input: ManageCaseObservationInput!): ManageCaseObservationPayload
+  reassignCase(input: ReassignCaseInput!): ReassignCasePayload
+  removeGroupVisitAttendee(input: RemoveGroupVisitAttendeeInput!): RemoveGroupVisitAttendeePayload
+  saveOlisLabMessage(input: SaveOlisLabMessageInput!): SaveOlisLabMessagePayload
+  updateAppointment(input: UpdateAppointmentInput!): UpdateAppointmentPayload
+  updateCareTeamMember(input: UpdateCareTeamMemberInput!): UpdateCareTeamMemberPayload
+  updateCase(input: UpdateCaseInput!): UpdateCasePayload
+  updateCaseStatus(input: UpdateCaseStatusInput!): UpdateCaseStatusPayload
+  updateContact(input: UpdateContactInput!): UpdateContactPayload
+  updateDraftAppointment(input: UpdateDraftAppointmentInput!): UpdateDraftAppointmentPayload
+  updateFacility(input: UpdateFacilityInput!): UpdateFacilityPayload
+  updateIncomingReferralRecord(input: UpdateIncomingReferralRecordInput!): UpdateIncomingReferralRecordPayload
+  updateInternalReferralRecord(input: UpdateInternalReferralRecordInput!): UpdateInternalReferralRecordPayload
+  updateOutgoingReferralRecord(input: UpdateOutgoingReferralRecordInput!): UpdateOutgoingReferralRecordPayload
+  updatePatient(input: UpdatePatientInput!): UpdatePatientPayload
+  updateTask(input: UpdateTaskInput!): UpdateTaskPayload
+  upsertCaseDataItem(input: UpsertCaseDataItemInput!): UpsertCaseDataItemPayload
+  upsertPatientDataItem(input: UpsertPatientDataItemInput!): UpsertPatientDataItemPayload
+  upsertReferralDataItem(input: UpsertReferralDataItemInput!): UpsertReferralDataItemPayload
+}
+
+interface Node {
+  id: ID!
+}
+
+enum NotificationMethodEnum {
+  BOTH
+  EMAIL
+  NONE
+  SMS
+}
+
+interface NullableTimestampable {
+  createdAt: ISO8601DateTime
+  updatedAt: ISO8601DateTime
+}
+
+scalar NumericString
+
+enum OccupationEnum {
+  ATHLETIC_THERAPIST
+  AUDIOLOGIST
+  AUXILIARY_NURSE
+  CHIROPODIST
+  CHIROPRACTOR
+  CLINICAL_ASSISTANT
+  COUNSELOR
+  DENTAL_ASSISTANT
+  DENTAL_HYGIENIST
+  DENTIST
+  DIETITIAN
+  ENVIRONMENTAL_PUBLIC_HEALTH_PROFESSIONAL
+  GENETIC_COUNSELLOR
+  HEALTH_INFORMATION_MANAGEMENT_PROFESSIONAL
+  KINESIOLOGIST
+  LAWYER
+  LICENSED_PRACTICAL_NURSE
+  MASSAGE_THERAPIST
+  MEDICAL_LABORATORY_TECHNOLOGIST
+  MEDICAL_OFFICE_ADMIN
+  MEDICAL_PHYSICIST
+  MEDICAL_RADIATION_TECHNOLOGIST
+  MEDICAL_STUDENT
+  MENTAL_HEALTH_WORKER
+  MID_WIFE
+  NATUROPATHIC_PHYSICIAN
+  NURSE_PRACTITIONER
+  NURSE
+  OCCUPATIONAL_THERAPIST
+  OPTICIAN
+  OPTOMETRIST
+  OTHER
+  PARAMEDIC
+  PHARMACIST
+  PHARMACY_TECHNICIAN
+  PHYSICIAN_ASSISTANT
+  MEDICAL_DOCTOR
+  PHYSIOTHERAPIST
+  PSYCHOLOGIST
+  REGISTERED_DIETITIAN
+  REGISTERED_MIDWIFE
+  REGISTERED_NURSE
+  REGISTERED_PSYCHIATRIC_NURSE
+  RESIDENT
+  RESPIRATORY_THERAPIST
+  SOCIAL_WORKER
+  SPEECH_LANGUAGE_PATHOLOGIST
+}
+
+enum OffTimeColorEnum {
+  GREY
+  BLACK
+  RED
+  PINK
+  SALMON
+  ORANGE
+  BROWN
+  YELLOW
+  MINT
+  GREEN
+  BLUE
+  PURPLE
+}
+
+type Offtime implements Colorable & Node & Timestampable {
+  color: String
+  createdAt: ISO8601DateTime!
+  endAtDate: ISO8601Date!
+  endAtTime: TimeWithoutOffset!
+  id: ID!
+  memo: String
+  name: String
+  provider: ProviderUser
+  startAt: ISO8601DateTime! @deprecated
+  startAtDate: ISO8601Date!
+  startAtTime: TimeWithoutOffset!
+  untilAt: ISO8601DateTime! @deprecated
+  updatedAt: ISO8601DateTime!
+}
+
+type OfftimeConnection {
+  edges: [OfftimeEdge]
+  nodes: [Offtime]
+  pageInfo: PageInfo!
+}
+
+type OfftimeEdge {
+  cursor: String!
+  node: Offtime
+}
+
+enum OrderByDirectionEnum {
+  ASC
+  DESC
+}
+
+type PageInfo {
+  endCursor: String
+  hasNextPage: Boolean!
+  hasPreviousPage: Boolean!
+  startCursor: String
+}
+
+scalar PartialDate
+
+type Patient implements Node & Timestampable {
+  additionalAddress: String
+  administrativeNotes(after: String, before: String, first: Int, last: Int): AdministrativeNoteConnection
+  age: Int!
+  allergyRecords(category: CategoryEnum, status: RecordsStatusEnum, severity: SeverityEnum, after: String, before: String, first: Int, last: Int): PatientAllergyRecordConnection
+  answerSheets(from: DateTimeWithTimezone, questionnaireId: ID, after: String, before: String, first: Int, last: Int): AnswerSheetConnection
+  archived: Boolean!
+  archivedAt: ISO8601Date
+  archivedBy: ArchivedBy
+  attachments(fileTagIds: [ID!], includeArchived: Boolean = false, after: String, before: String, first: Int, last: Int): AttachmentConnection
+  careTeamMembers(careTeamRoleUuid: String, orderBy: [CareTeamMemberOrderByInput!] = [{direction: DESC, field: CREATED_AT}]): [CareTeamMember!]
+  case(id: ID!): Case
+  cases(assignedProviderUserId: ID, includeArchived: Boolean = false, includeClosed: Boolean = false, issue: SearchString, statusId: ID, after: String, before: String, first: Int, last: Int): CaseConnection
+  city: String
+  country: String
+  createdAt: ISO8601DateTime!
+  dateOfBirth: ISO8601Date!
+  draft: Boolean!
+  email: Email
+  emailConfirmedAt: ISO8601DateTime
+  emergencyFirstName: String
+  emergencyLastName: String
+  emergencyMiddleName: String
+  emergencyPhone: Phone
+  emergencyRelationship: String
+  encounters(createdById: ID, from: ISO8601DateTime, orderBy: [EncounterOrderByInput!] = [{direction: DESC, field: CREATED_AT}], presentingIssueId: ID, signedById: ID, to: ISO8601DateTime, after: String, before: String, first: Int, last: Int): EncounterConnection
+  familyDoctor: String
+  familyPractitioner: Contact
+  firstName: String!
+  fullName: String!
+  gender: GenderEnum
+  genderIdentity: GenderIdentityEnum
+  genderIdentityDescription: String
+  hasAllergies: Boolean!
+  healthProfile: HealthProfile
+  homePhone: Phone
+  id: ID!
+  identifications: [Identification!]!
+  injectionRecords(type: InjectionTypeEnum, name: String, after: String, before: String, first: Int, last: Int): InjectionRecordConnection
+  insuranceCompany: String
+  insuranceGroupNumber: String
+  insuranceId: String
+  labReports(fileTagsIds: [ID!], includeArchived: Boolean = false, includeHistoricalVersions: Boolean = false, after: String, before: String, first: Int, last: Int): LabReportConnection
+  labResult(id: ID!): LabResult
+  labResults(labTestNames: [String!], lastResultOnly: Boolean, orderBy: [LabResultOrderByInput!] = [{direction: ASC, field: LAB_TEST_NAME}, {direction: DESC, field: COLLECTED_AT}], sectionName: String, after: String, before: String, first: Int, last: Int): LabResultConnection
+  language: String
+  lastName: String!
+  letters(contactId: ID, letterTemplateId: ID, orderBy: [LetterOrderByInput!] = [{direction: DESC, field: CREATED_AT}], title: SearchString, after: String, before: String, first: Int, last: Int): LetterConnection
+  medicationRecords(current: Boolean, after: String, before: String, first: Int, last: Int): MedicationRecordConnection
+  middleInitial: String
+  middleName: String
+  notifyBy: NotificationMethodEnum!
+  officePhone: Phone
+  officePhoneExt: String
+  patientDataItems(categoryUuid: String, templateUuid: String, after: String, before: String, first: Int, last: Int): PatientDataItemConnection
+  phone: String
+  phoneConfirmedAt: ISO8601DateTime
+  preferredName: String
+  preferredPharmacy: Facility
+  primaryLocation: Location
+  primaryPractitioner: ProviderUser
+  pronouns: PronounsEnum
+  publicAccessAllowed: Boolean
+  referralRecord(id: ID!): ReferralRecord
+  referralRecords(anyPriorityIds: [ID!], anyStatusIds: [ID!], direction: ReferralDirectionEnum, includeArchived: Boolean = false, orderBy: [ReferralRecordOrderByInput!] = [{direction: ASC, field: ID}, {direction: DESC, field: CREATED_AT}], waitingListId: ID, after: String, before: String, first: Int, last: Int): ReferralRecordConnection
+  referringDoctor: String
+  referringPractitioner: Contact
+  region: String
+  statusTags: [StatusTag!]!
+  streetAddress: String
+  task(id: ID!): Task
+  tasks(categoryId: ID, includeCompleted: Boolean = false, name: SearchString, orderBy: [TaskOrderByInput!], priority: TaskPriorityEnum, status: TaskStatusEnum, after: String, before: String, first: Int, last: Int): TaskConnection
+  title: String
+  unsubscribedFromEmail: Boolean!
+  unsubscribedFromSms: Boolean!
+  updatedAt: ISO8601DateTime!
+  verified: Boolean!
+  vitalsRecords(after: String, before: String, first: Int, last: Int): VitalsRecordConnection
+  zipcode: String
+}
+
+type PatientAllergyRecord implements Node & Timestampable {
+  category: CategoryEnum
+  comments: String
+  createdAt: ISO8601DateTime!
+  din: Din
+  id: ID!
+  lifeStage: LifeStageEnum
+  name: String
+  otherReactions: String
+  reaction: ReactionEnum
+  reactionType: ReactionTypeEnum
+  recordedAt: PartialDate
+  reportedBy: ReportedByEnum
+  severity: SeverityEnum
+  since: String
+  status: RecordsStatusEnum
+  updatedAt: ISO8601DateTime!
+}
+
+type PatientAllergyRecordConnection {
+  edges: [PatientAllergyRecordEdge]
+  nodes: [PatientAllergyRecord]
+  pageInfo: PageInfo!
+}
+
+type PatientAllergyRecordEdge {
+  cursor: String!
+  node: PatientAllergyRecord
+}
+
+type PatientConnection {
+  edges: [PatientEdge]
+  nodes: [Patient]
+  pageInfo: PageInfo!
+}
+
+type PatientDataCategory {
+  archived: Boolean!
+  name: String!
+  patientDataTemplates: [PatientDataTemplate!]
+  uuid: String!
+}
+
+type PatientDataCategoryConnection {
+  edges: [PatientDataCategoryEdge]
+  nodes: [PatientDataCategory]
+  pageInfo: PageInfo!
+}
+
+type PatientDataCategoryEdge {
+  cursor: String!
+  node: PatientDataCategory
+}
+
+union PatientDataEntityAny = PatientDataEntityDate | PatientDataEntityMultiSelection | PatientDataEntityNumber | PatientDataEntitySingleSelection | PatientDataEntityText
+
+type PatientDataEntityDate implements PatientDataEntityInterface {
+  dateFormat: PatientDataEntityDateFormatEnum
+  defaultValue: PatientDataEntityDateDefaultValueEnum
+  defaultValueOffset: Int
+  internalUseOnly: Boolean
+  name: String!
+  range: [PatientDataEntityDateRangeEnum!]
+  required: Boolean
+  setAsDateOfOccurred: Boolean
+  uuid: String!
+}
+
+enum PatientDataEntityDateDefaultValueEnum {
+  TODAY
+  NONE
+}
+
+enum PatientDataEntityDateFormatEnum {
+  YEAR_MONTH_DAY
+  YEAR_MONTH
+  YEAR
+}
+
+enum PatientDataEntityDateRangeEnum {
+  FUTURE
+  PAST
+}
+
+interface PatientDataEntityInterface {
+  internalUseOnly: Boolean
+  name: String!
+  required: Boolean
+  uuid: String!
+}
+
+type PatientDataEntityMultiSelection implements PatientDataEntityInterface {
+  internalUseOnly: Boolean
+  name: String!
+  required: Boolean
+  uuid: String!
+  values: [String!]
+}
+
+type PatientDataEntityNumber implements PatientDataEntityInterface {
+  internalUseOnly: Boolean
+  maxValue: Float
+  minValue: Float
+  name: String!
+  pluralFormat: String
+  required: Boolean
+  singularFormat: String
+  uuid: String!
+}
+
+type PatientDataEntitySingleSelection implements PatientDataEntityInterface {
+  internalUseOnly: Boolean
+  name: String!
+  required: Boolean
+  uuid: String!
+  values: [String!]
+}
+
+type PatientDataEntityText implements PatientDataEntityInterface {
+  allowMultiLines: Boolean
+  internalUseOnly: Boolean
+  name: String!
+  required: Boolean
+  uuid: String!
+}
+
+type PatientDataItem implements Node & Timestampable {
+  category: PatientDataCategory!
+  createdAt: ISO8601DateTime!
+  id: ID!
+  template: PatientDataTemplate!
+  updatedAt: ISO8601DateTime!
+  values: [PatientDataValueAny!]!
+}
+
+type PatientDataItemConnection {
+  edges: [PatientDataItemEdge]
+  nodes: [PatientDataItem]
+  pageInfo: PageInfo!
+}
+
+type PatientDataItemEdge {
+  cursor: String!
+  node: PatientDataItem
+}
+
+type PatientDataTemplate {
+  entities: [PatientDataEntityAny!]!
+  module: PatientDataTemplateModuleEnum!
+  name: String!
+  uuid: String!
+}
+
+type PatientDataTemplateConnection {
+  edges: [PatientDataTemplateEdge]
+  nodes: [PatientDataTemplate]
+  pageInfo: PageInfo!
+}
+
+type PatientDataTemplateEdge {
+  cursor: String!
+  node: PatientDataTemplate
+}
+
+enum PatientDataTemplateModuleEnum {
+  ADDRESS
+  APPOINTMENT
+  CONTACT
+  FORM
+}
+
+union PatientDataValueAny = PatientDataValueDate | PatientDataValueMultiSelection | PatientDataValueNumber | PatientDataValueSingleSelection | PatientDataValueText
+
+type PatientDataValueDate {
+  name: String!
+  uuid: String!
+  value: PartialDate
+}
+
+input PatientDataValueInput {
+  valueUuid: String!
+  textValue: String
+  dateValue: PartialDate
+  numberValue: Float
+  singleSelectValue: String
+  multiSelectValue: [String!]
+}
+
+type PatientDataValueMultiSelection {
+  name: String!
+  uuid: String!
+  values: [String!]
+}
+
+type PatientDataValueNumber {
+  displayValue: String
+  name: String!
+  uuid: String!
+  value: Float
+}
+
+type PatientDataValueSingleSelection {
+  name: String!
+  uuid: String!
+  value: String
+}
+
+type PatientDataValueText {
+  name: String!
+  uuid: String!
+  value: String
+}
+
+type PatientEdge {
+  cursor: String!
+  node: Patient
+}
+
+enum PatientHistoryRecordStatusEnum {
+  ACTIVE
+  INACTIVE
+  RECURRENCE
+  RELAPSE
+  REMISSION
+  RESOLVED
+}
+
+enum PatientOrderByEnum {
+  ID
+  CREATED_AT
+  UPDATED_AT
+  FIRST_NAME
+  LAST_NAME
+  DATE_OF_BIRTH
+  PRIMARY_LOCATION
+  PRIMARY_PRACTITIONER
+}
+
+input PatientOrderByInput {
+  direction: OrderByDirectionEnum!
+  field: PatientOrderByEnum!
+}
+
+scalar Phone
+
+scalar PhoneSearchString
+
+type PresentingIssue implements Colorable & Iconable & Node {
+  color: String
+  icon: String
+  id: ID!
+  internalName: String
+  localizedInternalName: [LocalizedField!]!
+  localizedName: [LocalizedField!]!
+  localizedPrepNote: [LocalizedField!]!
+  localizedSearchablePhrase: [LocalizedField!]!
+  name: String!
+  prepNote: String
+  searchablePhrase: String
+  services(name: SearchString, presentingIssueId: ID, after: String, before: String, first: Int, last: Int): ServiceConnection
+}
+
+type PresentingIssueConnection {
+  edges: [PresentingIssueEdge]
+  nodes: [PresentingIssue]
+  pageInfo: PageInfo!
+}
+
+type PresentingIssueEdge {
+  cursor: String!
+  node: PresentingIssue
+}
+
+type PrivateBillingItem implements Node & Timestampable {
+  amountUnit: CurrencyUnitEnum
+  code: String
+  createdAt: ISO8601DateTime!
+  currencySymbol: String
+  description: String
+  diagnoses: [Diagnosis!]
+  id: ID!
+  quantity: Int
+  status: BillingStatusEnum
+  totalPrice: Float
+  updatedAt: ISO8601DateTime!
+}
+
+enum PronounsEnum {
+  HE_HIM_HIS_HIMSELF
+  SHE_HER_HER_HERSELF
+  THEY_THEM_THEIR_THEMSELF
+  SIE_SIR_HIR_HIRSELF
+  ZIE_ZIM_ZIR_ZIRSELF
+}
+
+type ProviderUser implements Node & Timestampable {
+  billingNumber: String
+  createdAt: ISO8601DateTime!
+  email: Email!
+  firstName: String
+  fullName: String
+  hasInbox: Boolean
+  hasSchedule: Boolean
+  id: ID!
+  languages: [String!]!
+  lastName: String
+  licenseNumber: String
+  licensingBody: String
+  occupation: OccupationEnum
+  schedule: Schedule
+  specialty: String
+  title: ProviderUserTitleEnum
+  updatedAt: ISO8601DateTime!
+}
+
+type ProviderUserConnection {
+  edges: [ProviderUserEdge]
+  nodes: [ProviderUser]
+  pageInfo: PageInfo!
+}
+
+type ProviderUserEdge {
+  cursor: String!
+  node: ProviderUser
+}
+
+enum ProviderUserTitleEnum {
+  DR
+  DOCTOR
+  NURSE
+  NP
+  MR
+  MS
+  MRS
+}
+
+type Query {
+  appointment(id: ID!): Appointment
+  appointmentTags: [AppointmentTag!]
+  appointments(from: DateTimeWithTimezone, locationId: ID, patientId: ID, providerId: ID, serviceId: ID, to: DateTimeWithTimezone, visitType: VisitTypeEnum, includeDeactivated: Boolean, orderBy: [AppointmentOrderByInput!] = [{direction: ASC, field: CREATED_AT}, {direction: ASC, field: ID}], after: String, before: String, first: Int, last: Int): AppointmentConnection
+  availabilities(exclusiveAvailability: Boolean = false, from: DateTimeWithTimezone, locations: [ID!], providers: [ID!], serviceId: ID!, to: DateTimeWithTimezone, userGroupId: ID, visitType: VisitTypeEnum): [Availability!]
+  careTeamRole(uuid: String!): CareTeamRole
+  careTeamRoles(name: String, after: String, before: String, first: Int, last: Int): CareTeamRoleConnection
+  caseStatus(id: ID!): CaseStatus
+  caseStatuses(includeArchived: Boolean = false, name: SearchString, after: String, before: String, first: Int, last: Int): CaseStatusConnection
+  caseTemplate(id: ID!): CaseTemplate
+  caseTemplates(includeArchived: Boolean = false, name: SearchString, after: String, before: String, first: Int, last: Int): CaseTemplateConnection
+  contact(id: ID!): Contact
+  contacts(billingCode: String, excludeReadOnly: Boolean = false, facilityName: String, fax: String, name: String, occupation: ContactOccupationEnum, occupationRawValue: String, after: String, before: String, first: Int, last: Int): ContactConnection
+  draftAppointment(id: ID!): DraftAppointment
+  draftAppointments(from: DateTimeWithTimezone, locationId: ID, providerId: ID, serviceId: ID, to: DateTimeWithTimezone, orderBy: [DraftAppointmentOrderByInput!] = [{direction: ASC, field: CREATED_AT}, {direction: ASC, field: ID}], after: String, before: String, first: Int, last: Int): DraftAppointmentConnection
+  facilities(category: FacilityCategoryEnum, categoryRawValue: SearchString, city: SearchString, email: SearchString, excludeReadOnly: Boolean = false, fax: SearchString, name: SearchString, phone: SearchString, postalCode: SearchString, after: String, before: String, first: Int, last: Int): FacilityConnection
+  facility(id: ID!): Facility
+  fileTags(includeArchived: Boolean = false, after: String, before: String, first: Int, last: Int): FileTagConnection
+  groupVisit(id: ID!): GroupVisit
+  groupVisits(allowEbooking: Boolean = true, description: SearchString, from: DateTimeWithTimezone, fullyBooked: Boolean, includeDeactivated: Boolean = false, locationId: ID, name: SearchString, orderBy: [GroupVisitOrderByInput!] = [{direction: ASC, field: START_AT}], to: DateTimeWithTimezone, after: String, before: String, first: Int, last: Int): GroupVisitConnection
+  identificationTemplate(id: ID!): IdentificationTemplate
+  identificationTemplates: [IdentificationTemplate!]
+  labObservations(after: String, before: String, first: Int, last: Int, collectedDate: ISO8601Date!, identificationType: String!, identificationValue: String!, recordId: String, recordIds: [String!]): LabObservationConnection
+  labTestNames(name: SearchString, after: String, before: String, first: Int, last: Int): LabTestNameConnection
+  letterTemplate(id: ID!): LetterTemplate
+  letterTemplates(includeArchived: Boolean, title: SearchString, after: String, before: String, first: Int, last: Int): LetterTemplateConnection
+  location(id: ID!): Location
+  locations: [Location!]
+  patient(id: ID!): Patient
+  patientDataCategories(includeArchived: Boolean = false, name: SearchString, after: String, before: String, first: Int, last: Int): PatientDataCategoryConnection
+  patientDataCategory(uuid: String!): PatientDataCategory
+  patientDataTemplate(categoryUuid: String!, uuid: String!): PatientDataTemplate
+  patientDataTemplates(categoryName: SearchString, categoryUuid: String, name: SearchString, after: String, before: String, first: Int, last: Int): PatientDataTemplateConnection
+  patientIdentificationVerification(id: ID!): IdentificationVerification
+  patients(dateOfBirth: ISO8601Date, email: SearchString, firstName: SearchString, gender: GenderEnum, identificationValue: String, identificationTemplateId: ID, lastName: SearchString, locationId: ID, phone: PhoneSearchString, primaryPractitionerId: ID, statusTagId: ID, includeArchived: Boolean = false, orderBy: [PatientOrderByInput!], after: String, before: String, first: Int, last: Int): PatientConnection
+  presentingIssue(id: ID!): PresentingIssue
+  presentingIssues(after: String, before: String, first: Int, last: Int, name: SearchString, nameOrSearchablePhrase: SearchString): PresentingIssueConnection
+  provider(id: ID!): ProviderUser
+  providers(languages: [SearchString!], lastName: SearchString, firstName: SearchString, licenseNumber: SearchString, billingNumber: SearchString, email: SearchString, hasInbox: Boolean, hasSchedule: Boolean, after: String, before: String, first: Int, last: Int): ProviderUserConnection
+  referralDataSettings(direction: ReferralDirectionEnum): [ReferralDataSetting!]!
+  referralPriorities(includeArchived: Boolean = false, name: SearchString, after: String, before: String, first: Int, last: Int): ReferralPriorityConnection
+  referralPriority(id: ID!): ReferralPriority
+  referralRecord(id: ID!): ReferralRecord
+  referralRecords(anyPriorityIds: [ID!], anyStatusIds: [ID!], direction: ReferralDirectionEnum, includeArchived: Boolean = false, orderBy: [ReferralRecordOrderByInput!] = [{direction: ASC, field: ID}, {direction: DESC, field: CREATED_AT}], waitingListId: ID, after: String, before: String, first: Int, last: Int): ReferralRecordConnection
+  referralStatus(id: ID!): ReferralStatus
+  referralStatuses(direction: ReferralStatusDirectionEnum, excludeWaitingListStatus: Boolean = false, includeArchived: Boolean = false, name: SearchString, waitingListId: ID, after: String, before: String, first: Int, last: Int): ReferralStatusConnection
+  referralWaitingList(id: ID!): ReferralWaitingList
+  referralWaitingLists(includeArchived: Boolean = false, name: SearchString, after: String, before: String, first: Int, last: Int): ReferralWaitingListConnection
+  respondent(id: ID!): Respondent @deprecated
+  respondents(dateOfBirth: ISO8601Date, email: SearchString, firstName: SearchString, gender: GenderEnum, identificationValue: String, identificationTemplateId: ID, lastName: SearchString, locationId: ID, phone: PhoneSearchString, primaryPractitionerId: ID, statusTagId: ID, includeArchived: Boolean = false, orderBy: [PatientOrderByInput!], after: String, before: String, first: Int, last: Int): RespondentConnection @deprecated
+  schedule(to: DateTimeWithTimezone, from: DateTimeWithTimezone!, providers: [ID!]!, locations: [ID!], visitType: VisitTypeEnum): LegacySchedule
+  service(id: ID!): Service
+  services(name: SearchString, presentingIssueId: ID): [Service!]
+  statusTag(id: ID!): StatusTag
+  statusTags(after: String, before: String, first: Int, last: Int): StatusTagConnection
+  task(id: ID!): Task
+  taskCategories(includeArchived: Boolean = false, name: SearchString, orderBy: [TaskCategoryOrderByInput!] = [{direction: DESC, field: CREATED_AT}], after: String, before: String, first: Int, last: Int): TaskCategoryConnection
+  taskCategory(id: ID!): TaskCategory
+  taskTemplate(id: ID!): TaskTemplate
+  taskTemplates(name: SearchString, orderBy: [TaskTemplateOrderByInput!] = [{direction: DESC, field: CREATED_AT}], after: String, before: String, first: Int, last: Int): TaskTemplateConnection
+  tasks(categoryId: ID, includeCompleted: Boolean = false, name: SearchString, orderBy: [TaskOrderByInput!], priority: TaskPriorityEnum, status: TaskStatusEnum, after: String, before: String, first: Int, last: Int): TaskConnection
+  upcomingAppointments(after: String, before: String, first: Int, last: Int): AppointmentConnection
+  userGroup(id: ID!): UserGroup
+  userGroups: [UserGroup!]
+  virtualVisitLink(appointmentId: ID, id: ID): VirtualVisitLink
+}
+
+type Questionnaire implements Node & Timestampable {
+  createdAt: ISO8601DateTime!
+  description: String
+  estimatedMinutes: Int
+  id: ID!
+  name: String
+  updatedAt: ISO8601DateTime!
+}
+
+enum ReactionEnum {
+  ANAPHYLAXIS
+  ANGIODEMA
+  FEVER
+  MALIGNANT_HYPERTHERMIA
+  RASH_HIVES
+  RASH_LOCAL_CONTACT
+  RASH_MACULOPAPULAR
+  RASH_OTHER
+  SERUM_SICKNESS
+  STEVENS_JOHNSON
+  OTHER
+}
+
+enum ReactionTypeEnum {
+  ALLERGY
+  INTOLERANCE
+}
+
+input ReassignCaseInput {
+  clientMutationId: String
+  assignedProviderUserId: ID!
+  id: ID!
+}
+
+type ReassignCasePayload {
+  case: Case!
+  clientMutationId: String
+}
+
+enum RecordsStatusEnum {
+  ACTIVE
+  CONFIRMED
+  INACTIVE
+  REFUTED
+  RESOLVED
+  UNCONFIRMED
+}
+
+type ReferralDataSetting {
+  category: FlexibleDataCategory!
+  direction: ReferralDirectionEnum!
+  entity: FlexibleDataEntity!
+  position: Int!
+  template: FlexibleDataTemplate!
+}
+
+enum ReferralDirectionEnum {
+  INCOMING
+  INTERNAL
+  OUTGOING
+}
+
+union ReferralOrderingProviderResource = Contact | ProviderUser
+
+type ReferralPriority implements Colorable & Iconable & Node & Timestampable {
+  archived: Boolean!
+  color: String
+  createdAt: ISO8601DateTime!
+  default: Boolean!
+  icon: String
+  id: ID!
+  name: String!
+  position: Int!
+  updatedAt: ISO8601DateTime!
+}
+
+type ReferralPriorityConnection {
+  edges: [ReferralPriorityEdge]
+  nodes: [ReferralPriority]
+  pageInfo: PageInfo!
+}
+
+type ReferralPriorityEdge {
+  cursor: String!
+  node: ReferralPriority
+}
+
+type ReferralRecord implements Node & Timestampable {
+  archived: Boolean!
+  attachments(after: String, before: String, first: Int, last: Int): ReferralRecordAttachmentConnection!
+  comments(after: String, before: String, first: Int, last: Int): ReferralRecordCommentConnection!
+  createdAt: ISO8601DateTime!
+  dateOfAdded: ISO8601Date!
+  direction: ReferralDirectionEnum!
+  id: ID!
+  orderingProvider: ReferralOrderingProviderResource
+  patient: Patient!
+  priority: ReferralPriority
+  reason: String!
+  referralDataItem(id: ID!): FlexibleDataPropertyItem
+  referralDataItems(categoryUuid: String, templateUuid: String, after: String, before: String, first: Int, last: Int): FlexibleDataPropertyItemConnection
+  serviceProvider: ReferralServiceProviderResource
+  status: ReferralStatus
+  updatedAt: ISO8601DateTime!
+  waitingList: ReferralWaitingList
+}
+
+union ReferralRecordAttachment = AdministrativeNote | AnswerSheet | Appointment | Attachment | Encounter | InjectionRecord | MedicationRecord | PatientAllergyRecord | UnsupportedReferralRecordAttachment
+
+type ReferralRecordAttachmentConnection {
+  edges: [ReferralRecordAttachmentEdge]
+  nodes: [ReferralRecordAttachment]
+  pageInfo: PageInfo!
+}
+
+type ReferralRecordAttachmentEdge {
+  cursor: String!
+  node: ReferralRecordAttachment
+}
+
+type ReferralRecordComment implements Node & Timestampable {
+  author: ReferralRecordCommentAuthor!
+  body: String!
+  createdAt: ISO8601DateTime!
+  id: ID!
+  updatedAt: ISO8601DateTime!
+}
+
+union ReferralRecordCommentAuthor = Contact | EnterpriseApiConsumer | InternalApiConsumer | ProviderUser
+
+input ReferralRecordCommentAuthorInput {
+  id: ID!
+  type: ReferralRecordCommentAuthorInputTypeEnum!
+}
+
+enum ReferralRecordCommentAuthorInputTypeEnum {
+  PROVIDER_USER
+}
+
+type ReferralRecordCommentConnection {
+  edges: [ReferralRecordCommentEdge]
+  nodes: [ReferralRecordComment]
+  pageInfo: PageInfo!
+}
+
+type ReferralRecordCommentEdge {
+  cursor: String!
+  node: ReferralRecordComment
+}
+
+type ReferralRecordConnection {
+  edges: [ReferralRecordEdge]
+  nodes: [ReferralRecord]
+  pageInfo: PageInfo!
+}
+
+type ReferralRecordEdge {
+  cursor: String!
+  node: ReferralRecord
+}
+
+enum ReferralRecordOrderByEnum {
+  CREATED_AT
+  ID
+  PRIORITY_POSITION
+  REASON
+  STATUS_POSITION
+  UPDATED_AT
+}
+
+input ReferralRecordOrderByInput {
+  direction: OrderByDirectionEnum!
+  field: ReferralRecordOrderByEnum!
+}
+
+union ReferralServiceProviderResource = Contact | ProviderUser
+
+type ReferralStatus implements Colorable & Iconable & Node & Timestampable {
+  archived: Boolean!
+  color: String
+  createdAt: ISO8601DateTime!
+  default: Boolean!
+  direction: ReferralStatusDirectionEnum!
+  icon: String
+  id: ID!
+  name: String!
+  position: Int!
+  updatedAt: ISO8601DateTime!
+  waitingList: ReferralWaitingList
+}
+
+type ReferralStatusConnection {
+  edges: [ReferralStatusEdge]
+  nodes: [ReferralStatus]
+  pageInfo: PageInfo!
+}
+
+enum ReferralStatusDirectionEnum {
+  INCOMING
+  OUTGOING
+}
+
+type ReferralStatusEdge {
+  cursor: String!
+  node: ReferralStatus
+}
+
+type ReferralWaitingList implements Node & Timestampable {
+  archived: Boolean!
+  createdAt: ISO8601DateTime!
+  description: String
+  id: ID!
+  name: String!
+  position: Int!
+  referralStatuses: [ReferralStatus!]
+  updatedAt: ISO8601DateTime!
+}
+
+type ReferralWaitingListConnection {
+  edges: [ReferralWaitingListEdge]
+  nodes: [ReferralWaitingList]
+  pageInfo: PageInfo!
+}
+
+type ReferralWaitingListEdge {
+  cursor: String!
+  node: ReferralWaitingList
+}
+
+enum RelationshipEnum {
+  AUNT_MATERNAL
+  AUNT_PATERNAL
+  BROTHER
+  CHILD
+  COUSIN_MATERNAL
+  COUSIN_PATERNAL
+  FATHER
+  GRANDFATHER_MATERNAL
+  GRANDFATHER_PATERNAL
+  GRANDMOTHER_MATERNAL
+  GRANDMOTHER_PATERNAL
+  MOTHER
+  SISTER
+  UNCLE_MATERNAL
+  UNCLE_PATERNAL
+}
+
+input RemoveGroupVisitAttendeeInput {
+  clientMutationId: String
+  allowPatientNotification: Boolean
+  allowPractitionerNotification: Boolean
+  groupVisitId: ID!
+  patientId: ID!
+  patientNotificationMethod: EntityNotificationMethodEnum
+}
+
+type RemoveGroupVisitAttendeePayload {
+  appointments: [Appointment!]!
+  clientMutationId: String
+}
+
+input RemoveIdentificationInput {
+  id: ID!
+}
+
+input RemoveReferralRecordAttachmentInput {
+  resourceId: ID!
+  resourceType: RemoveReferralRecordAttachmentInputResourceTypeEnum!
+}
+
+enum RemoveReferralRecordAttachmentInputResourceTypeEnum {
+  ADMINISTRATIVE_NOTE
+  ANSWER_SHEET
+  APPOINTMENT
+  ATTACHMENT
+  CONVERSATION
+  ENCOUNTER
+  HL7_MESSAGE
+  INJECTION_RECORD
+  MEDICATION_RECORD
+  OCEAN_MESSAGE
+  PATIENT_ALLERGY_RECORD
+  PATIENT_FORM
+  PATIENT_REFERRAL_LETTER
+  PATIENT_PAYMENT
+  PATIENT_PRESCRIPTION
+  UPLOADED_FILE
+}
+
+input RemoveStatusTagIdsInput {
+  id: ID!
+}
+
+enum ReportedByEnum {
+  PATIENT
+  RELATED_PERSON
+  PRACTITIONER
+}
+
+type Respondent implements Node & Timestampable {
+  additionalAddress: String
+  administrativeNotes(after: String, before: String, first: Int, last: Int): AdministrativeNoteConnection
+  age: Int!
+  allergyRecords(category: CategoryEnum, status: RecordsStatusEnum, severity: SeverityEnum, after: String, before: String, first: Int, last: Int): PatientAllergyRecordConnection
+  answerSheets(from: DateTimeWithTimezone, questionnaireId: ID, after: String, before: String, first: Int, last: Int): AnswerSheetConnection
+  archived: Boolean!
+  archivedAt: ISO8601Date
+  archivedBy: ArchivedBy
+  attachments(fileTagIds: [ID!], includeArchived: Boolean = false, after: String, before: String, first: Int, last: Int): AttachmentConnection
+  careTeamMembers(careTeamRoleUuid: String, orderBy: [CareTeamMemberOrderByInput!] = [{direction: DESC, field: CREATED_AT}]): [CareTeamMember!]
+  case(id: ID!): Case
+  cases(assignedProviderUserId: ID, includeArchived: Boolean = false, includeClosed: Boolean = false, issue: SearchString, statusId: ID, after: String, before: String, first: Int, last: Int): CaseConnection
+  city: String
+  country: String
+  createdAt: ISO8601DateTime!
+  dateOfBirth: ISO8601Date!
+  draft: Boolean!
+  email: Email
+  emailConfirmedAt: ISO8601DateTime
+  emergencyFirstName: String
+  emergencyLastName: String
+  emergencyMiddleName: String
+  emergencyPhone: Phone
+  emergencyRelationship: String
+  encounters(createdById: ID, from: ISO8601DateTime, orderBy: [EncounterOrderByInput!] = [{direction: DESC, field: CREATED_AT}], presentingIssueId: ID, signedById: ID, to: ISO8601DateTime, after: String, before: String, first: Int, last: Int): EncounterConnection
+  familyDoctor: String
+  familyPractitioner: Contact
+  firstName: String!
+  fullName: String!
+  gender: GenderEnum
+  genderIdentity: GenderIdentityEnum
+  genderIdentityDescription: String
+  hasAllergies: Boolean!
+  healthProfile: HealthProfile
+  homePhone: Phone
+  id: ID!
+  identifications: [Identification!]!
+  injectionRecords(type: InjectionTypeEnum, name: String, after: String, before: String, first: Int, last: Int): InjectionRecordConnection
+  insuranceCompany: String
+  insuranceGroupNumber: String
+  insuranceId: String
+  labReports(fileTagsIds: [ID!], includeArchived: Boolean = false, includeHistoricalVersions: Boolean = false, after: String, before: String, first: Int, last: Int): LabReportConnection
+  labResult(id: ID!): LabResult
+  labResults(labTestNames: [String!], lastResultOnly: Boolean, orderBy: [LabResultOrderByInput!] = [{direction: ASC, field: LAB_TEST_NAME}, {direction: DESC, field: COLLECTED_AT}], sectionName: String, after: String, before: String, first: Int, last: Int): LabResultConnection
+  language: String
+  lastName: String!
+  letters(contactId: ID, letterTemplateId: ID, orderBy: [LetterOrderByInput!] = [{direction: DESC, field: CREATED_AT}], title: SearchString, after: String, before: String, first: Int, last: Int): LetterConnection
+  medicationRecords(current: Boolean, after: String, before: String, first: Int, last: Int): MedicationRecordConnection
+  middleInitial: String
+  middleName: String
+  notifyBy: NotificationMethodEnum!
+  officePhone: Phone
+  officePhoneExt: String
+  patientDataItems(categoryUuid: String, templateUuid: String, after: String, before: String, first: Int, last: Int): PatientDataItemConnection
+  phone: String
+  phoneConfirmedAt: ISO8601DateTime
+  preferredName: String
+  preferredPharmacy: Facility
+  primaryLocation: Location
+  primaryPractitioner: ProviderUser
+  pronouns: PronounsEnum
+  publicAccessAllowed: Boolean
+  referralRecord(id: ID!): ReferralRecord
+  referralRecords(anyPriorityIds: [ID!], anyStatusIds: [ID!], direction: ReferralDirectionEnum, includeArchived: Boolean = false, orderBy: [ReferralRecordOrderByInput!] = [{direction: ASC, field: ID}, {direction: DESC, field: CREATED_AT}], waitingListId: ID, after: String, before: String, first: Int, last: Int): ReferralRecordConnection
+  referringDoctor: String
+  referringPractitioner: Contact
+  region: String
+  statusTags: [StatusTag!]!
+  streetAddress: String
+  task(id: ID!): Task
+  tasks(categoryId: ID, includeCompleted: Boolean = false, name: SearchString, orderBy: [TaskOrderByInput!], priority: TaskPriorityEnum, status: TaskStatusEnum, after: String, before: String, first: Int, last: Int): TaskConnection
+  title: String
+  unsubscribedFromEmail: Boolean!
+  unsubscribedFromSms: Boolean!
+  updatedAt: ISO8601DateTime!
+  verified: Boolean!
+  vitalsRecords(after: String, before: String, first: Int, last: Int): VitalsRecordConnection
+  zipcode: String
+}
+
+type RespondentConnection {
+  edges: [RespondentEdge]
+  nodes: [Respondent]
+  pageInfo: PageInfo!
+}
+
+type RespondentEdge {
+  cursor: String!
+  node: Respondent
+}
+
+type ResponseSelection implements Node {
+  exportableValue: String
+  id: ID!
+  text: String
+  variableValue: String
+}
+
+input SaveOlisLabMessageInput {
+  clientMutationId: String
+  json: FileScalar!
+  pdf: FileScalar
+  providerUserId: ID
+  receivedAt: ISO8601DateTime
+  reviewedAt: ISO8601DateTime
+}
+
+type SaveOlisLabMessagePayload {
+  clientMutationId: String
+  status: Boolean!
+}
+
+type Schedule {
+  flexibleWorkHours(anyLocationIds: [ID!], from: ISO8601Date, to: ISO8601Date, after: String, before: String, first: Int, last: Int): FlexibleWorkHourConnection!
+  offtime(from: ISO8601Date, to: ISO8601Date, after: String, before: String, first: Int, last: Int): OfftimeConnection!
+  standardWorkHours(anyLocationIds: [ID!], anyWeekdays: [WeekDayEnum!], after: String, before: String, first: Int, last: Int): StandardWorkHourConnection!
+}
+
+type Score {
+  max: Float
+  name: String
+  value: Float
+}
+
+scalar SearchString
+
+type Service implements Colorable & Iconable & Node & Timestampable {
+  allowExistingPatient: Boolean!
+  allowNewPatient: Boolean!
+  color: String
+  createdAt: ISO8601DateTime!
+  icon: String
+  id: ID!
+  localizedLongDescription: [LocalizedField!]!
+  localizedName: [LocalizedField!]!
+  localizedShortDescription: [LocalizedField!]!
+  longDescription: HtmlFragment
+  maxRequestableDays: Int
+  minRequestableInterval: Int!
+  minRequestableIntervalType: String!
+  name: String!
+  patientDefaultStatus: AppointmentStatusEnum!
+  presentingIssues(after: String, before: String, first: Int, last: Int): PresentingIssueConnection
+  providerDefaultStatus: AppointmentStatusEnum!
+  shortDescription: String
+  slotLength: Int!
+  updatedAt: ISO8601DateTime!
+}
+
+type ServiceConnection {
+  edges: [ServiceEdge]
+  nodes: [Service]
+  pageInfo: PageInfo!
+}
+
+type ServiceEdge {
+  cursor: String!
+  node: Service
+}
+
+enum SeverityEnum {
+  SEVERE
+  MODERATE
+  MILD
+  UNKNOWN
+  NO_REACTION
+}
+
+type SocialHistoryRecord implements Node & Timestampable {
+  ageAtOnset: Int
+  createdAt: ISO8601DateTime!
+  endDate: PartialDate
+  id: ID!
+  isRiskFactor: Boolean!
+  lifeStage: LifeStageEnum
+  notes: String
+  rawData: String
+  riskFactor: String
+  startDate: PartialDate
+  subtype: SocialHistorySubtypeEnum
+  type: SocialHistoryTypeEnum
+  updatedAt: ISO8601DateTime!
+}
+
+type SocialHistoryRecordConnection {
+  edges: [SocialHistoryRecordEdge]
+  nodes: [SocialHistoryRecord]
+  pageInfo: PageInfo!
+}
+
+type SocialHistoryRecordEdge {
+  cursor: String!
+  node: SocialHistoryRecord
+}
+
+enum SocialHistorySubtypeEnum {
+  SMOKING
+  ALCOHOL
+  RECREATIONAL_DRUGS
+  DIET
+  PHISICAL_ACTIVITY
+  SEXUAL_HISTORY
+}
+
+enum SocialHistoryTypeEnum {
+  SUBSTANCE_USE
+  OCCUPATION_AND_EDUCATION
+  LIVING_ENVIRONMENT
+  LIFESTYLE
+  OTHER
+}
+
+type StandardWorkHour implements Colorable & Node & Timestampable {
+  color: String
+  createdAt: ISO8601DateTime!
+  endAtTime: TimeWithoutOffset!
+  id: ID!
+  interval: Int!
+  location: Location!
+  services: [Service!]!
+  showIntervalsOnSchedule: Boolean!
+  slot: Int!
+  stacking: Boolean!
+  startAtTime: TimeWithoutOffset!
+  updatedAt: ISO8601DateTime!
+  visitType: VisitTypeEnum!
+  weekday: WeekDayEnum!
+}
+
+type StandardWorkHourConnection {
+  edges: [StandardWorkHourEdge]
+  nodes: [StandardWorkHour]
+  pageInfo: PageInfo!
+}
+
+type StandardWorkHourEdge {
+  cursor: String!
+  node: StandardWorkHour
+}
+
+type StatusTag implements Colorable & Node & Timestampable {
+  color: String
+  createdAt: ISO8601DateTime!
+  id: ID!
+  name: String!
+  updatedAt: ISO8601DateTime!
+}
+
+type StatusTagConnection {
+  edges: [StatusTagEdge]
+  nodes: [StatusTag]
+  pageInfo: PageInfo!
+}
+
+type StatusTagEdge {
+  cursor: String!
+  node: StatusTag
+}
+
+type SurgicalHistoryRecord implements Node & Timestampable {
+  createdAt: ISO8601DateTime!
+  diagnoses: [Diagnosis!]!
+  endDate: PartialDate
+  id: ID!
+  isRiskFactor: Boolean!
+  lifeStage: LifeStageEnum
+  notes: String
+  performedOn: PartialDate
+  status: PatientHistoryRecordStatusEnum
+  updatedAt: ISO8601DateTime!
+}
+
+type SurgicalHistoryRecordConnection {
+  edges: [SurgicalHistoryRecordEdge]
+  nodes: [SurgicalHistoryRecord]
+  pageInfo: PageInfo!
+}
+
+type SurgicalHistoryRecordEdge {
+  cursor: String!
+  node: SurgicalHistoryRecord
+}
+
+type Task implements Node & Timestampable {
+  archived: Boolean!
+  assignee: TaskAssignee
+  completed: Boolean!
+  completedAt: ISO8601DateTime
+  createdAt: ISO8601DateTime!
+  dueAt: ISO8601DateTime
+  id: ID!
+  location: Location
+  name: String!
+  patient: Patient
+  priority: TaskPriorityEnum!
+  startAt: ISO8601DateTime!
+  status: TaskStatusEnum!
+  summary: String
+  taskCategory: TaskCategory
+  updatedAt: ISO8601DateTime!
+}
+
+union TaskAssignee = Patient | ProviderUser
+
+input TaskAssigneeInput {
+  id: ID!
+  type: AssigneeTypeEnum!
+}
+
+type TaskCategory implements Node & Timestampable {
+  archived: Boolean!
+  createdAt: ISO8601DateTime!
+  id: ID!
+  name: String!
+  taskTemplate(id: ID!): TaskTemplate
+  taskTemplates(name: SearchString, orderBy: [TaskTemplateOrderByInput!] = [{direction: DESC, field: CREATED_AT}], after: String, before: String, first: Int, last: Int): TaskTemplateConnection
+  updatedAt: ISO8601DateTime!
+}
+
+type TaskCategoryConnection {
+  edges: [TaskCategoryEdge]
+  nodes: [TaskCategory]
+  pageInfo: PageInfo!
+}
+
+type TaskCategoryEdge {
+  cursor: String!
+  node: TaskCategory
+}
+
+enum TaskCategoryOrderByEnum {
+  CREATED_AT
+  ID
+  NAME
+}
+
+input TaskCategoryOrderByInput {
+  direction: OrderByDirectionEnum!
+  field: TaskCategoryOrderByEnum!
+}
+
+type TaskComment implements Node & Timestampable {
+  comment: String!
+  createdAt: ISO8601DateTime!
+  createdBy: TaskCommentActor!
+  id: ID!
+  updatedAt: ISO8601DateTime!
+}
+
+union TaskCommentActor = EnterpriseApiConsumer | InternalApiConsumer | ProviderUser
+
+input TaskCommentActorInput {
+  id: ID!
+  type: TaskCommentActorInputTypeEnum!
+}
+
+enum TaskCommentActorInputTypeEnum {
+  PROVIDER_USER
+}
+
+type TaskConnection {
+  edges: [TaskEdge]
+  nodes: [Task]
+  pageInfo: PageInfo!
+}
+
+enum TaskDateOffsetUnitEnum {
+  DAY
+  MONTH
+  YEAR
+}
+
+type TaskEdge {
+  cursor: String!
+  node: Task
+}
+
+enum TaskOrderByEnum {
+  CATEGORY_ID
+  CREATED_AT
+  ID
+  NAME
+  PRIORITY
+  STATUS
+}
+
+input TaskOrderByInput {
+  direction: OrderByDirectionEnum!
+  field: TaskOrderByEnum!
+}
+
+enum TaskPriorityEnum {
+  ROUTINE
+  URGENT
+  CRITICAL
+}
+
+enum TaskStatusEnum {
+  NEW
+  IN_PROGRESS
+  DONE
+  ON_HOLD
+  CANCELLED
+}
+
+type TaskTemplate implements Node & Timestampable {
+  archived: Boolean!
+  assignee: ProviderUser
+  createdAt: ISO8601DateTime!
+  defaultDates: [TaskTemplateDefaultDate!]!
+  id: ID!
+  location: Location
+  name: String!
+  priority: TaskPriorityEnum!
+  summary: String
+  taskCategory: TaskCategory
+  updatedAt: ISO8601DateTime!
+}
+
+type TaskTemplateConnection {
+  edges: [TaskTemplateEdge]
+  nodes: [TaskTemplate]
+  pageInfo: PageInfo!
+}
+
+type TaskTemplateDefaultDate {
+  dueAtOffset: Int
+  dueAtUnit: TaskDateOffsetUnitEnum
+  priority: TaskPriorityEnum!
+  startAtOffset: Int!
+  startAtUnit: TaskDateOffsetUnitEnum!
+}
+
+type TaskTemplateEdge {
+  cursor: String!
+  node: TaskTemplate
+}
+
+enum TaskTemplateOrderByEnum {
+  CREATED_AT
+  ID
+  NAME
+}
+
+input TaskTemplateOrderByInput {
+  direction: OrderByDirectionEnum
+  field: TaskTemplateOrderByEnum!
+}
+
+scalar TimeWithoutOffset
+
+interface Timestampable {
+  createdAt: ISO8601DateTime!
+  updatedAt: ISO8601DateTime!
+}
+
+type UnsupportedReferralRecordAttachment implements Node & Timestampable {
+  attachmentType: UnsupportedReferralRecordAttachmentTypeEnum!
+  createdAt: ISO8601DateTime!
+  id: ID!
+  updatedAt: ISO8601DateTime!
+}
+
+enum UnsupportedReferralRecordAttachmentTypeEnum {
+  CONVERSATION
+  HL7_MESSAGE
+  OCEAN_MESSAGE
+  PATIENT_FORM
+  PATIENT_PAYMENT
+  PATIENT_PRESCRIPTION
+  PATIENT_REFERRAL_LETTER
+  UPLOADED_FILE
+}
+
+scalar UpcomingDateTime
+
+input UpdateAppointmentInput {
+  clientMutationId: String
+  allowNotification: Boolean
+  allowPractitionerNotification: Boolean
+  id: ID!
+  providerId: ID
+  serviceId: ID
+  locationId: ID
+  startAt: UpcomingDateTime
+  untilAt: UpcomingDateTime
+  presentingIssueId: ID
+  reason: String
+  visitType: VisitTypeEnum
+  tagIds: [ID!]
+  status: AppointmentStatusEnum
+  note: String
+  notifyBy: EntityNotificationMethodEnum
+  skipValidations: Boolean
+}
+
+type UpdateAppointmentPayload {
+  appointment: Appointment!
+  clientMutationId: String
+}
+
+input UpdateCareTeamMemberInput {
+  clientMutationId: String
+  id: ID!
+  memberId: ID
+  memberType: CareTeamMemberMemberTypeEnum
+  roleUuid: String
+}
+
+type UpdateCareTeamMemberPayload {
+  careTeamMember: CareTeamMember!
+  clientMutationId: String
+}
+
+input UpdateCaseInput {
+  clientMutationId: String
+  id: ID!
+  issue: String
+  linkedEncounters: CombinedLinkedEncounterInput
+}
+
+type UpdateCasePayload {
+  case: Case!
+  clientMutationId: String
+}
+
+input UpdateCaseStatusInput {
+  clientMutationId: String
+  id: ID!
+  statusId: ID!
+}
+
+type UpdateCaseStatusPayload {
+  case: Case!
+  clientMutationId: String
+}
+
+input UpdateContactInput {
+  clientMutationId: String
+  billingCode: String
+  comments: String
+  email: Email
+  fax: Phone
+  firstName: String
+  id: ID!
+  jurisdiction: ContactJurisdictionEnum
+  lastName: String
+  licenseNumber: String
+  medicalSpecialty: ContactMedicalSpecialtyEnum
+  occupation: ContactOccupationEnum
+  phone: Phone
+  phoneExtension: NumericString
+  title: ContactTitleEnum
+}
+
+type UpdateContactPayload {
+  clientMutationId: String
+  contact: Contact!
+}
+
+input UpdateDraftAppointmentInput {
+  clientMutationId: String
+  startAt: UpcomingDateTime!
+  untilAt: UpcomingDateTime!
+  locationId: ID!
+  serviceId: ID
+  providerId: ID!
+  id: ID!
+}
+
+type UpdateDraftAppointmentPayload {
+  clientMutationId: String
+  draftAppointment: DraftAppointment!
+}
+
+input UpdateFacilityInput {
+  clientMutationId: String
+  category: FacilityCategoryEnum
+  city: String
+  comments: String
+  country: String
+  email: Email
+  fax: Phone
+  id: ID!
+  name: String
+  phone: Phone
+  phoneExtension: NumericString
+  postalCode: String
+  province: String
+  secondaryPhone: Phone
+  secondaryPhoneExtension: NumericString
+  streetAddress1: String
+  streetAddress2: String
+  website: String
+}
+
+type UpdateFacilityPayload {
+  clientMutationId: String
+  facility: Facility!
+}
+
+input UpdateIdentificationInput {
+  code: String
+  id: ID!
+  name: String
+  paymentIssuerCode: String
+  primary: Boolean
+  templateId: Int
+  value: String
+  identificationCustomData: [IdentificationCustomDataInput!]
+}
+
+input UpdateIncomingReferralRecordInput {
+  clientMutationId: String
+  id: ID!
+  attachments: CombinedReferralRecordAttachmentInput
+  dateOfAdded: ISO8601Date
+  priorityId: ID
+  reason: String
+  orderingProviderId: ID
+  serviceProviderId: ID
+  statusId: ID
+}
+
+type UpdateIncomingReferralRecordPayload {
+  clientMutationId: String
+  referralRecord: ReferralRecord!
+}
+
+input UpdateInternalReferralRecordInput {
+  clientMutationId: String
+  id: ID!
+  attachments: CombinedReferralRecordAttachmentInput
+  dateOfAdded: ISO8601Date
+  priorityId: ID
+  reason: String
+  orderingProviderId: ID
+  serviceProviderId: ID
+  statusId: ID
+}
+
+type UpdateInternalReferralRecordPayload {
+  clientMutationId: String
+  referralRecord: ReferralRecord!
+}
+
+input UpdateObservationInput {
+  details: String
+  endAt: ISO8601Date
+  id: ID!
+  startAt: ISO8601Date
+  type: String
+}
+
+input UpdateOutgoingReferralRecordInput {
+  clientMutationId: String
+  id: ID!
+  attachments: CombinedReferralRecordAttachmentInput
+  dateOfAdded: ISO8601Date
+  priorityId: ID
+  reason: String
+  orderingProviderId: ID
+  serviceProviderId: ID
+  statusId: ID
+}
+
+type UpdateOutgoingReferralRecordPayload {
+  clientMutationId: String
+  referralRecord: ReferralRecord!
+}
+
+input UpdatePatientInput {
+  clientMutationId: String
+  additionalAddress: String
+  city: String
+  country: String
+  dateOfBirth: ISO8601Date
+  email: Email
+  emergencyFirstName: String
+  emergencyLastName: String
+  emergencyMiddleName: String
+  emergencyPhone: Phone
+  emergencyRelationship: String
+  familyDoctor: String
+  familyPractitionerId: Int
+  firstName: String
+  gender: GenderEnum
+  homePhone: Phone
+  id: ID!
+  identifications: CombinedIdentificationInput
+  insuranceCompany: String
+  insuranceGroupNumber: String
+  insuranceId: String
+  language: String
+  lastName: String
+  middleInitial: String
+  middleName: String
+  notifyBy: NotificationMethodEnum
+  officePhone: Phone
+  officePhoneExt: String
+  phone: String
+  preferredName: String
+  primaryPractitionerId: Int
+  referringPractitionerId: Int
+  region: String
+  streetAddress: String
+  zipcode: String
+  preferredPharmacyId: Int
+  publicAccessAllowed: Boolean
+  genderIdentity: GenderIdentityEnum
+  genderIdentityDescription: String
+  statusTagIds: CombinedStatusTagIdsInput
+  primaryLocationId: ID
+  pronouns: PronounsEnum
+  referringDoctor: String
+}
+
+type UpdatePatientPayload {
+  clientMutationId: String
+  patient: Patient
+}
+
+input UpdateTaskInput {
+  clientMutationId: String
+  id: ID!
+  assignee: TaskAssigneeInput
+  dueAt: DateTimeWithTimezone
+  name: String
+  priority: TaskPriorityEnum
+  startAt: DateTimeWithTimezone
+  status: TaskStatusEnum
+  summary: String
+  taskCategoryId: ID
+}
+
+type UpdateTaskPayload {
+  clientMutationId: String
+  task: Task!
+}
+
+input UpsertCaseDataItemInput {
+  clientMutationId: String
+  caseId: ID!
+  templateUuid: String!
+  values: [CaseDataValueInput!]!
+}
+
+type UpsertCaseDataItemPayload {
+  caseDataItem: CaseDataItem!
+  clientMutationId: String
+}
+
+input UpsertPatientDataItemInput {
+  clientMutationId: String
+  patientId: ID!
+  templateUuid: String!
+  values: [PatientDataValueInput!]!
+}
+
+type UpsertPatientDataItemPayload {
+  clientMutationId: String
+  patientDataItem: PatientDataItem!
+}
+
+input UpsertReferralDataItemInput {
+  clientMutationId: String
+  referralRecordId: ID!
+  templateUuid: String!
+  values: [FlexibleDataValueInput!]!
+}
+
+type UpsertReferralDataItemPayload {
+  clientMutationId: String
+  referralDataItem: FlexibleDataPropertyItem!
+}
+
+type UserGroup implements Colorable & Node & Timestampable {
+  bookable: Boolean
+  color: String
+  createdAt: ISO8601DateTime!
+  description: String
+  id: ID!
+  massMatch: [MassMatchEnum!]
+  members: [ProviderUser!]
+  name: String!
+  updatedAt: ISO8601DateTime!
+}
+
+type VirtualVisitLink {
+  accessCode: String!
+  appointment: Appointment
+  url: String!
+}
+
+enum VisitTypeEnum {
+  PHYSICAL_VISIT
+  VIRTUAL_VISIT
+}
+
+type VitalsRecord implements Node & Timestampable {
+  bloodPressureArm: BloodPressureArmEnum
+  bloodPressurePosition: BloodPressurePositionEnum
+  bmi: Float
+  createdAt: ISO8601DateTime!
+  diastolicBloodPressure: Int
+  headCircumference: Float
+  heartBeat: HeartBeatEnum
+  heartRate: Int
+  height: Float
+  id: ID!
+  measuredAt: ISO8601DateTime!
+  pulseOximetry: Int
+  respiratoryRate: Int
+  systolicBloodPressure: Int
+  temperature: Float
+  updatedAt: ISO8601DateTime!
+  waistCircumference: Float
+  weight: Float
+}
+
+type VitalsRecordConnection {
+  edges: [VitalsRecordEdge]
+  nodes: [VitalsRecord]
+  pageInfo: PageInfo!
+}
+
+type VitalsRecordEdge {
+  cursor: String!
+  node: VitalsRecord
+}
+
+enum WeekDayEnum {
+  SUNDAY
+  MONDAY
+  TUESDAY
+  WEDNESDAY
+  THURSDAY
+  FRIDAY
+  SATURDAY
+}
+
+input WorkHourColorInput {
+  name: ColorNameEnum
+  rgb: String
+}
+
+type Worktime implements Colorable & Node & Timestampable {
+  color: String
+  createdAt: ISO8601DateTime!
+  id: ID!
+  interval: Int!
+  location: Location
+  provider: ProviderUser!
+  services: [Service!]!
+  slots: Int!
+  stacking: Boolean!
+  startAt: ISO8601DateTime!
+  untilAt: ISO8601DateTime!
+  updatedAt: ISO8601DateTime!
+  visitType: VisitTypeEnum!
+}
