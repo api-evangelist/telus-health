@@ -34,7 +34,7 @@ tags:
 - Clinical Data
 created: '2026-07-24'
 modified: '2026-07-24'
-specificationVersion: '0.19'
+specificationVersion: '0.23'
 apis:
 - aid: telus-health:telus-chr-enterprise-api
   name: TELUS CHR Enterprise API
