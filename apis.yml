@@ -124,6 +124,32 @@ apis:
   - type: FHIR
     url: fhir/telus-patient-chart-structuredefinitions.json
 common:
+- type: Support
+  url: https://support.api.telus.com/
+- type: Blog
+  url: https://www.telus.com/en/blog
+- type: PrivacyPolicy
+  url: https://www.telus.com/en/about/privacy/commitment
+- type: TermsOfService
+  url: https://www.telus.com/en/about/policies-and-disclosures/user-terms
+- type: Security
+  url: https://www.telus.com/en/about/security/report-a-problem
+- type: Postman
+  url: https://docs.insights.telus.com/
+- type: ChangeLog
+  url: changelog/telus-health-changelog.yml
+- type: OAuthScopes
+  url: scopes/telus-health-scopes.yml
+- type: ErrorCatalog
+  url: errors/telus-health-problem-types.yml
+- type: RateLimits
+  url: rate-limits/telus-health-rate-limits.yml
+- type: Components
+  url: components/telus-health-components.yml
+- type: Webhooks
+  url: asyncapi/telus-health-chr-event-notifications.yml
+- type: VulnerabilityDisclosure
+  url: security/telus-health-vulnerability-disclosure.yml
 - type: DomainSecurity
   url: security/telus-health-domain-security.yml
 - type: Website
@@ -159,5 +185,3 @@ common:
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
-x-parent: telus
-x-relationship: product
